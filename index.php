@@ -193,7 +193,10 @@
         $radio_Help = $app->request->params('input_Teacher');
         $student_ID = $app->request->params('student_ID');
         $seating = $app->request->params('seating');
-		$cycle = getCurrentCycle();
+        $cycle = getCurrentCycle();
+        
+        if($radio_Help === 0)
+            $radio_Help = NULL;
 
         $sql = 'INSERT INTO scrumlog '
                 . '(Input_Yesterday, Input_Problems, Input_Today, Input_Help'
@@ -285,6 +288,7 @@
             //echo json_encode($person);
             if ($person['Student_ID'] != NULL)
                 {   
+                    $latest_scrum = getLatestScrum($person['Student_ID']);
                     
                     $student = array(
                         'User' => array(
@@ -295,7 +299,7 @@
                                 'Student_ID' => $person['Student_ID'],
                                 'Class' => $person['Class'],
                                 'Seating' => $person['Seating'],   
-                                'Last_Submitted_Scrumlog' => $person['Last_Submitted_Scrumlog']
+                                'Last_Submitted_Scrumlog' => $latest_scrum['Date']
                         ),
                         'Token' => $token,
                         'Userlevel' => 'Student'
@@ -383,6 +387,7 @@
                 $person = $stmt->fetch(PDO::FETCH_ASSOC);
                 if ($person['Student_ID'] != NULL)
                 {   
+                    
                     $student = array(
                         'User' => array(
                                 'Firstname' => $person['Firstname'],
@@ -433,6 +438,15 @@
 	});
     
     $app->run();
-		
-	
+    
+    function getLatestScrum($student_ID)
+    {
+        $sql = 'SELECT Date From Scrumlog Where Student_ID=? ORDER BY Date DESC';
+        $db = getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(1, $student_ID);
+        $stmt->execute();
+        $scrumlogs = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $scrumlogs;
+    }
     ?>
