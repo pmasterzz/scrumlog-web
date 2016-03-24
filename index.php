@@ -77,7 +77,7 @@
 	});
 	
     // retrieve selected/filtered scrumlogs
-    $app->get('/api/scrumlog', 'middleWare', function () use ($app) {
+    $app->get('/api/scrumlog',  function () use ($app) {
         
         $date = $app->request->params('date');
         $time = strtotime($date);
@@ -130,8 +130,9 @@
 		else{
         $scrumlog = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		
-		if($scrumlog[0]['Radio_Help'] !== NULL)
+		if($scrumlog[0]['Radio_Help'] !== '-')
 			$scrumlog[0]['Radio_Help'] = GetTeacherNameById($scrumlog[0]['Radio_Help']);
+	
 		$response = $app->response();
         $response['Content-Type'] = 'application/json';
         $response->body(json_encode($scrumlog));
@@ -301,11 +302,13 @@
             else
                 {
                     $teacher = array(
-                    'Firstname' => $person['Firstname'],
-                    'Lastname' => $person['Lastname'],
-                    'Infix' => $person['Infix'],
-                    'Person_ID' => $person['Person_ID'],
-                    'Teacher_ID' => $person['Teacher_ID'],           
+					'User' => array(
+						'Firstname' => $person['Firstname'],
+						'Lastname' => $person['Lastname'],
+						'Infix' => $person['Infix'],
+						'Person_ID' => $person['Person_ID'],
+						'Teacher_ID' => $person['Teacher_ID']
+					),						
                     'Success' => TRUE,
                     'Token' => $token,
 					'Userlevel' => 'Teacher'
@@ -313,7 +316,7 @@
                     $response = $app->response();
                     $response['Content-Type'] = 'application/json';
                     $response->body(json_encode($teacher));
-                    return $response;// i think dinky donky app 
+                    return $response;
                     
                     
                 }
