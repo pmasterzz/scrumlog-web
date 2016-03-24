@@ -52,14 +52,7 @@
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $cycle = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		$file = 'test2.txt';
-		// Open the file to get existing content
-		$current = file_get_contents($file);
-		// Append a new person to the file
-		$current .= json_encode($cycle);
-		// Write the contents back to the file
-		file_put_contents($file, $current);
-		$response = $cycle[0]['Cycle_ID'];
+        $response = $cycle[0]['Cycle_ID'];
         return $response;
     }
 	
@@ -195,15 +188,15 @@
         $seating = $app->request->params('seating');
         $cycle = getCurrentCycle();
         
-        if($radio_Help === 0)
+        if($radio_Help === 0){
             $radio_Help = NULL;
+        }
 
         $sql = 'INSERT INTO scrumlog '
                 . '(Input_Yesterday, Input_Problems, Input_Today, Input_Help'
                 . ', Radio_Help, Cycle_ID, Date, Student_ID, Seating)'
                 . ' VALUES(?, ?, ?, ?, ?, ?, CURDATE(), ?, ?)';
         $db = getDB();
-		$db->beginTransaction();
         $stmt = $db->prepare($sql);
         $stmt->bindParam(1, $input_Yesterday);
         $stmt->bindParam(2, $input_Problems);
@@ -214,12 +207,6 @@
         $stmt->bindParam(7, $student_ID);
         $stmt->bindParam(8, $seating);
         $stmt->execute();
-		$sql2 = 'UPDATE student SET Last_Submitted_Scrumlog=CURDATE() WHERE Student_ID=?';
-		$stmt = $db->prepare($sql2);
-		$stmt->bindParam(1, $student_ID);
-		$stmt->execute();
-		$db->commit();
-		//$db->rollBack();
     });
     //adds new cycle
     $app->post('/api/cycle','middleWare',function() use ($app){
