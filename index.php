@@ -427,6 +427,19 @@
             }
 	});
     
+	$app->get('/api/getAllStudents','middleWare' ,function() use ($app){
+		$sql = 'SELECT p.Firstname, p.Infix, p.Lastname, s.Student_ID'
+		.' FROM student s LEFT JOIN person p ON s.Person_ID=p.Person_ID';
+		$db = getDB();
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+			$students = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			
+		$response = $app->response();
+        $response['Content-Type'] = 'application/json';
+        $response->body(json_encode($students));
+        return $response; 
+	});
     $app->run();
     
     function getLatestScrum($student_ID)
