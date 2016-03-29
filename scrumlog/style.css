@@ -1,0 +1,129 @@
+body{
+background: url('images/tegelbackground3.jpg');
+}
+
+body a{
+color: #FFF;
+text-decoration: none;
+}
+.container{
+min-height: 600px;
+height: auto;
+width: 1000px;
+margin: 0 auto;
+margin-top: 50px;
+}
+
+.containerinlog{
+   position: absolute;
+   top: 50%;
+   margin-top: -50px;/* half of #content height*/
+   left: 0;
+   width: 100%;
+}
+
+#dummy{
+clear: both;
+}
+
+.overzichtcontainer{
+width: 952px;
+height: auto;
+float:left;
+}
+
+.uitlogtekst{
+height: auto;
+width: 700px;
+float:right;
+margin-top: 20px;
+margin-left: 10px;
+text-align: right;
+}
+.content{
+color: #FFF;
+background: rgba(54, 25, 25, .9);
+width: 930px;
+min-height: 500px;
+padding: 10px;
+height: auto;
+border: 1px solid #000;
+}
+
+.boeken{
+margin-top: 20px;
+float: left;
+width: 300px;
+height: 150px;
+margin-left: 10px;
+}
+
+.boekentekst{
+float: left;
+padding-left: 5px;
+padding-top: 5px;
+width: 195px;
+height: 145px;
+}
+
+.footer{
+width: 930px;
+padding: 10px;
+height: 20px;
+float:left;
+background: rgba(54, 25, 25, .99);
+border-left: 1px solid #000;
+border-bottom: 1px solid #000;
+border-right: 1px solid #000;
+}
+.login{
+	background: rgba(54, 25, 25, .9);
+	width: 264px;
+	padding: 5px;
+	color: #FFF;
+	padding-top: 40px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	height: 105px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border: 1px solid #000;
+}
+
+.registreer{
+	background: rgba(54, 25, 25, .9);
+	width: 264px;
+	padding: 5px;
+	color: #FFF;
+	padding-top: 5px;
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	height: 20px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border: 1px solid #000;
+}
+
+.admin{
+	background: rgba(54, 25, 25, .9);
+	width: 264px;
+	padding: 5px;
+	color: #FFF;
+	padding-top: 40px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+	height: 245px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border: 1px solid #000;
+}
