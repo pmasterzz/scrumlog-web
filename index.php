@@ -93,26 +93,27 @@
 		$sql .= " LEFT JOIN person p ON st.Person_ID=p.Person_ID";
 		$sql .= " WHERE sc.Date = ?";
 
+		
        
         if($year !== 'undefined')
         {
-            $sql .= " " . "AND student.Start_Year = ?";
+            $sql .= " " . "AND st.Start_Year = ?";
             array_push($filterArray, $year);
         }
         if($student_ID !== 'undefined')
         {
-            $sql .= " " . "AND scrumlog.Student_ID = ?";
+            $sql .= " " . "AND sc.Student_ID = ?";
             array_push($filterArray, $student_ID);
         }
-        if($seating !== 'undefined')
+        if($seating !== 'undefined' && $seating !== 'null')
         {
-            $sql .= " " . "AND scrumlog.Seating = ?";
+            $sql .= " " . "AND sc.Seating = ?";
             array_push($filterArray, $seating);
         }
 
         if($cycle_ID !== 'undefined')
         {
-            $sql .= " " . "AND scrumlog.Cycle_ID = ?";
+            $sql .= " " . "AND sc.Cycle_ID = ?";
             array_push($filterArray, $cycle_ID);
         }
         
@@ -446,7 +447,20 @@
         $response->body(json_encode($students));
         return $response; 
 	});
-    $app->run();
+    
+	$app->get('/api/getAllCycles', 'middleWare', function() use ($app){
+		$sql = "SELECT Cycle_ID, Start_Date, End_Date FROM cycle";
+		$db = getDB();
+		$stmt = $db->prepare($sql);
+		$stmt->execute();
+		$cycles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			
+		$response = $app->response();
+        $response['Content-Type'] = 'application/json';
+        $response->body(json_encode($cycles));
+        return $response;
+	}
+	$app->run();
     
     function getLatestScrum($student_ID)
     {
