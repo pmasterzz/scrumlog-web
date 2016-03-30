@@ -87,7 +87,11 @@
 		$cycle_ID = $app->request->params('cycle_ID');
         $filterArray = array($date);
 
-        $sql = "SELECT * FROM scrumlog LEFT JOIN student ON scrumlog.Student_ID=student.Student_ID WHERE scrumlog.Date = ?";
+        $sql = "SELECT sc.Input_Yesterday, sc.Input_Help, sc.Input_Today, sc.Input_Problems, sc.Radio_Help,";
+		$sql .= " sc.Scrumlog_ID, sc.Date, sc.Cycle_ID, sc.Seating, st.Student_ID, p.Firstname, p.Lastname, p.Infix";
+		$sql .= " FROM scrumlog sc LEFT JOIN student st ON sc.Student_ID=st.Student_ID";
+		$sql .= " LEFT JOIN person p ON st.Person_ID=p.Person_ID";
+		$sql .= " WHERE sc.Date = ?";
 
        
         if($year !== 'undefined')
