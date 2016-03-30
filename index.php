@@ -82,10 +82,10 @@
         $date = $app->request->params('date');
         $time = strtotime($date);
         //$newFormat = date('yyyy-MM-dd', $time);
-        $year = $app->request->params('Year');
+        $year = $app->request->params('year');
         $student_ID = $app->request->params('student_ID');
-        $seating = $app->request->params('Seating');
-        $cycle_ID = $app->request->params('Cycle_ID');
+        $seating = $app->request->params('seating');
+        $cycle_ID = $app->request->params('cycle_ID');
         $filterArray = array($date);
         $sql = "SELECT * FROM scrumlog WHERE Date = ?";
         

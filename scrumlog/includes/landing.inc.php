@@ -25,7 +25,7 @@
                         		</div>
                             </div>
                             <div class="form-bottom">
-                                <form role="form" action="" method="post" class="login-form" action="peehaapee/login.php">
+                                <form role="form" action="" method="post" class="login-form" action="./php/login.php">
 			                    	<div class="form-group">
 			                    		<label class="sr-only" for="form-username">Gebruikersnaam</label>
                                                         <input type="text" name="form-username" placeholder="Gebruikersnaam" class="form-username form-control" id="form-username" autofocus>
