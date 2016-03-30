@@ -81,35 +81,34 @@
         
         $date = $app->request->params('date');
         $time = strtotime($date);
-        //$newFormat = date('yyyy-MM-dd', $time);
         $year = $app->request->params('year');
         $student_ID = $app->request->params('student_ID');
         $seating = $app->request->params('seating');
 		$cycle_ID = $app->request->params('cycle_ID');
         $filterArray = array($date);
 
-        $sql = "SELECT * FROM scrumlog LEFT JOIN student ON scrumlog.Student_ID=student.Student_ID WHERE Scrumlog.Date = ?";
+        $sql = "SELECT * FROM scrumlog LEFT JOIN student ON scrumlog.Student_ID=student.Student_ID WHERE scrumlog.Date = ?";
 
         
         if($year != (NULL || 'undefined'))
         {
-            $sql .= " " . "AND Year = ?";
+            $sql .= " " . "AND student.Year = ?";
             array_push($filterArray, $year);
         }
         if($student_ID != (NULL || 'undefined'))
         {
-            $sql .= " " . "AND Student_ID = ?";
+            $sql .= " " . "AND scrumlog.Student_ID = ?";
             array_push($filterArray, $student_ID);
         }
         if($seating != (NULL || 'undefined'))
         {
-            $sql .= " " . "AND Seating = ?";
+            $sql .= " " . "AND scrumlog.Seating = ?";
             array_push($filterArray, $seating);
         }
 
-        if($cycle_ID != NULL)
+        if($cycle_ID != (NULL || 'undefined'))
         {
-            $sql .= " " . "AND Cycle_ID = ?";
+            $sql .= " " . "AND scrumlog.Cycle_ID = ?";
             array_push($filterArray, $cycle_ID);
         }
         
