@@ -87,26 +87,26 @@
         $seating = $app->request->params('seating');
         $cycle_ID = $app->request->params('cycle_ID');
         $filterArray = array($date);
-        $sql = "SELECT * FROM scrumlog WHERE Date = ?";
+        $sql = "SELECT * FROM scrumlog LEFT JOIN Student WHERE Scrumlog.Date = ?";
         
         if($year != NULL)
         {
-            $sql .= " " . "AND Year = ?";
+            $sql .= " " . "AND Student.Start_Year = ?";
             array_push($filterArray, $year);
         }
         if($student_ID != NULL)
         {
-            $sql .= " " . "AND Student_ID = ?";
+            $sql .= " " . "AND Scrumlog.Student_ID = ?";
             array_push($filterArray, $student_ID);
         }
         if($seating != NULL)
         {
-            $sql .= " " . "AND Seating = ?";
+            $sql .= " " . "AND Scrumlog.Seating = ?";
             array_push($filterArray, $seating);
         }
         if($cycle_ID != NULL)
         {
-            $sql .= " " . "AND Cycle_ID = ?";
+            $sql .= " " . "AND Scrumlog.Cycle_ID = ?";
             array_push($filterArray, $cycle_ID);
         }
         
