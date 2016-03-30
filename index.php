@@ -85,12 +85,11 @@
         $year = $app->request->params('year');
         $student_ID = $app->request->params('student_ID');
         $seating = $app->request->params('seating');
+		$cycle_ID = $app->request->params('cycle_ID');
         $filterArray = array($date);
-<<<<<<< HEAD
+
         $sql = "SELECT * FROM scrumlog LEFT JOIN student ON scrumlog.Student_ID=student.Student_ID WHERE Scrumlog.Date = ?";
-=======
-        $sql = "SELECT * FROM scrumlog WHERE Date = ?";
->>>>>>> parent of b421530... Fixed get scrumlog
+
         
         if($year != (NULL || 'undefined'))
         {
@@ -107,15 +106,13 @@
             $sql .= " " . "AND Seating = ?";
             array_push($filterArray, $seating);
         }
-<<<<<<< HEAD
-=======
+
         if($cycle_ID != NULL)
         {
             $sql .= " " . "AND Cycle_ID = ?";
             array_push($filterArray, $cycle_ID);
         }
         
->>>>>>> parent of b421530... Fixed get scrumlog
 		$db = getDB();
         $stmt = $db->prepare($sql);
 		foreach ($filterArray as $k => $v)
