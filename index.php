@@ -111,7 +111,6 @@
             array_push($filterArray, $seating);
         }
 
-        if($cycle_ID !== 'undefined')
         {
             $sql .= " " . "AND sc.Cycle_ID = ?";
             array_push($filterArray, $cycle_ID);
@@ -459,7 +458,7 @@
         $response['Content-Type'] = 'application/json';
         $response->body(json_encode($cycles));
         return $response;
-	}
+	});
 	$app->run();
     
     function getLatestScrum($student_ID)
