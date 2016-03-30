@@ -89,24 +89,24 @@
 
         $sql = "SELECT * FROM scrumlog LEFT JOIN student ON scrumlog.Student_ID=student.Student_ID WHERE scrumlog.Date = ?";
 
-        
-        if($year != (NULL || 'undefined'))
+       
+        if($year !== 'undefined')
         {
-            $sql .= " " . "AND student.Year = ?";
+            $sql .= " " . "AND student.Start_Year = ?";
             array_push($filterArray, $year);
         }
-        if($student_ID != (NULL || 'undefined'))
+        if($student_ID !== 'undefined')
         {
             $sql .= " " . "AND scrumlog.Student_ID = ?";
             array_push($filterArray, $student_ID);
         }
-        if($seating != (NULL || 'undefined'))
+        if($seating !== 'undefined')
         {
             $sql .= " " . "AND scrumlog.Seating = ?";
             array_push($filterArray, $seating);
         }
 
-        if($cycle_ID != (NULL || 'undefined'))
+        if($cycle_ID !== 'undefined')
         {
             $sql .= " " . "AND scrumlog.Cycle_ID = ?";
             array_push($filterArray, $cycle_ID);
