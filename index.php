@@ -111,6 +111,7 @@
             array_push($filterArray, $seating);
         }
 
+        if($cycle_ID !== 'undefined' && $cycle_ID !== 'null')
         {
             $sql .= " " . "AND sc.Cycle_ID = ?";
             array_push($filterArray, $cycle_ID);
@@ -457,6 +458,21 @@
 		$response = $app->response();
         $response['Content-Type'] = 'application/json';
         $response->body(json_encode($cycles));
+        return $response;
+	});
+	
+	$app->get('/api/getAllAvailableStudents', function() use ($app){
+		$sql = "SELECT p.Firstname, p.Infix, p.Lastname, s.Student_ID";
+		$sql .= " FROM student s LEFT JOIN person p ON s.Person_ID=p.Person_ID";
+		$sql .= " WHERE s.Seating = 0";
+		$db = getDB();
+		$stmt = $db->prepare($sql);
+		$stmt->execute();
+		$students = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		
+		$response = $app->response();
+        $response['Content-Type'] = 'application/json';
+        $response->body(json_encode($students));
         return $response;
 	});
 	$app->run();
