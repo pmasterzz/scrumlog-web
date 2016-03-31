@@ -230,18 +230,22 @@
         $stmt->execute();
     });
     //adjust table seatings
-    $app->post('/api/table/', 'middleWare',function() use ($app){
-        $studentArray = $app->request->params('studentArray');
+    $app->post('/api/table', 'middleWare',function() use ($app){
+	
+        $students = $app->request->params('studentArray');
+		$studentArray = explode(",", $students);
+		var_dump($studentArray);
         $inQuery = implode(',', array_fill(0, count($studentArray), '?'));
         $db = getDB();
-        $seat = $app->request->params('Seating');
+        $seat = $app->request->params('seating');
         $sql = 'UPDATE student SET Seating = ? WHERE Student_ID IN(' . $inQuery . ')';
         $stmt = $db->prepare($sql);
         $stmt->bindParam(1, $seat);
+		
         foreach($studentArray as $k => $id)
             {
                 $stmt->bindValue(($k+2), $id);
-            }
+            };
 
         $stmt->execute();
     });
@@ -461,7 +465,7 @@
         return $response;
 	});
 	
-	$app->get('/api/getAllAvailableStudents', function() use ($app){
+	$app->get('/api/getAllAvailableStudents', 'middleWare', function() use ($app){
 		$sql = "SELECT p.Firstname, p.Infix, p.Lastname, s.Student_ID";
 		$sql .= " FROM student s LEFT JOIN person p ON s.Person_ID=p.Person_ID";
 		$sql .= " WHERE s.Seating = 0";
