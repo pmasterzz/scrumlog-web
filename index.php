@@ -486,7 +486,7 @@
     $app->post('/api/deleteCycle', 'middleWare', function() use ($app){
         $cycle_ID = $app->request->params('cycle_ID');
 
-        $assignment = checkAssignmentsForCycle($cycle_ID);
+        $assignment = checkCycleUses($cycle_ID);
 
         if(!$assignment){
             $sql = "DELETE FROM cycle WHERE Cycle_ID = ?";
@@ -521,14 +521,19 @@
         return $scrumlogs;
     };
 
-    function checkAssignmentsForCycle($id)
+    function checkCycleUses($id)
     {
         $sql = "SELECT Assignment_ID FROM assignment WHERE Cycle_ID=?";
+        $sql2 = "SELECT Scrumlog_ID FROM scrumlog WHERE Cycle_ID=?";
         $db = getDB();
+        $db->beginTransaction();
         $stmt = $db->prepare($sql);
         $stmt->bindValue(1, $id);
         $stmt->execute();
-        if ($stmt->rowCount() > 0) 
+        $stmt2 = $db->prepare($sql2);
+        $stmt2->bindValue(1, $id);
+        $stmt2->execute();
+        if ($stmt->rowCount() > 0 || $stmt2->rowCount() > 0) 
         {
             return true;
         }
@@ -536,6 +541,7 @@
         {
             return false;
         };
+        $db->rollBack();
 
     };
     ?>
