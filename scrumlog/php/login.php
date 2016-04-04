@@ -1,31 +1,37 @@
 <?php
 
-die('sterf');
-
+session_start();
     if(isset($_POST['submit'])) {
-        $username    = $_POST['form-username'];
-        $password    = $_POST['form-password'];
+        $_SESSION['login'] = 'ingelogd';
+        login();
+        header("Location: ../home.php");
+        
     }
-$url = 'http://localhost/zee/index.php/api/login';
-$fields = array(
-	'username' => urlencode($_POST['form-username']),
-	'password' => urlencode($_POST['form-password']),
-);
+    else{
+       header("Location: http://www.google.nl");
+    }
+function login(){    
+    $url = 'http://localhost/scrumlog-api/index.php/api/login';
+    $fields = array(
+            'username' => urlencode($_POST['form-username']),
+            'password' => urlencode($_POST['form-password']),
+    );
 
-//url-ify the data for the POST
-foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
-rtrim($fields_string, '&');
+    //url-ify the data for the POST
+    foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    rtrim($fields_string, '&');
 
-//open connection
-$ch = curl_init();
+    //open connection
+    $ch = curl_init();
 
-//set the url, number of POST vars, POST data
-curl_setopt($ch,CURLOPT_URL, $url);
-curl_setopt($ch,CURLOPT_POST, count($fields));
-curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+    //set the url, number of POST vars, POST data
+    curl_setopt($ch,CURLOPT_URL, $url);
+    curl_setopt($ch,CURLOPT_POST, count($fields));
+    curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
 
-//execute post
-$result = curl_exec($ch);
+    //execute post
+    $result = curl_exec($ch);
 
-//close connection
-curl_close($ch);
+    //close connection
+    curl_close($ch);
+}
