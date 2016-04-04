@@ -4,7 +4,7 @@ session_start();
     if(isset($_POST['submit'])) {
         $_SESSION['login'] = 'ingelogd';
         login();
-        header("Location: ../home.php");
+        header("Location: ../home.php?page=scrumloginvullen");
         
     }
     else{
