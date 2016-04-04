@@ -453,7 +453,7 @@
 	});
     
 	$app->get('/api/getAllCycles', 'middleWare', function() use ($app){
-		$sql = "SELECT Cycle_ID, Start_Date, End_Date FROM cycle";
+		$sql = "SELECT Cycle_ID, Start_Date, End_Date, Number FROM cycle";
 		$db = getDB();
 		$stmt = $db->prepare($sql);
 		$stmt->execute();
@@ -466,11 +466,14 @@
 	});
 	
 	$app->get('/api/getAllAvailableStudents', 'middleWare', function() use ($app){
-		$sql = "SELECT p.Firstname, p.Infix, p.Lastname, s.Student_ID";
+	
+		$table = $app->request->params('table');
+		$sql = "SELECT p.Firstname, p.Infix, p.Lastname, s.Student_ID, s.Seating";
 		$sql .= " FROM student s LEFT JOIN person p ON s.Person_ID=p.Person_ID";
-		$sql .= " WHERE s.Seating = 0";
+		$sql .= " WHERE s.Seating = 0 OR s.Seating = ?";
 		$db = getDB();
 		$stmt = $db->prepare($sql);
+		$stmt->bindValue(1, $table);
 		$stmt->execute();
 		$students = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		
@@ -479,6 +482,32 @@
         $response->body(json_encode($students));
         return $response;
 	});
+
+    $app->post('/api/deleteCycle', 'middleWare', function() use ($app){
+        $cycle_ID = $app->request->params('cycle_ID');
+
+        $assignment = checkAssignmentsForCycle($cycle_ID);
+
+        if(!$assignment){
+            $sql = "DELETE FROM cycle WHERE Cycle_ID = ?";
+            $db = getDB();
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(1, $cycle_ID);
+            $stmt->execute();
+            $res = array('Success' => TRUE);
+            $response = $app->response();
+            $response['Content-Type'] = 'application/json';
+            $response->body(json_encode($res));
+            return $response;
+        }
+      else{
+            $res = array('Success' => FALSE);
+            $response = $app->response();
+            $response['Content-Type'] = 'application/json';
+            $response->body(json_encode($res));
+            return $response;
+        };
+    });
 	$app->run();
     
     function getLatestScrum($student_ID)
@@ -490,5 +519,23 @@
         $stmt->execute();
         $scrumlogs = $stmt->fetch(PDO::FETCH_ASSOC);
         return $scrumlogs;
-    }
+    };
+
+    function checkAssignmentsForCycle($id)
+    {
+        $sql = "SELECT Assignment_ID FROM assignment WHERE Cycle_ID=?";
+        $db = getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(1, $id);
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) 
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        };
+
+    };
     ?>
