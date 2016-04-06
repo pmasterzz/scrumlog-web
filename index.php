@@ -81,32 +81,39 @@
         
         $date = $app->request->params('date');
         $time = strtotime($date);
-        //$newFormat = date('yyyy-MM-dd', $time);
-        $year = $app->request->params('Year');
+        $year = $app->request->params('year');
         $student_ID = $app->request->params('student_ID');
-        $seating = $app->request->params('Seating');
-        $cycle_ID = $app->request->params('Cycle_ID');
+        $seating = $app->request->params('seating');
+		$cycle_ID = $app->request->params('cycle_ID');
         $filterArray = array($date);
-        $sql = "SELECT * FROM scrumlog WHERE Date = ?";
-        
-        if($year != NULL)
+
+        $sql = "SELECT sc.Input_Yesterday, sc.Input_Help, sc.Input_Today, sc.Input_Problems, sc.Radio_Help,";
+		$sql .= " sc.Scrumlog_ID, sc.Date, sc.Cycle_ID, sc.Seating, st.Student_ID, p.Firstname, p.Lastname, p.Infix";
+		$sql .= " FROM scrumlog sc LEFT JOIN student st ON sc.Student_ID=st.Student_ID";
+		$sql .= " LEFT JOIN person p ON st.Person_ID=p.Person_ID";
+		$sql .= " WHERE sc.Date = ?";
+
+		
+       
+        if($year !== 'undefined')
         {
-            $sql .= " " . "AND Year = ?";
+            $sql .= " " . "AND st.Start_Year = ?";
             array_push($filterArray, $year);
         }
-        if($student_ID != NULL)
+        if($student_ID !== 'undefined')
         {
-            $sql .= " " . "AND Student_ID = ?";
+            $sql .= " " . "AND sc.Student_ID = ?";
             array_push($filterArray, $student_ID);
         }
-        if($seating != NULL)
+        if($seating !== 'undefined' && $seating !== 'null')
         {
-            $sql .= " " . "AND Seating = ?";
+            $sql .= " " . "AND sc.Seating = ?";
             array_push($filterArray, $seating);
         }
-        if($cycle_ID != NULL)
+
+        if($cycle_ID !== 'undefined' && $cycle_ID !== 'null')
         {
-            $sql .= " " . "AND Cycle_ID = ?";
+            $sql .= " " . "AND sc.Cycle_ID = ?";
             array_push($filterArray, $cycle_ID);
         }
         
@@ -223,18 +230,22 @@
         $stmt->execute();
     });
     //adjust table seatings
-    $app->post('/api/table/', 'middleWare',function() use ($app){
-        $studentArray = $app->request->params('studentArray');
+    $app->post('/api/table', 'middleWare',function() use ($app){
+	
+        $students = $app->request->params('studentArray');
+		$studentArray = explode(",", $students);
+		var_dump($studentArray);
         $inQuery = implode(',', array_fill(0, count($studentArray), '?'));
         $db = getDB();
-        $seat = $app->request->params('Seating');
+        $seat = $app->request->params('seating');
         $sql = 'UPDATE student SET Seating = ? WHERE Student_ID IN(' . $inQuery . ')';
         $stmt = $db->prepare($sql);
         $stmt->bindParam(1, $seat);
+		
         foreach($studentArray as $k => $id)
             {
                 $stmt->bindValue(($k+2), $id);
-            }
+            };
 
         $stmt->execute();
     });
@@ -440,7 +451,64 @@
         $response->body(json_encode($students));
         return $response; 
 	});
-    $app->run();
+    
+	$app->get('/api/getAllCycles', 'middleWare', function() use ($app){
+		$sql = "SELECT Cycle_ID, Start_Date, End_Date, Number FROM cycle";
+		$db = getDB();
+		$stmt = $db->prepare($sql);
+		$stmt->execute();
+		$cycles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			
+		$response = $app->response();
+        $response['Content-Type'] = 'application/json';
+        $response->body(json_encode($cycles));
+        return $response;
+	});
+	
+	$app->get('/api/getAllAvailableStudents', 'middleWare', function() use ($app){
+	
+		$table = $app->request->params('table');
+		$sql = "SELECT p.Firstname, p.Infix, p.Lastname, s.Student_ID, s.Seating";
+		$sql .= " FROM student s LEFT JOIN person p ON s.Person_ID=p.Person_ID";
+		$sql .= " WHERE s.Seating = 0 OR s.Seating = ?";
+		$db = getDB();
+		$stmt = $db->prepare($sql);
+		$stmt->bindValue(1, $table);
+		$stmt->execute();
+		$students = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		
+		$response = $app->response();
+        $response['Content-Type'] = 'application/json';
+        $response->body(json_encode($students));
+        return $response;
+	});
+
+    $app->post('/api/deleteCycle', 'middleWare', function() use ($app){
+        $cycle_ID = $app->request->params('cycle_ID');
+
+        $assignment = checkCycleUses($cycle_ID);
+
+        if(!$assignment){
+            $sql = "DELETE FROM cycle WHERE Cycle_ID = ?";
+            $db = getDB();
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(1, $cycle_ID);
+            $stmt->execute();
+            $res = array('Success' => TRUE);
+            $response = $app->response();
+            $response['Content-Type'] = 'application/json';
+            $response->body(json_encode($res));
+            return $response;
+        }
+      else{
+            $res = array('Success' => FALSE);
+            $response = $app->response();
+            $response['Content-Type'] = 'application/json';
+            $response->body(json_encode($res));
+            return $response;
+        };
+    });
+	$app->run();
     
     function getLatestScrum($student_ID)
     {
@@ -451,5 +519,29 @@
         $stmt->execute();
         $scrumlogs = $stmt->fetch(PDO::FETCH_ASSOC);
         return $scrumlogs;
-    }
+    };
+
+    function checkCycleUses($id)
+    {
+        $sql = "SELECT Assignment_ID FROM assignment WHERE Cycle_ID=?";
+        $sql2 = "SELECT Scrumlog_ID FROM scrumlog WHERE Cycle_ID=?";
+        $db = getDB();
+        $db->beginTransaction();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(1, $id);
+        $stmt->execute();
+        $stmt2 = $db->prepare($sql2);
+        $stmt2->bindValue(1, $id);
+        $stmt2->execute();
+        if ($stmt->rowCount() > 0 || $stmt2->rowCount() > 0) 
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        };
+        $db->rollBack();
+
+    };
     ?>

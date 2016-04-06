@@ -26,6 +26,10 @@
                             </div>
                             <div class="form-bottom">
                                 <form role="form" action="php/login.php" method="post" class="login-form" >
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/master
 			                    	<div class="form-group">
 			                    		<label class="sr-only" for="form-username">Gebruikersnaam</label>
                                                         <input type="text" name="form-username" placeholder="Gebruikersnaam" class="form-username form-control" id="form-username" autofocus>

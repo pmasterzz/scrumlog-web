@@ -66,6 +66,7 @@ if (!isset($_SESSION['login'])){
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
+<<<<<<< HEAD
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -101,6 +102,30 @@ if (!isset($_SESSION['login'])){
                 </div>
             </div>
         </div>
+=======
+        <?php
+
+        if (isset($_GET['page'])){
+            switch($_GET['page']){
+                case 'scrumloginvullen':
+                    include 'includes/scrumloginvullen.inc.php';
+                    break;
+                case 'scrumloginzien':
+                    include 'includes/scrumlogsinzien.inc.php';
+                    break;
+                case 'allescrumloginzien':
+                    include 'includes/allescrumlogsinzien.inc.php';
+                    break;
+                case 'wijzigtafel':
+                    include 'includes/wijzigtafel.inc.php';
+                    break;
+                default:
+                    include 'includes/scrumloginvullen.inc.php';
+                    break;
+            }
+        }
+        ?>
+>>>>>>> refs/remotes/origin/master
         <!-- /#page-content-wrapper -->
 
     </div>
