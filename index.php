@@ -354,7 +354,7 @@
         $stmt->execute();
     });
     
-    $app->get('/api/getTeachers','middleWare',  function() use ($app){
+    $app->get('/api/getAllTeachers','middleWare',  function() use ($app){
         $sql = 'SELECT person.Firstname, person.Infix, person.Lastname, teacher.Teacher_ID '
                 . 'FROM person '
                 . 'LEFT JOIN teacher '
@@ -368,6 +368,7 @@
         $response['Content-Type'] = 'application/json';
         $response->body(json_encode($teacher));
         return $response; 
+        
     });
 	
 	$app->get('/api/checkToken', function() use ($app){

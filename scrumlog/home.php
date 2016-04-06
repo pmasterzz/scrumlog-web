@@ -8,6 +8,8 @@ if (!isset($_SESSION['login'])){
     header("Location: index.php");
 }
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +23,7 @@ if (!isset($_SESSION['login'])){
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Simple Sidebar - Start Bootstrap Template</title>
+    <title>Scrumlog!</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -66,51 +68,14 @@ if (!isset($_SESSION['login'])){
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
-<<<<<<< HEAD
-        <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="doorzichtig">   
-                            <h1>Scrumlog</h1>
-                            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Show menu bitch</a>
-                            <p>
-                                <form action="submitScrumlog.php" class="invullen">
-                                    Wat heb je gister gedaan knuppel:<br>
-                                    <input type="text" name="Input_Yesterday" class="invullen"><br>
-                                    wat zat je in de weg:<br>
-                                    <input type="text" name="Input_Problems" class="invullen"><br>
-                                    wat denk je vandaag te bereiken:<br>
-                                    <input type="text" name="Input_Today" class="invullen"><br>
-                                    hulp heb je zeker nodig:<br>
-                                    <input type="text"  name="Input_Help" class="invullen"><br>
-                                    welk van deze slachtoffers moet jouw helpen?<br>
-                                    <select name="Radio_Help">
-                                        <option value="nvt">geen</option>
-                                        <option value="Westerveld">Die Vrouw</option>
-                                        <option value="Wouters">Die Belg</option>
-                                        <option value="Michels">Die ene met die snor</option>
-                                        <option value="Dirksen">Die andere vrouw</option>
-                                        <option value="Menno">Die kale</option>
-                                    </select><br><br>
-                                    
-                                    <button type="submit">Submit</button>
-                                </form>
-                            </p>
-                        </div>    
-                    </div>
-                </div>
-            </div>
-        </div>
-=======
         <?php
 
         if (isset($_GET['page'])){
             switch($_GET['page']){
-                case 'scrumloginvullen':
+                case 'scrumlogInvullen':
                     include 'includes/scrumloginvullen.inc.php';
                     break;
-                case 'scrumloginzien':
+                case 'scrumlogInzien':
                     include 'includes/scrumlogsinzien.inc.php';
                     break;
                 case 'allescrumloginzien':
@@ -125,7 +90,6 @@ if (!isset($_SESSION['login'])){
             }
         }
         ?>
->>>>>>> refs/remotes/origin/master
         <!-- /#page-content-wrapper -->
 
     </div>
