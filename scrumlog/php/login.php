@@ -47,7 +47,7 @@ function login(){
     $result = curl_exec($ch);
   
     $result = json_decode($result, TRUE);
-  
+
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
     if($httpCode === 401){
@@ -57,7 +57,7 @@ function login(){
         
         $_SESSION['Token'] = $result['Token'];
        
-        
+        $_SESSION['User'] = $result['User'];
         return TRUE;
     }
  

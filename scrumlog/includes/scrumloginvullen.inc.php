@@ -9,7 +9,7 @@
                     <h1>Scrumlog</h1>
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Show menu bitch</a>
                     <p>
-                    <form action="submitScrumlog.php" class="invullen">
+                    <form method="POST" action="php/submitScrumlog.php" class="invullen">
                         Wat heb je gister gedaan knuppel:<br>
                         <input type="text" name="Input_Yesterday" class="invullen" required autofocus><br>
                         wat zat je in de weg:<br>
@@ -19,13 +19,13 @@
                         hulp heb je zeker nodig:<br>
                         <input type="text"  name="Input_Help" class="invullen" required><br>
                         welk van deze slachtoffers moet jouw helpen?<br>
-                        <select name="Radio_Help">
+                        <select name="Input_Teacher">
                             <option value="nvt">geen</option>
                             <?php                            
                                 foreach($teachersArray as $teacher)
                                 {
                                     echo '<option value=' . '"' 
-                                            . $teacher['TeacherID'] . 
+                                            . $teacher['Teacher_ID'] . 
                                             '"' . "> " . $teacher['Firstname'] 
                                             . " " . $teacher['Lastname'] 
                                             . " </option>";

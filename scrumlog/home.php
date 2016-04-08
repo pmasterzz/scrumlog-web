@@ -76,7 +76,7 @@ if (!isset($_SESSION['login'])){
                     include 'includes/scrumloginvullen.inc.php';
                     break;
                 case 'scrumlogInzien':
-                    include 'includes/scrumlogsinzien.inc.php';
+                    include 'includes/scrumlogInzien.inc.php';
                     break;
                 case 'allescrumloginzien':
                     include 'includes/allescrumlogsinzien.inc.php';
