@@ -60,7 +60,7 @@ if (isset ($_POST['Cycle_ID']))
 function getAllScrumlogs($date, $year,$table,$student_ID,$seating,$cycle_ID)
 {
     
-    $url = 'http://localhost/scrumlog-api/index.php/api/scrumlog?';    
+    $url = 'http://localhost/scrumlog-web/api/api.php/api/scrumlog?';    
     $fields = array(
         'date' => urlencode($date),
         'year' => urlencode($year),

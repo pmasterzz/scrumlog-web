@@ -10,7 +10,7 @@ submitScrumlog();
 
 header("Location: ../home.php?page=scrumlogInzien");
 function submitScrumlog(){    
-    $url = 'http://localhost/scrumlog-api/index.php/api/submitScrumlog';
+    $url = 'http://localhost/scrumlog-web/api/api.php/api/submitScrumlog';
     $fields = array(
             'input_Yesterday' => urlencode($_POST['Input_Yesterday']),
             'input_Problems' => urlencode($_POST['Input_Problems']),

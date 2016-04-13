@@ -20,7 +20,7 @@ session_start();
            }
         }
         else{
-           //header("Location: ../index.php");
+           header("Location: ../index.php");
         }
        
             
@@ -30,7 +30,7 @@ session_start();
     }
 function login(){   
 	
-    $url = 'http://localhost/scrumlog-web/api/api.php/login';
+    $url = 'http://localhost/scrumlog-web/api/api.php/api/login';
     $fields = array(
             'username' => urlencode($_POST['form-username']),
             'password' => urlencode($_POST['form-password']),

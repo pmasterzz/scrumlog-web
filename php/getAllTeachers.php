@@ -3,7 +3,7 @@ $teachersArray = getAllTeachers();
 
 function getAllTeachers()
 {
-    $url = 'http://localhost/scrumlog-api/index.php/api/getAllTeachers';
+    $url = 'http://localhost/scrumlog-web/api/api.php/api/getAllTeachers';
     
     $ch = curl_init();
 
