@@ -575,11 +575,12 @@
     
     $app->put('/api/completeTodo', function() use ($app){
         $id = $app->request->params('scrumlog_ID');
-        
-        $sql = "UPDATE scrumlog SET Completed=TRUE WHERE Scrumlog_ID=?";
+        $comment = $app->request->params('comment');
+        $sql = "UPDATE scrumlog SET Completed=TRUE, Remark=? WHERE Scrumlog_ID=?";
         $db = getDB();
         $stmt = $db->prepare($sql);
-        $stmt->bindValue(1, $id);
+        $stmt->bindValue(1, $comment);
+        $stmt->bindValue(2, $id);
         $stmt->execute(); 
     });
 	$app->run();
