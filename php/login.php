@@ -28,8 +28,9 @@ session_start();
     else{
        header("Location: http://www.google.nl");
     }
-function login(){    
-    $url = 'http://localhost/scrumlog-web/api/index.php/login';
+function login(){   
+	
+    $url = 'http://localhost/scrumlog-web/api/api.php/login';
     $fields = array(
             'username' => urlencode($_POST['form-username']),
             'password' => urlencode($_POST['form-password']),
