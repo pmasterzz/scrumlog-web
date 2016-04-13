@@ -26,13 +26,14 @@
                             </div>
                             <div class="form-bottom">
                                 <form role="form" action="php/login.php" method="post" class="login-form" >
+
 			                    	<div class="form-group">
 			                    		<label class="sr-only" for="form-username">Gebruikersnaam</label>
-                                                        <input type="text" name="form-username" placeholder="Gebruikersnaam" class="form-username form-control" id="form-username" autofocus>
+                                                        <input type="text" name="form-username" placeholder="Gebruikersnaam" class="form-username form-control" id="form-username" autofocus required>
 			                        </div>
 			                        <div class="form-group">
 			                        	<label class="sr-only" for="form-password">Wachtwoord</label>
-			                        	<input type="password" name="form-password" placeholder="Wachtwoord" class="form-password form-control" id="form-password">
+                                                        <input type="password" name="form-password" placeholder="Wachtwoord" class="form-password form-control" id="form-password" required>
 			                        </div>
 			                        <button type="submit" name="submit" class="btn">Log in</button>
 			                    </form>
