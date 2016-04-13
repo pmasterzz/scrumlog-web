@@ -1,8 +1,8 @@
 <?php
     include 'php/getAllTeachers.php';
-    if ($_SESSION['Userlevel'] != 'Student') 
+    if ($_SESSION['Userlevel'] != 'Teacher') 
         {
-            header("Location: home.php?page=scrumlogInzien");
+            header("Location: home.php?page=scrumlogInvullen");
         }
 ?>
 <div id="page-content-wrapper">
@@ -54,4 +54,11 @@
             </div>
         </div>
     </div>
-</div>
+</div><?php
+
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+

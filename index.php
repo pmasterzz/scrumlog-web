@@ -149,7 +149,7 @@
 
     //retrieve all tables 
     $app->get('/api/tables','middleWare',function() use ($app){
-        $sql = 'SELECT person.Firstname , person.Lastname, student.Seating '
+        $sql = 'SELECT person.Firstname, person.Infix , person.Lastname, student.Seating '
             . 'FROM student '
             . 'LEFT JOIN person '
             . 'ON student.Person_ID=person.Person_ID '
@@ -160,7 +160,7 @@
         $seating = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($seating as $seat)
         {
-            echo $seat['Firstname'] . ' ' . $seat['Lastname'] . ' ' . $seat['Seating'] . '<br>';
+            echo $seat['Firstname'] . ' ' .$seat['Infix'] . ' ' . $seat['Lastname'] . ' ' . $seat['Seating'] . '<br>';
         }
         $response = $app->response();
         $response['Content-Type'] = 'application/json';
@@ -174,7 +174,8 @@
             . 'FROM student '
             . 'LEFT JOIN person '
             . 'ON person.Person_ID=student.Person_ID '
-            . 'WHERE Seating = ?';
+            . 'WHERE Seating = ?'
+            . 'SORT BY person.Lastname';
         $db = getDB();
         $stmt = $db->prepare($sql);
         $stmt->bindParam(1, $seat);

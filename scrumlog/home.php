@@ -53,12 +53,33 @@ if (!isset($_SESSION['login'])){
                     </a>
                 </li>
                 <li>
-                    <a href="#">Scrumlog invullen</a>
+                <?php 
+                    if ($_SESSION['Userlevel'] == 'Student')
+                        {
+                            echo ' <a href="?page=scrumlogInvullen">Scrumlog invullen</a>';
+                        }
+                ?>
+                   
                 </li>
                 <li>
-                    <a href="#">Scrumlog inzien</a>
+                    <a href="?page=scrumlogInzien">Scrumlog inzien</a>
                 </li>
-
+                <li>
+                <?php 
+                    if ($_SESSION['Userlevel'] == 'Teacher')
+                        {
+                            echo ' <a href="?page=createTable">Tafels Wijzigen</a>';
+                        }
+                ?>   
+                </li>
+                <li>
+                <?php 
+                    if ($_SESSION['Userlevel'] == 'Teacher')
+                        {
+                            echo ' <a href="?page=createCycle">Cyclus Wijzigen</a>';
+                        }
+                ?>   
+                </li>
                 
                 <li class="beneden">
                     <a href="php/uitloggen.php">uitloggen/oprotten</a>
@@ -69,7 +90,6 @@ if (!isset($_SESSION['login'])){
 
         <!-- Page Content -->
         <?php
-
         if (isset($_GET['page'])){
             switch($_GET['page']){
                 case 'scrumlogInvullen':
@@ -81,14 +101,18 @@ if (!isset($_SESSION['login'])){
                 case 'allescrumloginzien':
                     include 'includes/allescrumlogsinzien.inc.php';
                     break;
-                case 'wijzigtafel':
-                    include 'includes/wijzigtafel.inc.php';
+                case 'createTable':
+                    include 'includes/createTable.inc.php';
+                    break;
+                case 'createCycle':
+                    include 'includes/createCycle.inc.php';
                     break;
                 default:
                     include 'includes/scrumloginvullen.inc.php';
                     break;
             }
         }
+        
         ?>
         <!-- /#page-content-wrapper -->
 

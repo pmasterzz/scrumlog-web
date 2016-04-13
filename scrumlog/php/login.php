@@ -10,8 +10,14 @@ session_start();
         if($isLoggedIn){
            $_SESSION['login'] = 'ingelogd'; 
           
-
-           header("Location: ../home.php?page=scrumloginvullen");
+           if($_SESSION['Userlevel'] == 'Student')
+            {
+                header("Location: ../home.php?page=scrumloginvullen");  
+            }
+           else
+           {
+                header("Location: ../home.php?page=scrumloginzien");
+           }
         }
         else{
            header("Location: ../index.php");
@@ -56,8 +62,9 @@ function login(){
     else if($httpCode === 200){
         
         $_SESSION['Token'] = $result['Token'];
-       
+        
         $_SESSION['User'] = $result['User'];
+        $_SESSION['Userlevel'] = $result['Userlevel'];
         return TRUE;
     }
  
