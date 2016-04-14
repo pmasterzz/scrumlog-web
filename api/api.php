@@ -2,6 +2,7 @@
 
     require 'vendor/autoload.php';
     include 'db_config.php';
+    include '../php/database.php';
 
     $app = new \Slim\Slim();
 	
@@ -261,89 +262,107 @@
     //Log in
     $app->post('/api/login', function() use($app){
     $username = $app->request->params('username');
-    $password = $app->request->params('password'); 
-    $sql = 'SELECT p.Firstname, p.Infix, p.Lastname, p.Person_ID, p.Password,'
-			.' s.Student_ID, s.Class, s.Seating, s.Phase, t.Teacher_ID, s.Last_Submitted_Scrumlog '
-			. 'FROM person p '
-            . 'LEFT JOIN student s ON p.Person_ID = s.Person_ID '
-            . 'LEFT JOIN teacher t ON p.Person_ID = t.Person_ID '
-            . 'WHERE Username = ?';
-    $db = getDB();
-    $stmt = $db->prepare($sql);
-    $stmt->bindParam(1, $username);
-    $stmt->execute();
-    if ($stmt->rowCount() == 1) 
-    {
-        $person = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-    if (password_verify($password, $person['Password']))
-        {   
-            
-            $token = uniqid();
-            $sql = 'UPDATE person SET Token = ? WHERE Person_ID = ?';
-            $stmt = $db->prepare($sql);
-            $stmt->bindParam(1, $token);
-            $stmt->bindParam(2, $person['Person_ID']);    
-            $stmt->execute();
-            //echo json_encode($person);
-            if ($person['Student_ID'] != NULL)
-                {   
-                    $latest_scrum = getLatestScrum($person['Student_ID']);
-                    
-                    $student = array(
-                        'User' => array(
-                                'Firstname' => $person['Firstname'],
-                                'Lastname' => $person['Lastname'],
-                                'Infix' => $person['Infix'],
-                                'Person_ID' => $person['Person_ID'],
-                                'Student_ID' => $person['Student_ID'],
-                                'Class' => $person['Class'],
-                                'Seating' => $person['Seating'],   
-                                'Last_Submitted_Scrumlog' => $latest_scrum['Date']
-                        ),
-                        'Token' => $token,
-                        'Userlevel' => 'Student'
-					);
-                    $response = $app->response();                    
-                    $response['Content-Type'] = 'application/json';
-                    $response->body(json_encode($student));
+    $password = $app->request->params('password');
 
-                    
-                    return $response; // i think dinky donky
-                }
-            else
-                {
-                    $teacher = array(
-					'User' => array(
-						'Firstname' => $person['Firstname'],
-						'Lastname' => $person['Lastname'],
-						'Infix' => $person['Infix'],
-						'Person_ID' => $person['Person_ID'],
-						'Teacher_ID' => $person['Teacher_ID']
-					),						
-                    'Success' => TRUE,
-                    'Token' => $token,
-					'Userlevel' => 'Teacher'
-                    );
-                    $response = $app->response();
-                    $response['Content-Type'] = 'application/json';
-                    $response->body(json_encode($teacher));
-                    return $response;
-                    
-                    
-                }
-        }
-        else
-        {
-           $app->response->setStatus(401);
-            //return $response;// i think dinky donky app 
-        }
-    }
-    else 
+    $login = login($username, $password);
+
+    if($login === false)
     {
+        $response = $app->response();
         $app->response->setStatus(401);
-         //return $response;// i think dinky donky app 
+        return $response;
     }
+    else
+    {
+        $response = $app->response();
+        $response['Content-Type'] = 'application/json';
+        $response->body(json_encode($login));
+        return $response;  
+    }
+
+
+//    $sql = 'SELECT p.Firstname, p.Infix, p.Lastname, p.Person_ID, p.Password,'
+//			.' s.Student_ID, s.Class, s.Seating, s.Phase, t.Teacher_ID, s.Last_Submitted_Scrumlog '
+//			. 'FROM person p '
+//            . 'LEFT JOIN student s ON p.Person_ID = s.Person_ID '
+//            . 'LEFT JOIN teacher t ON p.Person_ID = t.Person_ID '
+//            . 'WHERE Username = ?';
+//    $db = getDB();
+//    $stmt = $db->prepare($sql);
+//    $stmt->bindParam(1, $username);
+//    $stmt->execute();
+//    if ($stmt->rowCount() == 1)
+//    {
+//        $person = $stmt->fetch(PDO::FETCH_ASSOC);
+//
+//    if (password_verify($password, $person['Password']))
+//        {
+//
+//            $token = uniqid();
+//            $sql = 'UPDATE person SET Token = ? WHERE Person_ID = ?';
+//            $stmt = $db->prepare($sql);
+//            $stmt->bindParam(1, $token);
+//            $stmt->bindParam(2, $person['Person_ID']);
+//            $stmt->execute();
+//            //echo json_encode($person);
+//            if ($person['Student_ID'] != NULL)
+//                {
+//                    $latest_scrum = getLatestScrum($person['Student_ID']);
+//
+//                    $student = array(
+//                        'User' => array(
+//                                'Firstname' => $person['Firstname'],
+//                                'Lastname' => $person['Lastname'],
+//                                'Infix' => $person['Infix'],
+//                                'Person_ID' => $person['Person_ID'],
+//                                'Student_ID' => $person['Student_ID'],
+//                                'Class' => $person['Class'],
+//                                'Seating' => $person['Seating'],
+//                                'Last_Submitted_Scrumlog' => $latest_scrum['Date']
+//                        ),
+//                        'Token' => $token,
+//                        'Userlevel' => 'Student'
+//					);
+//                    $response = $app->response();
+//                    $response['Content-Type'] = 'application/json';
+//                    $response->body(json_encode($student));
+//
+//
+//                    return $response; // i think dinky donky
+//                }
+//            else
+//                {
+//                    $teacher = array(
+//					'User' => array(
+//						'Firstname' => $person['Firstname'],
+//						'Lastname' => $person['Lastname'],
+//						'Infix' => $person['Infix'],
+//						'Person_ID' => $person['Person_ID'],
+//						'Teacher_ID' => $person['Teacher_ID']
+//					),
+//                    'Success' => TRUE,
+//                    'Token' => $token,
+//					'Userlevel' => 'Teacher'
+//                    );
+//                    $response = $app->response();
+//                    $response['Content-Type'] = 'application/json';
+//                    $response->body(json_encode($teacher));
+//                    return $response;
+//
+//
+//                }
+//        }
+//        else
+//        {
+//           $app->response->setStatus(401);
+//            //return $response;// i think dinky donky app
+//        }
+//    }
+//    else
+//    {
+//        $app->response->setStatus(401);
+//         //return $response;// i think dinky donky app
+//    }
 
     });
     $app->post('/api/logout',function() use ($app){
