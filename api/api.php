@@ -2,7 +2,7 @@
 
     require 'vendor/autoload.php';
     include 'db_config.php';
-    include '../php/database.php';
+    //include '../php/database.php';
 
     $app = new \Slim\Slim();
 	
@@ -184,6 +184,7 @@
         $seating = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($seating as $seat)
         {
+            
             echo $seat['Firstname'] . ' ' . $seat['Lastname'] . ' ' . $seat['Seating'] . '<br/>';
         }
     });
@@ -263,105 +264,105 @@
     $username = $app->request->params('username');
     $password = $app->request->params('password');
 
-    $login = login($username, $password);
+    // $login = login($username, $password);
 
-    if($login === false)
-    {
-        $response = $app->response();
-        $app->response->setStatus(401);
-        return $response;
-    }
-    else
-    {
-        $response = $app->response();
-        $response['Content-Type'] = 'application/json';
-        $response->body(json_encode($login));
-        return $response;  
-    }
+    // if($login === false)
+    // {
+    //     $response = $app->response();
+    //     $app->response->setStatus(401);
+    //     return $response;
+    // }
+    // else
+    // {
+    //     $response = $app->response();
+    //     $response['Content-Type'] = 'application/json';
+    //     $response->body(json_encode($login));
+    //     return $response;  
+    // }
 
 
-//    $sql = 'SELECT p.Firstname, p.Infix, p.Lastname, p.Person_ID, p.Password,'
-//			.' s.Student_ID, s.Class, s.Seating, s.Phase, t.Teacher_ID, s.Last_Submitted_Scrumlog '
-//			. 'FROM person p '
-//            . 'LEFT JOIN student s ON p.Person_ID = s.Person_ID '
-//            . 'LEFT JOIN teacher t ON p.Person_ID = t.Person_ID '
-//            . 'WHERE Username = ?';
-//    $db = getDB();
-//    $stmt = $db->prepare($sql);
-//    $stmt->bindParam(1, $username);
-//    $stmt->execute();
-//    if ($stmt->rowCount() == 1)
-//    {
-//        $person = $stmt->fetch(PDO::FETCH_ASSOC);
-//
-//    if (password_verify($password, $person['Password']))
-//        {
-//
-//            $token = uniqid();
-//            $sql = 'UPDATE person SET Token = ? WHERE Person_ID = ?';
-//            $stmt = $db->prepare($sql);
-//            $stmt->bindParam(1, $token);
-//            $stmt->bindParam(2, $person['Person_ID']);
-//            $stmt->execute();
-//            //echo json_encode($person);
-//            if ($person['Student_ID'] != NULL)
-//                {
-//                    $latest_scrum = getLatestScrum($person['Student_ID']);
-//
-//                    $student = array(
-//                        'User' => array(
-//                                'Firstname' => $person['Firstname'],
-//                                'Lastname' => $person['Lastname'],
-//                                'Infix' => $person['Infix'],
-//                                'Person_ID' => $person['Person_ID'],
-//                                'Student_ID' => $person['Student_ID'],
-//                                'Class' => $person['Class'],
-//                                'Seating' => $person['Seating'],
-//                                'Last_Submitted_Scrumlog' => $latest_scrum['Date']
-//                        ),
-//                        'Token' => $token,
-//                        'Userlevel' => 'Student'
-//					);
-//                    $response = $app->response();
-//                    $response['Content-Type'] = 'application/json';
-//                    $response->body(json_encode($student));
-//
-//
-//                    return $response; // i think dinky donky
-//                }
-//            else
-//                {
-//                    $teacher = array(
-//					'User' => array(
-//						'Firstname' => $person['Firstname'],
-//						'Lastname' => $person['Lastname'],
-//						'Infix' => $person['Infix'],
-//						'Person_ID' => $person['Person_ID'],
-//						'Teacher_ID' => $person['Teacher_ID']
-//					),
-//                    'Success' => TRUE,
-//                    'Token' => $token,
-//					'Userlevel' => 'Teacher'
-//                    );
-//                    $response = $app->response();
-//                    $response['Content-Type'] = 'application/json';
-//                    $response->body(json_encode($teacher));
-//                    return $response;
-//
-//
-//                }
-//        }
-//        else
-//        {
-//           $app->response->setStatus(401);
-//            //return $response;// i think dinky donky app
-//        }
-//    }
-//    else
-//    {
-//        $app->response->setStatus(401);
-//         //return $response;// i think dinky donky app
-//    }
+   $sql = 'SELECT p.Firstname, p.Infix, p.Lastname, p.Person_ID, p.Password,'
+			.' s.Student_ID, s.Class, s.Seating, s.Phase, t.Teacher_ID, s.Last_Submitted_Scrumlog '
+			. 'FROM person p '
+           . 'LEFT JOIN student s ON p.Person_ID = s.Person_ID '
+           . 'LEFT JOIN teacher t ON p.Person_ID = t.Person_ID '
+           . 'WHERE Username = ?';
+   $db = getDB();
+   $stmt = $db->prepare($sql);
+   $stmt->bindParam(1, $username);
+   $stmt->execute();
+   if ($stmt->rowCount() == 1)
+   {
+       $person = $stmt->fetch(PDO::FETCH_ASSOC);
+
+   if (password_verify($password, $person['Password']))
+       {
+
+           $token = uniqid();
+           $sql = 'UPDATE person SET Token = ? WHERE Person_ID = ?';
+           $stmt = $db->prepare($sql);
+           $stmt->bindParam(1, $token);
+           $stmt->bindParam(2, $person['Person_ID']);
+           $stmt->execute();
+           //echo json_encode($person);
+           if ($person['Student_ID'] != NULL)
+               {
+                   $latest_scrum = getLatestScrum($person['Student_ID']);
+
+                   $student = array(
+                       'User' => array(
+                               'Firstname' => $person['Firstname'],
+                               'Lastname' => $person['Lastname'],
+                               'Infix' => $person['Infix'],
+                               'Person_ID' => $person['Person_ID'],
+                               'Student_ID' => $person['Student_ID'],
+                               'Class' => $person['Class'],
+                               'Seating' => $person['Seating'],
+                               'Last_Submitted_Scrumlog' => $latest_scrum['Date']
+                       ),
+                       'Token' => $token,
+                       'Userlevel' => 'Student'
+					);
+                   $response = $app->response();
+                   $response['Content-Type'] = 'application/json';
+                   $response->body(json_encode($student));
+
+
+                   return $response; // i think dinky donky
+               }
+           else
+               {
+                   $teacher = array(
+					'User' => array(
+						'Firstname' => $person['Firstname'],
+						'Lastname' => $person['Lastname'],
+						'Infix' => $person['Infix'],
+						'Person_ID' => $person['Person_ID'],
+						'Teacher_ID' => $person['Teacher_ID']
+					),
+                   'Success' => TRUE,
+                   'Token' => $token,
+					'Userlevel' => 'Teacher'
+                   );
+                   $response = $app->response();
+                   $response['Content-Type'] = 'application/json';
+                   $response->body(json_encode($teacher));
+                   return $response;
+
+
+               }
+       }
+       else
+       {
+          $app->response->setStatus(401);
+           //return $response;// i think dinky donky app
+       }
+   }
+   else
+   {
+       $app->response->setStatus(401);
+        //return $response;// i think dinky donky app
+   }
 
     });
     $app->post('/api/logout',function() use ($app){
@@ -575,7 +576,7 @@
         $sql = "SELECT sc.Remark, sc.Teacher_ID, sc.Completed, p.Firstname, p.Lastname, p.Infix, sc.Scrumlog_ID, sc.Input_Help ";
         $sql .= "FROM scrumlog sc LEFT JOIN student st ON sc.Student_ID=st.Student_ID ";
         $sql .= "LEFT JOIN person p ON st.Person_ID=p.Person_ID ";
-        $sql .= "WHERE (sc.Teacher_ID=:id OR sc.Radio_Help=:id) AND sc.Date=CURDATE()";
+        $sql .= "WHERE (sc.Teacher_ID=:id OR (sc.Radio_Help=:id AND sc.Teacher_ID=null)) AND sc.Date=CURDATE()";
 
         $db = getDB();
         $stmt = $db->prepare($sql);
