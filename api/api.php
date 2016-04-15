@@ -236,7 +236,6 @@
 	
         $students = $app->request->params('studentArray');
 		$studentArray = explode(",", $students);
-		var_dump($studentArray);
         $inQuery = implode(',', array_fill(0, count($studentArray), '?'));
         $db = getDB();
         $seat = $app->request->params('seating');
