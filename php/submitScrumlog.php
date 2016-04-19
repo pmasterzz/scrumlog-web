@@ -12,15 +12,15 @@ header("Location: ../home.php?page=scrumlogInzien");
 function submitScrumlog(){    
     $url = 'http://localhost/scrumlog-web/api/api.php/api/submitScrumlog';
     $fields = array(
-            'input_Yesterday' => urlencode($_POST['Input_Yesterday']),
-            'input_Problems' => urlencode($_POST['Input_Problems']),
-            'input_Today' => urlencode($_POST['Input_Today']),
-            'input_Help' => urlencode($_POST['Input_Help']),
-            'input_Teacher' => urlencode($_POST['Input_Teacher']),
-            'student_ID' => urlencode($_SESSION['User']['Student_ID']),
-            'seating' => urlencode($_SESSION['User']['Seating'])
+        'input_Yesterday' => urlencode(htmlspecialchars($_POST['Input_Yesterday'])),
+        'input_Problems' => urlencode(htmlspecialchars($_POST['Input_Problems'])),
+        'input_Today' => urlencode(htmlspecialchars($_POST['Input_Today'])),
+        'input_Help' => urlencode(htmlspecialchars($_POST['Input_Help'])),
+        'input_Teacher' => urlencode(htmlspecialchars($_POST['Input_Teacher'])),
+        'student_ID' => urlencode($_SESSION['User']['Student_ID']),
+        'seating' => urlencode($_SESSION['User']['Seating'])
     );
-    var_dump($fields);
+
     $fields_string="";
     //url-ify the data for the POST
     foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
