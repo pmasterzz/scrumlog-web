@@ -6,7 +6,6 @@
  * Time: 12:51
  */
 
-//include '../api/db_config.php';
 $path = $_SERVER['DOCUMENT_ROOT'];
 $path .= "/scrumlog-web/api/db_config.php";
 include_once($path);
