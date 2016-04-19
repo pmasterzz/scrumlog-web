@@ -1,5 +1,6 @@
 <?php
     include 'php/getAllScrumlogs.php';
+    include 'php/globals.php';
     $min_Year = date('Y') - 5;
 ?>
 <div id="page-content-wrapper">
