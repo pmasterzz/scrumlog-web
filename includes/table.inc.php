@@ -1,5 +1,7 @@
 <?php
-    include 'php/getAllTeachers.php';
+    include 'php/updateTable.php';
+    
+    include 'php/globals.php';
     if ($_SESSION['Userlevel'] != 'Teacher') 
         {
             header("Location: home.php?page=scrumlogInvullen");
@@ -14,39 +16,24 @@
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Show menu</a>
                     <p>
                     <?php
-                    $last_Scrum = $_SESSION['User']['Last_Submitted_Scrumlog'];
-                    $todays_Date = date('y-m-d');
-                    $str_Today = strtotime($todays_Date);
-                    $str_Last_Scrum = strtotime($last_Scrum);
-                    if ($str_Last_Scrum != $str_Today){ // form already submitted
-                        echo '<form method="POST" action="php/submitScrumlog.php" class="invullen">
-                        Wat heb je gister gedaan knuppel:<br>
-                        <input type="text" name="Input_Yesterday" class="invullen" required autofocus><br>
-                        wat zat je in de weg:<br>
-                        <input type="text" name="Input_Problems" class="invullen" required><br>
-                        wat denk je vandaag te bereiken:<br>
-                        <input type="text" name="Input_Today" class="invullen" required><br>
-                        hulp heb je zeker nodig:<br>
-                        <input type="text"  name="Input_Help" class="invullen" required><br>
-                        welk van deze slachtoffers moet jouw helpen?<br>
-                        <select name="Input_Teacher">
-                            <option value="nvt">geen</option>';   
-                            foreach($teachersArray as $teacher)
+                        
+                        if (!isset($_POST["submit"]))
+                        {   
+                            echo '<form method="POST"><select name="table">';
+                            foreach($table as $table)
                             {
-                                echo '<option value=' . '"' 
-                                        . $teacher['Teacher_ID'] . 
-                                        '"' . "> " . $teacher['Firstname'] 
-                                        . " " . $teacher['Lastname'] 
-                                        . " </option>";
+                                echo '<option value="' . $table . '">' . $table . '</option>';
                             }
-                           echo '</select><br><br>
-
-                                <button type="submit">Submit</button>
-                            </form>
-                        </p>';   
-                    }
-                    else {
-                            echo '<img src="http://thecatapi.com/api/images/get?format=src&type=gif"></img>';
+                            echo '</select> <button type="submit">SELECTEER</button></form>';
+                        }
+                        else
+                        {
+                            echo '<form method="POST"><select multiple="true" name="table">';
+                            foreach($students as $student)
+                            {
+                                echo '<option value="' . $student['Student_ID'] . '" >' . $student['Firstname'] . ' ' . $student['Infix'] . ' ' . $student['Lastname'] . ' ' . $student['Student_ID'] .  '</option>';
+                            }
+                             echo '</select> <button type="submit">Verlos van deze tafel</button></form>';
                         }
                     ?>
                     
@@ -54,7 +41,9 @@
             </div>
         </div>
     </div>
-</div><?php
+</div>
+
+<?php
 
 /* 
  * To change this license header, choose License Headers in Project Properties.
