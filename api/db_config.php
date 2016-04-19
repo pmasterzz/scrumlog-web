@@ -1,9 +1,9 @@
 <?php
     function getDB()
     {
-        $dbhost = "us-cdbr-azure-central-a.cloudapp.net";
-        $dbuser = "beed615a75b973";
-        $dbpass = "acd4afcb";
+        $dbhost = "localhost";
+        $dbuser = "root";
+        $dbpass = "Welkom2016!";
         $dbname = "scrumlog-db";
 
         $mysql_conn_string = "mysql:host=$dbhost;dbname=$dbname";
