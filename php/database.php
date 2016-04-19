@@ -6,7 +6,10 @@
  * Time: 12:51
  */
 
-include '../api/db_config.php';
+//include '../api/db_config.php';
+$path = $_SERVER['DOCUMENT_ROOT'];
+$path .= "/scrumlog-web/api/db_config.php";
+include_once($path);
 
 function login($username, $password)
 {
@@ -75,7 +78,7 @@ function login($username, $password)
         return false;
 };
 
-function getScrumlog($date, $year='undefined', $student_ID='undefined', $seating='undefined', $cycle_ID='undefined'){
+function getScrumlog($date, $year, $student_ID, $seating, $cycle_ID){
     $filterArray = array($date);
 
         $sql = "SELECT sc.Input_Yesterday, sc.Input_Help, sc.Input_Today, sc.Input_Problems, sc.Radio_Help,";
@@ -96,7 +99,7 @@ function getScrumlog($date, $year='undefined', $student_ID='undefined', $seating
             $sql .= " " . "AND sc.Student_ID = ?";
             array_push($filterArray, $student_ID);
         }
-        if($seating !== 'undefined' && $seating !== 'null')
+        if($seating !== 'undefined')
         {
             $sql .= " " . "AND sc.Seating = ?";
             array_push($filterArray, $seating);
@@ -107,7 +110,6 @@ function getScrumlog($date, $year='undefined', $student_ID='undefined', $seating
             $sql .= " " . "AND sc.Cycle_ID = ?";
             array_push($filterArray, $cycle_ID);
         }
-        
 		$db = getDB();
         $stmt = $db->prepare($sql);
 		foreach ($filterArray as $k => $v)
