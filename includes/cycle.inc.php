@@ -1,5 +1,5 @@
 <?php
-    include 'php/getAllTeachers.php';
+    include 'php/cycle.php';
     if ($_SESSION['Userlevel'] != 'Teacher') 
         {
             header("Location: home.php?page=scrumlogInvullen");
