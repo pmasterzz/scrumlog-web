@@ -1,4 +1,5 @@
 <?php
+include_once 'database.php';
 session_start();
 
 $yesterday = $_POST['Input_Yesterday'];
@@ -6,42 +7,13 @@ $problems = $_POST['Input_Problems'];
 $today = $_POST['Input_Today'];
 $help = $_POST['Input_Help'];
 $radio = $_POST['Input_Teacher'];
-submitScrumlog();
+$student_ID = $_SESSION['User']['Student_ID'];
+$seating = $_SESSION['User']['Seating'];
+
+
+submitScrumlog($yesterday, $problems, $today, $help, $radio, $student_ID, $seating);
+
 
 header("Location: ../home.php?page=scrumlogInzien");
-function submitScrumlog(){    
-    $url = 'http://localhost/scrumlog-web/api/api.php/api/submitScrumlog';
-    $fields = array(
-        'input_Yesterday' => urlencode(htmlspecialchars($_POST['Input_Yesterday'])),
-        'input_Problems' => urlencode(htmlspecialchars($_POST['Input_Problems'])),
-        'input_Today' => urlencode(htmlspecialchars($_POST['Input_Today'])),
-        'input_Help' => urlencode(htmlspecialchars($_POST['Input_Help'])),
-        'input_Teacher' => urlencode(htmlspecialchars($_POST['Input_Teacher'])),
-        'student_ID' => urlencode($_SESSION['User']['Student_ID']),
-        'seating' => urlencode($_SESSION['User']['Seating'])
-    );
-
-    $fields_string="";
-    //url-ify the data for the POST
-    foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
-    rtrim($fields_string, '&');
-
-    //open connection
-    $ch = curl_init();
-
-    //set the url, number of POST vars, POST data
-    curl_setopt($ch,CURLOPT_URL, $url);
-    curl_setopt($ch,CURLOPT_POST, count($fields));
-    curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
-    //curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-     
-    //execute post
-    curl_exec($ch);
-    
-    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
- 
-    //close connection
-    curl_close($ch);
-}
+?>
 
