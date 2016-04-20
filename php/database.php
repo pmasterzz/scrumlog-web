@@ -116,15 +116,16 @@ function getScrumlog($date, $year, $student_ID, $seating, $cycle_ID){
            $stmt->bindValue(($k+1), $v); 
         }  
 		$stmt->execute();
+                
         if($stmt->rowCount() == 0){
+
             return false;
         }
         else{
              $scrumlog = $stmt->fetchAll(PDO::FETCH_ASSOC);	
              foreach ($scrumlog as $s) {
                 if($s['Radio_Help'] !== '-')
-			        $s['Radio_Help'] = GetTeacherNameById($scrumlog[0]['Radio_Help']);
-	        
+                    $s['Radio_Help'] = GetTeacherNameById($s['Radio_Help']);
              }
              return $scrumlog;
         }
