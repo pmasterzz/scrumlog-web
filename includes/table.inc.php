@@ -16,7 +16,7 @@
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Show menu</a>
                     <p>
                     <?php
-                        echo '<form method="POST" action="php/updateTable.php">
+                        echo '<form method="POST" action="php/getTable.php">
                             <select name="table">';
                         foreach($table as $table)
                         {
@@ -29,16 +29,22 @@
                         }
                         else
                         {
-                            echo  '<form method="POST" action=""><select multiple="true" name="table">';
+                            echo  '<form method="POST" action="php/updateTable.php"><select multiple="true" name="table[]">';
                             foreach($_SESSION['students'] as $student)
                             {
                                 echo '<option value="' . $student['Student_ID'] . '" >' . $student['Firstname'] . ' ' . $student['Infix'] . ' ' . $student['Lastname'] . ' ' . $student['Student_ID'] .  '</option>';
                             }
                              echo '</select> <button type="submit">Verlos van deze tafel</button></form>';
                              unset($_SESSION['submit']);
+                             echo  '<form method="POST" action="php/setTable.php"><select multiple="true" name="table[]">';
+                            foreach($_SESSION['availableStudents'] as $student)
+                            {
+                                echo '<option value="' . $student['Student_ID'] . '" >' . $student['Firstname'] . ' ' . $student['Infix'] . ' ' . $student['Lastname'] . ' ' . $student['Student_ID'] .  '</option>';
+                            }
+                             echo '</select> <button type="submit">Zet aan tafel</button></form>';
                         }
                     ?>
-                    
+                        <<form action="php/clearTable.php" method="POST"><button type="submit">leeg alle tafels</button></form>
                 </div>
             </div>
         </div>

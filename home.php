@@ -105,7 +105,7 @@ if (!isset($_SESSION['login'])){
                     include 'includes/table.inc.php';
                     break;
                 case 'createCycle':
-                    include 'includes/createCycle.inc.php';
+                    include 'includes/cycle.inc.php';
                     break;
                 default:
                     include 'includes/scrumloginvullen.inc.php';
