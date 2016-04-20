@@ -3,7 +3,7 @@
     {
         $dbhost = "localhost";
         $dbuser = "root";
-        $dbpass = "12345678";
+        $dbpass = "";
         $dbname = "scrumlog-db";
 
         $mysql_conn_string = "mysql:host=$dbhost;dbname=$dbname";

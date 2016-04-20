@@ -170,11 +170,10 @@ function addCycle($start_Date, $end_Date, $number){
         return;
 };
 
-function setTable($students){
+function setTable($students, $seat){
     $studentArray = explode(",", $students);
         $inQuery = implode(',', array_fill(0, count($studentArray), '?'));
         $db = getDB();
-        $seat = $app->request->params('seating');
         $sql = 'UPDATE student SET Seating = ? WHERE Student_ID IN(' . $inQuery . ')';
         $stmt = $db->prepare($sql);
         $stmt->bindParam(1, $seat);
@@ -288,6 +287,14 @@ function deleteCycle($cycle_ID){
         }
 };
 
+function setTableToZero($table){
+    $sql = "UPDATE student SET Seating=0 WHERE Seating=?";
+    $db = getDB();
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(1, $table);
+    $stmt->execute();
+    return;
+}
 
 function updateCycle($number, $start, $end, $id){
     $sql = "UPDATE cycle SET Number=?, Start_Date=?, End_Date=? WHERE cycle_ID=?";

@@ -2,7 +2,7 @@
 
     require 'vendor/autoload.php';
     include 'db_config.php';
-    //include '../php/database.php';
+    include '../php/database.php';
 
     $app = new \Slim\Slim();
 	
@@ -47,35 +47,35 @@
         }
     }
     
-	function getCurrentCycle(){
-        $sql = 'SELECT Cycle_ID FROM cycle WHERE CURDATE() > Start_Date AND CURDATE() < End_Date';
-        $db = getDB();
-        $stmt = $db->prepare($sql);
-        $stmt->execute();
-        $cycle = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $response = $cycle[0]['Cycle_ID'];
-        return $response;
-    }
+	// function getCurrentCycle(){
+    //     $sql = 'SELECT Cycle_ID FROM cycle WHERE CURDATE() > Start_Date AND CURDATE() < End_Date';
+    //     $db = getDB();
+    //     $stmt = $db->prepare($sql);
+    //     $stmt->execute();
+    //     $cycle = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    //     $response = $cycle[0]['Cycle_ID'];
+    //     return $response;
+    // }
 	
-	function GetTeacherNameById($id){
-		$sql = 'SELECT p.Firstname, p.Infix, p.Lastname '
-		. 'FROM person p LEFT JOIN teacher t ON p.Person_ID=t.Person_ID '
-		. 'WHERE t.Teacher_ID=?';
-		$db = getDB();
-		$stmt = $db->prepare($sql);
-		$stmt->bindParam(1, $id);
-		$stmt->execute();
-		$teacher = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	// function GetTeacherNameById($id){
+	// 	$sql = 'SELECT p.Firstname, p.Infix, p.Lastname '
+	// 	. 'FROM person p LEFT JOIN teacher t ON p.Person_ID=t.Person_ID '
+	// 	. 'WHERE t.Teacher_ID=?';
+	// 	$db = getDB();
+	// 	$stmt = $db->prepare($sql);
+	// 	$stmt->bindParam(1, $id);
+	// 	$stmt->execute();
+	// 	$teacher = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		
-		$name = $teacher[0]['Firstname'];
-		if($teacher[0]['Infix'] !== NULL)
-			$name .= ' ' . $teacher[0]['Infix'];
-		$name .= ' ' . $teacher[0]['Lastname'];
-		return $name;
-	}
-	$app->get('/test', function() use ($app){
-		echo GetTeacherNameById(1);
-	});
+	// 	$name = $teacher[0]['Firstname'];
+	// 	if($teacher[0]['Infix'] !== NULL)
+	// 		$name .= ' ' . $teacher[0]['Infix'];
+	// 	$name .= ' ' . $teacher[0]['Lastname'];
+	// 	return $name;
+	// }
+	// $app->get('/test', function() use ($app){
+	// 	echo GetTeacherNameById(1);
+	// });
 	
     // retrieve selected/filtered scrumlogs
     $app->get('/api/scrumlog',  function () use ($app) {
@@ -236,20 +236,9 @@
     $app->post('/api/table', 'middleWare',function() use ($app){
 	
         $students = $app->request->params('studentArray');
-		$studentArray = explode(",", $students);
-        $inQuery = implode(',', array_fill(0, count($studentArray), '?'));
-        $db = getDB();
         $seat = $app->request->params('seating');
-        $sql = 'UPDATE student SET Seating = ? WHERE Student_ID IN(' . $inQuery . ')';
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam(1, $seat);
-		
-        foreach($studentArray as $k => $id)
-            {
-                $stmt->bindValue(($k+2), $id);
-            };
-
-        $stmt->execute();
+		setTableToZero($seat);
+        setTable($students, $seat);
     });
     //clear all tables
     $app->put('/api/cleanTables','middleWare',function(){
@@ -573,10 +562,11 @@
     $app->get('/api/getAllTodos', function() use ($app){
         $teacher_ID = $app->request->params('teacher_ID');
 
-        $sql = "SELECT sc.Remark, sc.Teacher_ID, sc.Completed, p.Firstname, p.Lastname, p.Infix, sc.Scrumlog_ID, sc.Input_Help ";
+        $sql = "SELECT sc.Remark, sc.Teacher_ID, sc.Completed, p.Firstname, p.Lastname, p.Infix, sc.Scrumlog_ID, sc.Input_Help, sc.Radio_Help ";
         $sql .= "FROM scrumlog sc LEFT JOIN student st ON sc.Student_ID=st.Student_ID ";
         $sql .= "LEFT JOIN person p ON st.Person_ID=p.Person_ID ";
-        $sql .= "WHERE (sc.Teacher_ID=:id OR (sc.Radio_Help=:id AND sc.Teacher_ID=null)) AND sc.Date=CURDATE()";
+        $sql .= "WHERE (sc.Teacher_ID IN (:id, 11) OR (sc.Radio_Help IN(:id, 11) AND sc.Teacher_ID IS NULL)) ";
+        $sql .= "AND sc.Date=CURDATE()";
 
         $db = getDB();
         $stmt = $db->prepare($sql);
@@ -604,38 +594,38 @@
     });
 	$app->run();
     
-    function getLatestScrum($student_ID)
-    {
-        $sql = 'SELECT Date From Scrumlog Where Student_ID=? ORDER BY Date DESC';
-        $db = getDB();
-        $stmt = $db->prepare($sql);
-        $stmt->bindValue(1, $student_ID);
-        $stmt->execute();
-        $scrumlogs = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $scrumlogs;
-    };
+    // function getLatestScrum($student_ID)
+    // {
+    //     $sql = 'SELECT Date From Scrumlog Where Student_ID=? ORDER BY Date DESC';
+    //     $db = getDB();
+    //     $stmt = $db->prepare($sql);
+    //     $stmt->bindValue(1, $student_ID);
+    //     $stmt->execute();
+    //     $scrumlogs = $stmt->fetch(PDO::FETCH_ASSOC);
+    //     return $scrumlogs;
+    // };
 
-    function checkCycleUses($id)
-    {
-        $sql = "SELECT Assignment_ID FROM assignment WHERE Cycle_ID=?";
-        $sql2 = "SELECT Scrumlog_ID FROM scrumlog WHERE Cycle_ID=?";
-        $db = getDB();
-        $db->beginTransaction();
-        $stmt = $db->prepare($sql);
-        $stmt->bindValue(1, $id);
-        $stmt->execute();
-        $stmt2 = $db->prepare($sql2);
-        $stmt2->bindValue(1, $id);
-        $stmt2->execute();
-        if ($stmt->rowCount() > 0 || $stmt2->rowCount() > 0) 
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        };
-        $db->rollBack();
+    // function checkCycleUses($id)
+    // {
+    //     $sql = "SELECT Assignment_ID FROM assignment WHERE Cycle_ID=?";
+    //     $sql2 = "SELECT Scrumlog_ID FROM scrumlog WHERE Cycle_ID=?";
+    //     $db = getDB();
+    //     $db->beginTransaction();
+    //     $stmt = $db->prepare($sql);
+    //     $stmt->bindValue(1, $id);
+    //     $stmt->execute();
+    //     $stmt2 = $db->prepare($sql2);
+    //     $stmt2->bindValue(1, $id);
+    //     $stmt2->execute();
+    //     if ($stmt->rowCount() > 0 || $stmt2->rowCount() > 0) 
+    //     {
+    //         return true;
+    //     }
+    //     else
+    //     {
+    //         return false;
+    //     };
+    //     $db->rollBack();
 
-    };
+    // };
     ?>
