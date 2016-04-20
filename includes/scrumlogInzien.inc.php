@@ -46,8 +46,17 @@
                             <select>';
                             
                         for($year = date('Y'); $year > $min_Year; $year--){echo '<option value="' . $year . '">' . $year . '</option>';}
-                        echo '</select>' ;
-                     }
+                        echo '</select> <br/>' ;
+                        echo '<select>';
+                        foreach($table as $table)
+                        {
+                            echo '<option value="' . $table . '">' . $table . '</option>';                        
+                        }
+                        echo '</select>'
+                        . '<button type="submit" name="submit">submit</button>'
+                                . '</form>';
+                        
+                    } 
                      else
                     {
                          foreach($scrumlogArray as $scrumlog)
