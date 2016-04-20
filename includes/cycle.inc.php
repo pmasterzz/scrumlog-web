@@ -1,5 +1,5 @@
 <?php
-    include 'php/cycle.php';
+    include 'php/getCycle.php';
     if ($_SESSION['Userlevel'] != 'Teacher') 
         {
             header("Location: home.php?page=scrumlogInvullen");
@@ -12,7 +12,12 @@
                 <div class="doorzichtig">
                     <h1>Cyclus wijzigen</h1>
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Show menu</a>
-                    <p></p>
+                    <?php 
+                    foreach($cycles as $cycle)
+                    {
+                        echo $cycle['Cycle_ID'] . ' ' . $cycle['Start_Date'] . ' ' . $cycle['End_Date'] . '<br/>';
+                    }
+                    ?>
                 </div>
             </div>
         </div>
