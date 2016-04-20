@@ -188,6 +188,21 @@ function setTable($students){
         return;
 };
 
+function updateTable($students){
+    $studentArray = explode(",", $students);
+        $inQuery = implode(',', array_fill(0, count($studentArray), '?'));
+        $db = getDB();
+        $sql = 'UPDATE student SET Seating = 0 WHERE Student_ID IN(' . $inQuery . ')';
+        $stmt = $db->prepare($sql);	
+        foreach($studentArray as $k => $id)
+            {
+                $stmt->bindValue(($k+2), $id);
+            };
+
+        $stmt->execute();
+        return;
+};
+
 function clearTables(){
         $sql = 'UPDATE student SET Seating=0';
         $db = getDB();
@@ -254,12 +269,7 @@ function getSpecificTable($seat){
     return $students;
 };
 
-function updateTable(){
-    $sql = 'UPDATE s.Seating = 0 WHERE s.Student_ID =?';
-    $db = getDB();
-    $stmt = $db->prepare($sql);
-    $stmt->execute();
-};
+
 
 function getEmptyTable(){
     $sql = 'SELECT p.Firstname, p.Infix, p.Lastname, s.Student_ID'
