@@ -242,6 +242,36 @@ function getAllAvailableStudents($table){
     return $students;
 };
 
+function getSpecificTable($seat){
+    $sql = 'SELECT p.Firstname, p.Infix, p.Lastname, s.Student_ID'
+        .' FROM student s LEFT JOIN person p ON s.Person_ID=p.Person_ID '
+        . 'WHERE s.Seating=?';
+    $db = getDB();
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(1, $seat);
+    $stmt->execute();
+    $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $students;
+};
+
+function updateTable(){
+    $sql = 'UPDATE s.Seating = 0 WHERE s.Student_ID =?';
+    $db = getDB();
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+};
+
+function getEmptyTable(){
+    $sql = 'SELECT p.Firstname, p.Infix, p.Lastname, s.Student_ID'
+        .' FROM student s LEFT JOIN person p ON s.Person_ID=p.Person_ID '
+        . 'WHERE s.Seating=0';
+    $db = getDB();
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $students;
+};
+
 function deleteCycle($cycle_ID){
      $assignment = checkCycleUses($cycle_ID);
 

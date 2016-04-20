@@ -1,8 +1,11 @@
 <?php
+session_start();
 include_once'database.php';
+$_SESSION["submit"] = "set";
 $seat = $_POST['table'];
-$students = getSpecificTable($seat);
-var_dump($students);
+$_SESSION['students'] = getSpecificTable($seat);
+var_dump($_SESSION['students']);
+ header("Location: ../home.php?page=createTable");
 
 //setTable($students);
 /* 

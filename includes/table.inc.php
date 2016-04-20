@@ -1,5 +1,5 @@
 <?php
-    include 'php/updateTable.php';
+ //   include 'php/updateTable.php';
     
     include 'php/globals.php';
     if ($_SESSION['Userlevel'] != 'Teacher') 
@@ -17,9 +17,10 @@
                     <p>
                     <?php
                         
-                        if (!isset($_POST["submit"]))
+                        if (!isset($_SESSION["submit"]))
                         {   
-                            echo '<form method="POST"><select name="table">';
+                            echo '<form method="POST" action="php/updateTable.php">
+                                <select name="table">';
                             foreach($table as $table)
                             {
                                 echo '<option value="' . $table . '">' . $table . '</option>';
@@ -28,12 +29,13 @@
                         }
                         else
                         {
-                            echo '<form method="POST"><select multiple="true" name="table">';
-                            foreach($students as $student)
+                            echo  '<form method="POST" action=""><select multiple="true" name="table">';
+                            foreach($_SESSION['students'] as $student)
                             {
                                 echo '<option value="' . $student['Student_ID'] . '" >' . $student['Firstname'] . ' ' . $student['Infix'] . ' ' . $student['Lastname'] . ' ' . $student['Student_ID'] .  '</option>';
                             }
                              echo '</select> <button type="submit">Verlos van deze tafel</button></form>';
+                             unset($_SESSION['submit']);
                         }
                     ?>
                     

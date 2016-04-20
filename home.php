@@ -102,7 +102,7 @@ if (!isset($_SESSION['login'])){
                     include 'includes/allescrumlogsinzien.inc.php';
                     break;
                 case 'createTable':
-                    include 'includes/createTable.inc.php';
+                    include 'includes/table.inc.php';
                     break;
                 case 'createCycle':
                     include 'includes/createCycle.inc.php';
