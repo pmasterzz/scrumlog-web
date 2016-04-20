@@ -16,16 +16,16 @@
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Show menu</a>
                     <p>
                     <?php
-                        
+                        echo '<form method="POST" action="php/updateTable.php">
+                            <select name="table">';
+                        foreach($table as $table)
+                        {
+                            echo '<option value="' . $table . '">' . $table . '</option>';
+                        }
+                        echo '</select> <button type="submit">SELECTEER</button></form>';
                         if (!isset($_SESSION["submit"]))
                         {   
-                            echo '<form method="POST" action="php/updateTable.php">
-                                <select name="table">';
-                            foreach($table as $table)
-                            {
-                                echo '<option value="' . $table . '">' . $table . '</option>';
-                            }
-                            echo '</select> <button type="submit">SELECTEER</button></form>';
+                            
                         }
                         else
                         {
