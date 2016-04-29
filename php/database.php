@@ -116,15 +116,16 @@ function getScrumlog($date, $year, $student_ID, $seating, $cycle_ID){
            $stmt->bindValue(($k+1), $v); 
         }  
 		$stmt->execute();
+                
         if($stmt->rowCount() == 0){
+
             return false;
         }
         else{
              $scrumlog = $stmt->fetchAll(PDO::FETCH_ASSOC);	
              foreach ($scrumlog as $s) {
                 if($s['Radio_Help'] !== '-')
-			        $s['Radio_Help'] = GetTeacherNameById($scrumlog[0]['Radio_Help']);
-	        
+                    $s['Radio_Help'] = GetTeacherNameById($s['Radio_Help']);
              }
              return $scrumlog;
         }
@@ -170,11 +171,19 @@ function addCycle($start_Date, $end_Date, $number){
         return;
 };
 
+<<<<<<< HEAD
+function setTable($students,$seat){
+    $studentArray = implode(",", $students);
+        
+        $db = getDB();
+        $sql = 'UPDATE student SET Seating = ? WHERE Student_ID IN(' . $studentArray . ')';
+=======
 function setTable($students, $seat){
     $studentArray = explode(",", $students);
         $inQuery = implode(',', array_fill(0, count($studentArray), '?'));
         $db = getDB();
         $sql = 'UPDATE student SET Seating = ? WHERE Student_ID IN(' . $inQuery . ')';
+>>>>>>> master
         $stmt = $db->prepare($sql);
         $stmt->bindParam(1, $seat);
 		
@@ -182,6 +191,21 @@ function setTable($students, $seat){
             {
                 $stmt->bindValue(($k+2), $id);
             };
+
+        $stmt->execute();
+        return;
+};
+
+function updateTable($students){
+    $studentArray = implode(",", $students);
+    
+       // $inQuery = $studentArray;
+       // var_dump($inQuery);
+    
+        $db = getDB();
+        $sql = 'UPDATE student SET Seating = 0 WHERE Student_ID IN(' . $studentArray . ')';
+        $stmt = $db->prepare($sql);	
+        
 
         $stmt->execute();
         return;
@@ -253,12 +277,7 @@ function getSpecificTable($seat){
     return $students;
 };
 
-function updateTable(){
-    $sql = 'UPDATE s.Seating = 0 WHERE s.Student_ID =?';
-    $db = getDB();
-    $stmt = $db->prepare($sql);
-    $stmt->execute();
-};
+
 
 function getEmptyTable(){
     $sql = 'SELECT p.Firstname, p.Infix, p.Lastname, s.Student_ID'
