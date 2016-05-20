@@ -25,13 +25,13 @@
                         {
                             echo '<p>Datum:' .  '<br>';
                             echo $scrumlog['Date'] .  '<br>';
-                            echo 'Wat heb je gister gedaan knuppel:' .  '<br>';
+                            echo 'Wat heb je gister bereikt? :' .  '<br>';
                             echo $scrumlog['Input_Yesterday'] .  '<br>';
-                            echo 'wat zat je in de weg:' .  '<br>';
+                            echo 'Wat zat je in de weg:' .  '<br>';
                             echo $scrumlog['Input_Problems'] .  '<br>';
-                            echo 'wat denk je vandaag te bereiken:' .  '<br>';
+                            echo 'Wat denk je vandaag te bereiken:' .  '<br>';
                             echo $scrumlog['Input_Today'] .  '<br>';
-                            echo 'hulp heb je zeker nodig:' .  '<br>';
+                            echo 'Wat voor hulp heb je nodig/waarbij?:' .  '<br>';
                             echo $scrumlog['Input_Help'] .  '<br>';
                             echo 'welk van deze slachtoffers moet jouw helpen?' .  '<br>';
                             echo $scrumlog['Radio_Help'] .  '<br></p>';
@@ -63,11 +63,11 @@
                          echo '<table class="table table-hover">'
                         . '<thead>'
                             . '<th>Datum</th>'
-                            . '<th>Wat heb je gister gedaan</th>'
+                            . '<th>Wat heb je gister bereikt</th>'
                             . '<th>Wat zat je in de weg</th>'
                             . '<th>Wat denk je vandaag te bereiken</th>'
-                            . '<th>Hulp heb je zeker nodig</th>'
-                            . '<th>welk van deze slachtoffers moet jouw helpen?</th>'
+                            . '<th>Wat voor hulp heb je nodig/waarbij?</th>'
+                            . '<th>Welk van deze slachtoffers moet jouw helpen?</th>'
                         . '</thead>'
                         . '<tbody>';
                          
