@@ -20,13 +20,13 @@
                     $str_Last_Scrum = strtotime($last_Scrum);
                     if ($str_Last_Scrum != $str_Today){ // form already submitted
                         echo '<form method="POST" action="php/submitScrumlog.php" class="invullen">
-                        Wat heb je gister gedaan knuppel:<br>
+                        Wat heb je gister bereikt:<br>
                         <input type="text" name="Input_Yesterday" class="invullen" required autofocus><br>
-                        wat zat je in de weg:<br>
+                        Wat zat je in de weg:<br>
                         <input type="text" name="Input_Problems" class="invullen" required><br>
-                        wat denk je vandaag te bereiken:<br>
+                        Wat denk je vandaag te bereiken:<br>
                         <input type="text" name="Input_Today" class="invullen" required><br>
-                        hulp heb je zeker nodig:<br>
+                        Wat voor hulp heb je nodig/waarbij?:<br>
                         <input type="text"  name="Input_Help" class="invullen" required><br>
                         welk van deze slachtoffers moet jouw helpen?<br>
                         <select name="Input_Teacher">

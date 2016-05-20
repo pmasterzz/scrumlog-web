@@ -1,8 +1,10 @@
 <?php
 session_start();
 include_once'database.php';
+if (confirmBox === TRUE) {
+    clearTables();
+}
 
-clearTables();
 
 $_SESSION['students'] = getSpecificTable($seat);
 $_SESSION['availableStudents'] = getEmptyTable();

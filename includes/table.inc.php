@@ -44,7 +44,7 @@
                              echo '</select> <button type="submit">Zet aan tafel</button></form>';
                         }
                     ?>
-                        <<form action="php/clearTable.php" method="POST"><button type="submit">leeg alle tafels</button></form>
+                        <<form action="php/clearTable.php" method="POST" onclick="confirmBox()"><button type="submit">leeg alle tafels</button></form>
                 </div>
             </div>
         </div>
