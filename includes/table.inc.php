@@ -16,32 +16,32 @@
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Show menu</a>
                     <p>
                     <?php
-                        echo '<form method="POST" action="php/getTable.php">
-                            <select name="table">';
+                        echo '<form method="POST" action="php/getTable.php" class="invullen">
+                            <select name="table" class="form-control">';
                         foreach($table as $table)
                         {
                             echo '<option value="' . $table . '">' . $table . '</option>';
                         }
-                        echo '</select> <button type="submit">SELECTEER</button></form>';
+                        echo '</select> <button type="submit">selecteer tafel</button></form>';
                         if (!isset($_SESSION["submit"]))
                         {   
                             
                         }
                         else
                         {
-                            echo  '<form method="POST" action="php/updateTable.php"><select multiple="true" name="table[]">';
+                            echo  '<form method="POST" action="php/updateTable.php" class="col-lg-6"><select multiple="true"  class="form-control" name="table[]">';
                             foreach($_SESSION['students'] as $student)
                             {
                                 echo '<option value="' . $student['Student_ID'] . '" >' . $student['Firstname'] . ' ' . $student['Infix'] . ' ' . $student['Lastname'] . ' ' . $student['Student_ID'] .  '</option>';
                             }
-                             echo '</select> <button type="submit">Verlos van deze tafel</button></form>';
+                             echo '</select> <br><br><button type="submit">Verwijder student(en)</button></form>';
                              unset($_SESSION['submit']);
-                             echo  '<form method="POST" action="php/setTable.php"><select multiple="true" name="table[]">';
+                             echo  '<form method="POST" action="php/setTable.php" class="col-lg-6"><select multiple="true" class="form-control" name="table[]">';
                             foreach($_SESSION['availableStudents'] as $student)
                             {
                                 echo '<option value="' . $student['Student_ID'] . '" >' . $student['Firstname'] . ' ' . $student['Infix'] . ' ' . $student['Lastname'] . ' ' . $student['Student_ID'] .  '</option>';
                             }
-                             echo '</select> <button type="submit">Zet aan tafel</button></form>';
+                             echo '</select> <br><br><button type="submit">Zet aan tafel</button></form>';
                         }
                     ?>
                         <<form action="php/clearTable.php" method="POST" onclick="confirmBox()"><button type="submit">leeg alle tafels</button></form>

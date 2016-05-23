@@ -148,6 +148,73 @@ input.invullen {
     color: #FFF;
 }
 
+button.knop {
+    color: #FF5800;
+    padding: 10px;
+    background: #FFF;
+    border: #FF5800 solid;
+    font-family: Montserrat,sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-shadow: none;
+    text-align: center;
+    display: inline-block;
+    max-width: 235px;
+    width: 100%;
+}
+
+button.knop:hover   {
+    color: #FFF;
+    padding: 10px;
+    background: #FF5800;
+    border: rgba(255,255,255, 0) solid;
+    font-family: Montserrat,sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-shadow: none;
+    text-align: center;
+    display: inline-block;
+}
+
+input.invullen {
+    color: #333;
+
+
+}
+
+form.invullen {
+    padding: 20px 15px;
+    margin: auto;
+    text-align: center;
+    background: rgba(255,255,255,0.8);
+    color: #333;
+    border: #FF5800 solid 1px;
+    max-width: 300px;
+}
+
+.invullen h3 {
+    color: #FF5800!important;
+    margin: 7%;
+}
+
+form.col-lg-6{
+    padding: 20px 15px;
+    margin: auto;
+    text-align: center;
+    background: rgba(255,255,255,0.8);
+    color: #333;
+    border: #FF5800 solid 1px;
+}
+
+table {
+    background-color: #FFF;
+}
+
+
 
 
 @media(min-width:768px) {

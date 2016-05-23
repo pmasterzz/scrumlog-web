@@ -416,7 +416,7 @@ function GetTeacherNameById($id){
 function getCurrentCycle(){
     
     
-        $sql = 'SELECT Cycle_ID FROM cycle WHERE CURDATE() > Start_Date AND CURDATE() < End_Date';
+        $sql = 'SELECT Cycle_ID FROM cycle WHERE CURDATE() >= Start_Date AND CURDATE() <= End_Date';
         $db = getDB();
         $stmt = $db->prepare($sql);
         $stmt->execute();

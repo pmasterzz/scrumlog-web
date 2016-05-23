@@ -82,7 +82,7 @@ if (!isset($_SESSION['login'])){
                 </li>
                 
                 <li class="beneden">
-                    <a href="php/uitloggen.php">Het gebouw verlaten</a>
+                    <a href="php/uitloggen.php">uitloggen</a>
                 </li>
             </ul>
         </div>
