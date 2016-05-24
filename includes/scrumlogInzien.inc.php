@@ -24,27 +24,19 @@
                     {
                          foreach($scrumlogArray as $scrumlog)
                         {
-                            echo '<table class="table table-hover">'
-                                . '<thead>'
-                                . '<th>Datum</th>'
-                                . '<th>Wat heb je gister bereikt</th>'
-                                . '<th>Wat zat je in de weg</th>'
-                                . '<th>Wat denk je vandaag te bereiken</th>'
-                                . '<th>Wat voor hulp heb je nodig/waarbij?</th>'
-                                . '<th>Welk van deze docenten moet jouw helpen?</th>'
-                                . '</thead>'
-                                . '<tbody>'
-                                .'<tr>'
-                                . '<td>' . $scrumlog['Date'] .  '</td>'
-                                . '<td>' . $scrumlog['Input_Yesterday'] .  '</td>'
-                                . '<td>' . $scrumlog['Input_Problems'] .  '</td>'
-                                . '<td>' . $scrumlog['Input_Today'] .  '</td>'
-                                . '<td>' . $scrumlog['Input_Help'] .  '</td>'
-                                . '<td>' . $scrumlog['Radio_Help'] .  '</td>'
-                                . '</tr>'
-                                . '</tbody>'
-                                . '</table>'
-                                . '</div>';
+                            echo '<form class="invullen">'
+                                . '<h3>Scrumglog van: ' . $scrumlog['Date'] .  '</h3><br>'
+                                . 'Wat heb je gister bereikt:<br>
+                                  <input  class="form-control" value="' . $scrumlog['Input_Yesterday'] . '" disabled><br>'
+                                . 'Wat zat je in de weg:<br>
+                                  <input class="form-control" value="' . $scrumlog['Input_Problems'] . '" disabled><br>'
+                                . 'Wat denk je vandaag te bereiken:<br>
+                                  <input class="form-control" value="' . $scrumlog['Input_Today'] . '" disabled><br>'
+                                . 'Wat voor hulp heb je nodig/waarbij?:<br>
+                                  <input class="form-control" value="' . $scrumlog['Input_Help'] . '" disabled><br>'
+                                . 'welk van deze docenten moet jouw helpen?<br>
+                                  <input class="form-control" value="' . $scrumlog['Radio_Help'] . '" disabled>'
+                                . '</form>';
                             }
                         }
                     }
