@@ -141,6 +141,7 @@ li.beneden {
 div#page-content-wrapper
 {
     background-image: url('../../img/backgrounds/rainbow.jpg');
+    background-attachment: fixed;
     min-height: 1000px;
 }
 input.invullen {
