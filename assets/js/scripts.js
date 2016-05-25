@@ -26,6 +26,13 @@ jQuery(document).ready(function() {
     	});
     	
     });
-    
+    $('#menu-toggle').click(function(){
+            console.log('message');
+            $(this).find('i').toggleClass('glyphicon-arrow-left glyphicon-arrow-right')
+    });
     
 });
+
+
+    
+
