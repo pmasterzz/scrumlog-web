@@ -48,8 +48,8 @@ if (!isset($_SESSION['login'])){
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="#">
-                        Scrumlog
+                    <a>
+                        <?php echo '<div class="knop">Welkom: ' .  $_SESSION['User']['Firstname'] . ' ' . $_SESSION['User']['Infix'] . '  ' . $_SESSION['User']['Lastname'] . '</div>'; ?>
                     </a>
                 </li>
                 <li>

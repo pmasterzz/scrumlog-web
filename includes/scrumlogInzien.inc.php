@@ -44,6 +44,7 @@
                     {
                         if (!isset($_POST["submit"])){
                         echo '<form action="" method="post" class="invullen">
+                            <h3>Scrumlog Inzien</h3>
                             Datum:
                             <input type="date" name="Date" value=' . date('Y-m-d') . ' class="form-control"><br/><br/>
                             Jaar:

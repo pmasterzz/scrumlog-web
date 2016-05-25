@@ -6,9 +6,13 @@
 
 /* Toggle Styles */
 
-h1, h2, h3, h4, h5, h6, p, form
+h1, h2, h4, h5, h6, p, form
 {
     color:#FFF;
+}
+
+h3{
+    color: #FF5800;
 }
 
 button{ color: #333;}
@@ -149,10 +153,10 @@ input.invullen {
 }
 
 button.knop {
-    color: #FF5800;
+    color: #4b08a1;
     padding: 10px;
     background: #FFF;
-    border: #FF5800 solid;
+    border: #4b08a1 solid 1px;
     font-family: Montserrat,sans-serif;
     font-weight: 700;
     font-size: 13px;
@@ -161,15 +165,14 @@ button.knop {
     text-shadow: none;
     text-align: center;
     display: inline-block;
-    max-width: 235px;
     width: 100%;
 }
 
 button.knop:hover   {
     color: #FFF;
     padding: 10px;
-    background: #FF5800;
-    border: rgba(255,255,255, 0) solid;
+    background: #4b08a1;
+/*    border: rgba(255,255,255, 0) solid;*/
     font-family: Montserrat,sans-serif;
     font-weight: 700;
     font-size: 13px;
@@ -179,6 +182,19 @@ button.knop:hover   {
     text-align: center;
     display: inline-block;
 }
+
+
+.tafelContainer{
+    display: flex;
+}
+
+.knopContainer{
+    position: relative;
+    top: 50%;
+    transform: translateY(95%)!important;
+}
+
+
 
 input.invullen {
     color: #333;
@@ -201,15 +217,31 @@ form.invullen {
     margin: 7%;
 }
 
-form.col-lg-6{
+.col-lg-5 form{
     padding: 20px 15px;
     margin: auto;
     text-align: center;
     background: rgba(255,255,255,0.8);
     color: #333;
-    border: #FF5800 solid 1px;
 }
 
+.col-lg-2 form{
+    padding: 20px 15px;
+    text-align: center;
+    background: rgba(255,255,255,0.8);
+    color: #333;
+}
+
+.col-lg-2{
+    padding: 0;
+    text-align: center;
+    background: rgba(255,255,255,0.8);
+    color: #333;
+}
+
+.col-lg-5{
+    padding: 0;
+}
 table {
     background-color: #FFF;
 }
