@@ -123,10 +123,19 @@ function getScrumlog($date, $year, $student_ID, $seating, $cycle_ID){
         }
         else{
              $scrumlog = $stmt->fetchAll(PDO::FETCH_ASSOC);	
-             foreach ($scrumlog as $s) {
-                if($s['Radio_Help'] !== '-')
-                    $s['Radio_Help'] = GetTeacherNameById($s['Radio_Help']);
+             
+            //  foreach ($scrumlog as $s) {
+                 
+            //     if($s['Radio_Help'] !== '-')
+            //         $s['Radio_Help'] = GetTeacherNameById($s['Radio_Help']);
+            //     var_dump($s);
+            //  }
+             
+             for($i=0;$i<sizeof($scrumlog);$i++){
+                 if($scrumlog[$i]['Radio_Help'] !== '-')
+                    $scrumlog[$i]['Radio_Help'] = GetTeacherNameById($scrumlog[$i]['Radio_Help']);
              }
+             
              return $scrumlog;
         }
 };
@@ -404,6 +413,7 @@ function getLatestScrum($student_ID){
     $stmt->execute();
     $scrumlogs = $stmt->fetch(PDO::FETCH_ASSOC);
     return $scrumlogs;};
+    
 function GetTeacherNameById($id){
 		$sql = 'SELECT p.Firstname, p.Infix, p.Lastname '
 		. 'FROM person p LEFT JOIN teacher t ON p.Person_ID=t.Person_ID '
@@ -418,6 +428,7 @@ function GetTeacherNameById($id){
 		if($teacher[0]['Infix'] !== NULL)
 			$name .= ' ' . $teacher[0]['Infix'];
 		$name .= ' ' . $teacher[0]['Lastname'];
+        
 		return $name;
 	}
 
