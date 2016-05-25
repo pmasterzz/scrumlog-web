@@ -30,7 +30,7 @@ if (!isset($_SESSION['login'])){
 
     <!-- Custom CSS -->
     <link href="assets/bootstrap/css/simple-sidebar.css" rel="stylesheet">
-
+    <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
     
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -48,11 +48,12 @@ if (!isset($_SESSION['login'])){
 </head>
 
 <body>
-
+    
     <div id="wrapper">
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
+  
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a>
@@ -93,6 +94,7 @@ if (!isset($_SESSION['login'])){
                 </li>
             </ul>
         </div>
+        
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
@@ -122,8 +124,11 @@ if (!isset($_SESSION['login'])){
         
         ?>
         <!-- /#page-content-wrapper -->
-
+        <div class="wasHier">
+            <?php echo $_SESSION['User']['Firstname'] . ' wazz hier'; ?>
+        </div>  
     </div>
+    
     <!-- /#wrapper -->
 
     <!-- jQuery -->

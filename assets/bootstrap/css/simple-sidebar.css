@@ -147,6 +147,17 @@ div#page-content-wrapper
     
 /*    min-height: 1000px;*/
 }
+
+.wasHier {
+    position: absolute;
+    right: 50px;
+    font-size: 40px;
+    color: #FFF;
+    transform: rotate(-15deg);
+    top: 150px;
+    font-family: 'Rock Salt', cursive;
+}
+
 input.invullen {
     color: #333;
 }
