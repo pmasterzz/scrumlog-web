@@ -14,7 +14,7 @@
                     <?php 
                     if ($_SESSION['Userlevel'] == 'Student') {
                     if (!isset($_POST["submit"])){
-                        echo '<form action="" method="post" class="invullen">
+                        echo '<form action="" method="post" class="scrum-invullen">
                             <h3>Scrumlog bekijken</h3>
                             <input type="date" name="Date" value=' . date('Y-m-d') . ' class="form-control"></br></br>
                             <button type="submit" name="submit" class="knop">bekijk scrumlog</button>
@@ -24,7 +24,7 @@
                     {
                          foreach($scrumlogArray as $scrumlog)
                         {
-                            echo '<form class="invullen">'
+                            echo '<form class="scrum-invullen">'
                                 . '<h3>Scrumglog van: ' . $scrumlog['Date'] .  '</h3><br>'
                                 . 'Wat heb je gister bereikt:<br>
                                   <input  class="form-control" value="' . $scrumlog['Input_Yesterday'] . '" disabled><br>'
@@ -43,7 +43,7 @@
                     else
                     {
                         if (!isset($_POST["submit"])){
-                        echo '<form action="" method="post" class="invullen">
+                        echo '<form action="" method="post" class="scrum-invullen">
                             <h3>Scrumlog Inzien</h3>
                             Datum:
                             <input type="date" name="Date" value=' . date('Y-m-d') . ' class="form-control"><br/><br/>

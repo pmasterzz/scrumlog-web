@@ -12,6 +12,7 @@
                 <div class="doorzichtig">
                     <h1>Cyclus wijzigen</h1>
                     <a href="#menu-toggle"  class="btn btn-default" id="menu-toggle"><i class="glyphicon glyphicon-arrow-left"></i></a>
+                    <div class="row cylcus">
 <!--                    <div class="tafel">-->
 <!--                    <table class="table table-hover">
                         <thead>
@@ -20,14 +21,23 @@
                         <th>Delete</th>
                         </thead>-->
                     <?php 
+                    
                     foreach($cycles as $cycle)
                     {
-                         echo '<form class="invullen">'
+                         echo '<form class="col-lg-3 invullen">'
                                 . '<h3>Cyclus: ' . $cycle['Number'] .  '</h3><br>'
-                                . 'Wat heb je gister bereikt:<br>
+                                . 'Start Datum:<br>
                                   <input  class="form-control" value="' . $cycle['Start_Date'] . '" disabled><br>'
-                                . 'Wat zat je in de weg:<br>
-                                  <input class="form-control" value="' . $cycle['End_Date'] . '" disabled><br>' 
+                                . 'Eind Datum:<br>
+                                  <input class="form-control" value="' . $cycle['End_Date'] . '" disabled><br>'
+                                 . '<div class="row">'
+                                    . '<button class="col-lg-6 cyclusButton" data-toggle="tooltip" title="Bijwerken">'
+                                     . '<i class="glyphicon glyphicon-pencil"></i>'
+                                    . '</button>'
+                                    . '<button class="col-lg-6 cyclusButton" data-toggle="tooltip" title="Verwijderen">'
+                                        . '<i class="glyphicon glyphicon-trash"></i>'
+                                    . '</button>'
+                                . '</div>' 
                                 . '</form>';
 //                        echo '<tr>'
 //                        . '<td><form action="php/editCycle.php" method="post">
@@ -55,7 +65,7 @@
                     }
                     ?>
                     <!--</table>-->
-<!--                    </div>-->
+                    </div>
                 </div>
             </div>
         </div>
