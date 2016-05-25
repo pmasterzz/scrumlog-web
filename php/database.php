@@ -172,6 +172,7 @@ function addCycle($start_Date, $end_Date, $number){
 };
 
 
+// <<<<<<< HEAD
 function setTable($students,$seat){
     $studentArray = implode(",", $students);
         
@@ -179,6 +180,13 @@ function setTable($students,$seat){
         $sql = 'UPDATE student SET Seating = ? WHERE Student_ID IN(' . $studentArray . ')';
 
 
+// =======
+// function setTable($students, $seat){
+//     $studentArray = explode(",", $students);
+//         $inQuery = implode(',', array_fill(0, count($studentArray), '?'));
+//         $db = getDB();
+//         $sql = 'UPDATE student SET Seating = ? WHERE Student_ID IN(' . $inQuery . ')';
+// >>>>>>> master
         $stmt = $db->prepare($sql);
         $stmt->bindParam(1, $seat);
 		
