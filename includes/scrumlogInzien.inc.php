@@ -9,7 +9,7 @@
             <div class="col-lg-12">
                 <div class="doorzichtig">
                     <h1>Scrumlog</h1>
-                    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Show menu</a>
+                    <a href="#menu-toggle"  class="btn btn-default" id="menu-toggle"><i class="glyphicon glyphicon-arrow-left"></i></a>
                     <p>
                     <?php 
                     if ($_SESSION['Userlevel'] == 'Student') {
