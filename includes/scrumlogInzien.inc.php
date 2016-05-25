@@ -22,6 +22,15 @@
                      }
                      else
                     {
+                        if($scrumlogArray == false){
+                            echo '<div class="alert alert-danger">
+                                
+                                    Er zijn geen scrumlogs gevonden
+                                
+                            </div>';
+                        }
+                        else{    
+                        
                          foreach($scrumlogArray as $scrumlog)
                         {
                             echo '<form class="invullen">'
@@ -38,6 +47,7 @@
                                   <input class="form-control" value="' . $scrumlog['Radio_Help'] . '" disabled>'
                                 . '</form>';
                             }
+                        }
                         }
                     }
                     else
@@ -64,6 +74,16 @@
                     } 
                      else
                     {
+                        
+                        if($scrumlogArray == false){
+                            echo '<div class="alert alert-danger">
+                                
+                                    Er zijn geen scrumlogs gevonden
+                                
+                            </div>';
+                        }
+                        else{
+                        
                          echo '<div class="container">';
                          echo '<table class="table table-hover">'
                         . '<thead>'
@@ -75,6 +95,7 @@
                             . '<th>Welk van deze docenten moet jouw helpen?</th>'
                         . '</thead>'
                         . '<tbody>';
+                         
                          
                          foreach($scrumlogArray as $scrumlog)
                         {
@@ -91,6 +112,7 @@
                         echo '</tbody>'
                         . '</table>'
                         . '</div>';
+                    }
                     }
                     
                     ?>

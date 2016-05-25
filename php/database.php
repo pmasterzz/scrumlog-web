@@ -116,9 +116,10 @@ function getScrumlog($date, $year, $student_ID, $seating, $cycle_ID){
            $stmt->bindValue(($k+1), $v); 
         }  
 		$stmt->execute();
+        
+        
                 
         if($stmt->rowCount() == 0){
-
             return false;
         }
         else{
