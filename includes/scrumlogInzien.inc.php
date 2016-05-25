@@ -14,46 +14,51 @@
                     <?php 
                     if ($_SESSION['Userlevel'] == 'Student') {
                     if (!isset($_POST["submit"])){
-                        echo '<form action="" method="post">
-                            <input type="date" name="Date"><br>
-                            <button type="submit" name="submit">submit</button>
+                        echo '<form action="" method="post" class="invullen">
+                            <h3>Scrumlog bekijken</h3>
+                            <input type="date" name="Date" value=' . date('Y-m-d') . ' class="form-control"></br></br>
+                            <button type="submit" name="submit" class="knop">bekijk scrumlog</button>
                             </form>';
                      }
                      else
                     {
                          foreach($scrumlogArray as $scrumlog)
                         {
-                            echo '<p>Datum:' .  '<br>';
-                            echo $scrumlog['Date'] .  '<br>';
-                            echo 'Wat heb je gister bereikt? :' .  '<br>';
-                            echo $scrumlog['Input_Yesterday'] .  '<br>';
-                            echo 'Wat zat je in de weg:' .  '<br>';
-                            echo $scrumlog['Input_Problems'] .  '<br>';
-                            echo 'Wat denk je vandaag te bereiken:' .  '<br>';
-                            echo $scrumlog['Input_Today'] .  '<br>';
-                            echo 'Wat voor hulp heb je nodig/waarbij?:' .  '<br>';
-                            echo $scrumlog['Input_Help'] .  '<br>';
-                            echo 'welk van deze slachtoffers moet jouw helpen?' .  '<br>';
-                            echo $scrumlog['Radio_Help'] .  '<br></p>';
+                            echo '<form class="invullen">'
+                                . '<h3>Scrumglog van: ' . $scrumlog['Date'] .  '</h3><br>'
+                                . 'Wat heb je gister bereikt:<br>
+                                  <input  class="form-control" value="' . $scrumlog['Input_Yesterday'] . '" disabled><br>'
+                                . 'Wat zat je in de weg:<br>
+                                  <input class="form-control" value="' . $scrumlog['Input_Problems'] . '" disabled><br>'
+                                . 'Wat denk je vandaag te bereiken:<br>
+                                  <input class="form-control" value="' . $scrumlog['Input_Today'] . '" disabled><br>'
+                                . 'Wat voor hulp heb je nodig/waarbij?:<br>
+                                  <input class="form-control" value="' . $scrumlog['Input_Help'] . '" disabled><br>'
+                                . 'welk van deze docenten moet jouw helpen?<br>
+                                  <input class="form-control" value="' . $scrumlog['Radio_Help'] . '" disabled>'
+                                . '</form>';
                             }
                         }
                     }
                     else
                     {
                         if (!isset($_POST["submit"])){
-                        echo '<form action="" method="post">
-                            <input type="date" name="Date"><br>
-                            <select name="Year">';
+                        echo '<form action="" method="post" class="invullen">
+                            <h3>Scrumlog Inzien</h3>
+                            Datum:
+                            <input type="date" name="Date" value=' . date('Y-m-d') . ' class="form-control"><br/><br/>
+                            Jaar:
+                            <select name="Year" class="form-control">';
                             
                         for($year = date('Y'); $year > $min_Year; $year--){echo '<option value="' . $year . '">' . $year . '</option>';}
-                        echo '</select> <br/>' ;
-                        echo '<select name="Table">';
+                        echo '</select> <br/><br/> Tafel' ;
+                        echo '<select name="Table" class="form-control">';
                         foreach($table as $table)
                         {
                             echo '<option value="' . $table . '">' . $table . '</option>';                        
                         }
-                        echo '</select>'
-                        . '<button type="submit" name="submit">submit</button>'
+                        echo '</select><br/><br/>'
+                        . '<button type="submit" name="submit" class="knop">bekijk scrumlog</button>'
                                 . '</form>';
                         
                     } 
@@ -67,7 +72,7 @@
                             . '<th>Wat zat je in de weg</th>'
                             . '<th>Wat denk je vandaag te bereiken</th>'
                             . '<th>Wat voor hulp heb je nodig/waarbij?</th>'
-                            . '<th>Welk van deze slachtoffers moet jouw helpen?</th>'
+                            . '<th>Welk van deze docenten moet jouw helpen?</th>'
                         . '</thead>'
                         . '<tbody>';
                          

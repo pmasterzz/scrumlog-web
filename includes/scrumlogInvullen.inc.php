@@ -19,17 +19,18 @@
                     $str_Today = strtotime($todays_Date);
                     $str_Last_Scrum = strtotime($last_Scrum);
                     if ($str_Last_Scrum != $str_Today){ // form already submitted
-                        echo '<form method="POST" action="php/submitScrumlog.php" class="invullen">
+                        echo '<div class="scrumin"><form method="POST" action="php/submitScrumlog.php" class="invullen">
+                        <h3>Scrumlog invullen</h3>
                         Wat heb je gister bereikt:<br>
-                        <input type="text" name="Input_Yesterday" class="invullen" required autofocus><br>
+                        <input type="text" name="Input_Yesterday" class="invullen form-control" required autofocus><br>
                         Wat zat je in de weg:<br>
-                        <input type="text" name="Input_Problems" class="invullen" required><br>
+                        <input type="text" name="Input_Problems" class="invullen form-control" required><br>
                         Wat denk je vandaag te bereiken:<br>
-                        <input type="text" name="Input_Today" class="invullen" required><br>
+                        <input type="text" name="Input_Today" class="invullen form-control" required><br>
                         Wat voor hulp heb je nodig/waarbij?:<br>
-                        <input type="text"  name="Input_Help" class="invullen" required><br>
-                        welk van deze slachtoffers moet jouw helpen?<br>
-                        <select name="Input_Teacher">
+                        <input type="text"  name="Input_Help" class="invullen form-control" required><br>
+                        welk van deze docenten moet jouw helpen?<br>
+                        <select name="Input_Teacher" class="form-control">
                             <option value="nvt">geen</option>';   
                             foreach($teachersArray as $teacher)
                             {
@@ -41,9 +42,9 @@
                             }
                            echo '</select><br><br>
 
-                                <button type="submit">Submit</button>
+                                <button type="submit" class="knop">VERSTUUR SCRUMLOG</button>
                             </form>
-                        </p>';   
+                        </p></div>';   
                     }
                     else {
                             echo '<img src="http://thecatapi.com/api/images/get?format=src&type=gif"></img>';

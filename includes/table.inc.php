@@ -16,35 +16,46 @@
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Show menu</a>
                     <p>
                     <?php
-                        echo '<form method="POST" action="php/getTable.php">
-                            <select name="table">';
+                        echo '<form method="POST" id="tableForm" action="php/getTable.php" class="invullen"><h3>Selecteer een tafel</h3>
+                            <select name="table"  class="form-control" onchange="document.getElementById(' . "'tableForm'" . ').submit();">';
+                                
                         foreach($table as $table)
                         {
-                            echo '<option value="' . $table . '">' . $table . '</option>';
+                            echo '<option value="' . $table . '"';
+                                    if($_SESSION['seat'] == $table)
+                                        { echo 'selected="selected"'; }
+                                    echo '>' . $table . '</option>';
                         }
-                        echo '</select> <button type="submit">SELECTEER</button></form>';
+                        echo '</select></form><br>';
                         if (!isset($_SESSION["submit"]))
                         {   
                             
                         }
                         else
                         {
-                            echo  '<form method="POST" action="php/updateTable.php"><select multiple="true" name="table[]">';
+                            echo  '<div class="tafelContainer"><div class="col-lg-5"><form method="POST" action="php/updateTable.php"  id="formTafel"><h3>Tafel: ' . $_SESSION['seat'] . '</h3><select multiple="true"  class="form-control" name="table[]">';
                             foreach($_SESSION['students'] as $student)
                             {
                                 echo '<option value="' . $student['Student_ID'] . '" >' . $student['Firstname'] . ' ' . $student['Infix'] . ' ' . $student['Lastname'] . ' ' . $student['Student_ID'] .  '</option>';
                             }
-                             echo '</select> <button type="submit">Verlos van deze tafel</button></form>';
+                             echo '</select> <br><br></form></div>';
                              unset($_SESSION['submit']);
-                             echo  '<form method="POST" action="php/setTable.php"><select multiple="true" name="table[]">';
+                             echo '<div class="col-lg-2">'
+                                    . '<div class="knopContainer">'
+                                        . '<button type="submit"  form="formTafel" class="knop"><i class="glyphicon glyphicon-arrow-right"></i></button>'
+                                        . '<button type="submit" form="formBeschikbaar" class="knop"><i class="glyphicon glyphicon-arrow-left"></i></button>'
+                                        
+                                    . '</div>'
+                                  . '</div>';
+                             echo  '<div class="col-lg-5"><form method="POST" action="php/setTable.php" id="formBeschikbaar" ><h3>Beschikbare studenten</h3><select multiple="true" class="form-control" name="table[]">';
                             foreach($_SESSION['availableStudents'] as $student)
                             {
                                 echo '<option value="' . $student['Student_ID'] . '" >' . $student['Firstname'] . ' ' . $student['Infix'] . ' ' . $student['Lastname'] . ' ' . $student['Student_ID'] .  '</option>';
                             }
-                             echo '</select> <button type="submit">Zet aan tafel</button></form>';
+                             echo '</select> <br><br></form></div></div>';
                         }
                     ?>
-                        <<form action="php/clearTable.php" method="POST" onclick="confirmBox()"><button type="submit">leeg alle tafels</button></form>
+                        <form action="php/clearTable.php" id="formLegen" method="POST" onclick="confirmBox()"><button type="submit" class="knop"><i class="glyphicon glyphicon-trash"></i></button></form>
                 </div>
             </div>
         </div>

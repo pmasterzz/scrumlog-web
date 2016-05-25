@@ -172,11 +172,21 @@ function addCycle($start_Date, $end_Date, $number){
 };
 
 
-function setTable($students, $seat){
-    $studentArray = explode(",", $students);
-        $inQuery = implode(',', array_fill(0, count($studentArray), '?'));
+// <<<<<<< HEAD
+function setTable($students,$seat){
+    $studentArray = implode(",", $students);
+        
         $db = getDB();
-        $sql = 'UPDATE student SET Seating = ? WHERE Student_ID IN(' . $inQuery . ')';
+        $sql = 'UPDATE student SET Seating = ? WHERE Student_ID IN(' . $studentArray . ')';
+
+
+// =======
+// function setTable($students, $seat){
+//     $studentArray = explode(",", $students);
+//         $inQuery = implode(',', array_fill(0, count($studentArray), '?'));
+//         $db = getDB();
+//         $sql = 'UPDATE student SET Seating = ? WHERE Student_ID IN(' . $inQuery . ')';
+// >>>>>>> master
         $stmt = $db->prepare($sql);
         $stmt->bindParam(1, $seat);
 		
@@ -414,7 +424,7 @@ function GetTeacherNameById($id){
 function getCurrentCycle(){
     
     
-        $sql = 'SELECT Cycle_ID FROM cycle WHERE CURDATE() > Start_Date AND CURDATE() < End_Date';
+        $sql = 'SELECT Cycle_ID FROM cycle WHERE CURDATE() >= Start_Date AND CURDATE() <= End_Date';
         $db = getDB();
         $stmt = $db->prepare($sql);
         $stmt->execute();
