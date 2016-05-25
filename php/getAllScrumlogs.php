@@ -55,9 +55,9 @@ if (isset ($_POST['Cycle_ID']))
     }
     $date = $_POST['Date'];
     $date = date_create($date);
-    $date = date_format($date, 'y-m-d');
-    $scrumlogArray = getScrumlog($date, $year,$student_ID,$seating,$cycle_ID);
- 
+    $date = date_format($date, 'y-m-d'); 
+    $scrumlogArray = getScrumlog($date, $year,$student_ID,$table,$cycle_ID);
+
     //$scrumlogArray = getAllScrumlogs($date, $year,$table,$student_ID,$seating,$cycle_ID);  
   } 
 // function getAllScrumlogs($date, $year,$table,$student_ID,$seating,$cycle_ID)

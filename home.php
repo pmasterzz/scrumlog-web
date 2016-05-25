@@ -48,8 +48,8 @@ if (!isset($_SESSION['login'])){
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="#">
-                        Start Bootstrap
+                    <a>
+                        <?php echo '<div class="knop"><h3>Welkom: ' .  $_SESSION['User']['Firstname']  . '</h3></div>'; ?>
                     </a>
                 </li>
                 <li>
@@ -82,7 +82,7 @@ if (!isset($_SESSION['login'])){
                 </li>
                 
                 <li class="beneden">
-                    <a href="php/uitloggen.php">uitloggen/oprotten</a>
+                    <a href="php/uitloggen.php">uitloggen</a>
                 </li>
             </ul>
         </div>
@@ -105,7 +105,7 @@ if (!isset($_SESSION['login'])){
                     include 'includes/table.inc.php';
                     break;
                 case 'createCycle':
-                    include 'includes/createCycle.inc.php';
+                    include 'includes/cycle.inc.php';
                     break;
                 default:
                     include 'includes/scrumloginvullen.inc.php';
