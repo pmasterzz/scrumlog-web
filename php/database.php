@@ -256,7 +256,7 @@ function getAllStudents(){
 };
 
 function getAllCycles(){
-    $sql = "SELECT Cycle_ID, Start_Date, End_Date, Number FROM cycle";
+    $sql = "SELECT Cycle_ID, Start_Date, End_Date, Number FROM cycle ORDER BY Number";
     $db = getDB();
     $stmt = $db->prepare($sql);
     $stmt->execute();

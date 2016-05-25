@@ -141,6 +141,7 @@ li.beneden {
 div#page-content-wrapper
 {
     background-image: url('../../img/backgrounds/rainbow.jpg');
+    background-attachment: fixed;
     min-height: 1000px;
 }
 input.invullen {
@@ -209,9 +210,20 @@ form.invullen {
     background: rgba(255,255,255,0.8);
     color: #333;
     border: #FF5800 solid 1px;
-    max-width: 300px;
+    
 }
-
+form.scrum-invullen {
+    padding: 20px 15px;
+    margin: auto;
+    text-align: center;
+    background: rgba(255,255,255,0.8);
+    color: #333;
+    border: #FF5800 solid 1px;
+    max-width: 300px!important;
+}
+form#tableForm{
+    max-width: 300px!important;
+}
 .invullen h3 {
     color: #FF5800!important;
     margin: 7%;
@@ -239,6 +251,18 @@ form.invullen {
     color: #333;
 }
 
+.col-lg-3 form{
+    padding: 0;
+    text-align: center;
+    background: rgba(255,255,255,0.8);
+    color: #333;
+    margin: 2%;
+}
+
+form.col-lg-3.invullen {
+    margin: 0.2%;
+    width: 24.6%;
+}
 .col-lg-5{
     padding: 0;
 }
@@ -246,8 +270,37 @@ table {
     background-color: #FFF;
 }
 
+.cyclusButton{
+    width: 48%;
+    margin: 1%;
+    color: #4b08a1;
+    padding: 10px;
+    background: #FFF;
+    border: #4b08a1 solid 1px;
+    font-family: Montserrat,sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-shadow: none;
+    text-align: center;
+    display: inline-block;
+}
 
-
+.cyclusButton:hover{
+    color: #FFF;
+    padding: 10px;
+    background: #4b08a1;
+/*    border: rgba(255,255,255, 0) solid;*/
+    font-family: Montserrat,sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-shadow: none;
+    text-align: center;
+    display: inline-block;
+}
 
 @media(min-width:768px) {
     #wrapper {
