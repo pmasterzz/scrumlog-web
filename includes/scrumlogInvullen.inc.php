@@ -18,7 +18,8 @@
                     $todays_Date = date('y-m-d');
                     $str_Today = strtotime($todays_Date);
                     $str_Last_Scrum = strtotime($last_Scrum);
-                    if ($str_Last_Scrum != $str_Today){ // form already submitted
+                    if ($str_Last_Scrum != $str_Today)
+                    { // form already submitted
                         echo '<div class="scrumin"><form method="POST" action="php/submitScrumlog.php" class="invullen">
                         <h3>Scrumlog invullen</h3>
                         Wat heb je gister bereikt:<br>
