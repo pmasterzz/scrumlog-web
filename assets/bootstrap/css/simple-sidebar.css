@@ -243,6 +243,10 @@ form#tableForm{
     margin: 7%;
 }
 
+.col-lg-12{
+    z-index:1 !important;
+}
+
 .col-lg-5 form{
     padding: 20px 15px;
     margin: auto;
