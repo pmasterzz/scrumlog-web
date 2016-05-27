@@ -21,6 +21,7 @@ session_start();
            }
         }
         else{
+            $_SESSION['foutmelding'] = 'fout';
            header("Location: ../index.php");
         }
        
