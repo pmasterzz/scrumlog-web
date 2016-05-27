@@ -156,7 +156,10 @@ div#page-content-wrapper
     transform: rotate(-15deg);
     top: 150px;
     font-family: 'Rock Salt', cursive;
+    z-index: 0!important;
 }
+
+
 
 input.invullen {
     color: #333;
@@ -165,6 +168,11 @@ input.invullen {
 .doorzichtig p
 {
     color: #FFF;
+}
+
+form 
+{
+    z-index: 1!important;
 }
 
 button.knop {
