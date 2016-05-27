@@ -18,8 +18,10 @@
                     $todays_Date = date('y-m-d');
                     $str_Today = strtotime($todays_Date);
                     $str_Last_Scrum = strtotime($last_Scrum);
+
                     if ($str_Last_Scrum != $str_Today){ // form already submitted
                         echo '<div class="scrumin"><form method="POST" action="php/submitScrumlog.php" class="scrum-invullen">
+
                         <h3>Scrumlog invullen</h3>
                         Wat heb je gister bereikt:<br>
                         <input type="text" name="Input_Yesterday" class="invullen form-control" required autofocus><br>

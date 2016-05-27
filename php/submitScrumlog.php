@@ -12,6 +12,7 @@ $seating = $_SESSION['User']['Seating'];
 
 
 submitScrumlog($yesterday, $problems, $today, $help, $radio, $student_ID, $seating);
+$_SESSION['User']['Last_Submitted_Scrumlog'] = date('y-m-d');
 
 
 header("Location: ../home.php?page=scrumlogInzien");
