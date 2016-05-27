@@ -28,7 +28,7 @@
                                         { echo 'selected="selected"'; }
                                     echo '>' . $table . '</option>';
                         }
-                        echo '</select></form><br>';
+                        echo '</select><br/><form action="php/clearTable.php" id="formLegen" method="POST" onclick="confirmBox()"><button type="submit" class="knop"><i class="glyphicon glyphicon-trash"></i> Leeg alle tafels</button></form></form><br>';
                         if (!isset($_SESSION["submit"]))
                         {   
                             
@@ -57,7 +57,7 @@
                              echo '</select> <br><br></form></div></div>';
                         }
                     ?>
-                        <form action="php/clearTable.php" id="formLegen" method="POST" onclick="confirmBox()"><button type="submit" class="knop"><i class="glyphicon glyphicon-trash"></i></button></form>
+
                 </div>
             </div>
         </div>
