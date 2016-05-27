@@ -37,6 +37,12 @@
 			                        </div>
 			                        <button type="submit" name="submit" class="btn">Log in</button>
 			                    </form>
+                                <?php
+                                if (isset ($_SESSION['foutmelding'])){
+                                    echo '<p class="foutmelding">Verkeerde gebruikersnaam en/of wachtwoord.<p>';
+                                    unset($_SESSION['foutmelding']);
+                                }
+                                    ?>
 		                    </div>
                         </div>
                     </div>
