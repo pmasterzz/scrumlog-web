@@ -18,9 +18,10 @@
                     $todays_Date = date('y-m-d');
                     $str_Today = strtotime($todays_Date);
                     $str_Last_Scrum = strtotime($last_Scrum);
-                    if ($str_Last_Scrum != $str_Today)
-                    { // form already submitted
-                        echo '<div class="scrumin"><form method="POST" action="php/submitScrumlog.php" class="invullen">
+
+                    if ($str_Last_Scrum != $str_Today){ // form already submitted
+                        echo '<div class="scrumin"><form method="POST" action="php/submitScrumlog.php" class="scrum-invullen">
+
                         <h3>Scrumlog invullen</h3>
                         Wat heb je gister bereikt:<br>
                         <input type="text" name="Input_Yesterday" class="invullen form-control" required autofocus><br>
@@ -29,10 +30,10 @@
                         Wat denk je vandaag te bereiken:<br>
                         <input type="text" name="Input_Today" class="invullen form-control" required><br>
                         Wat voor hulp heb je nodig/waarbij?:<br>
-                        <input type="text"  name="Input_Help" class="invullen form-control" required><br>
+                        <input type="text"  name="Input_Help" class="invullen form-control" value="n.v.t." required><br>
                         welk van deze docenten moet jouw helpen?<br>
                         <select name="Input_Teacher" class="form-control">
-                            <option value="nvt">geen</option>';   
+                            <option value="n.v.t.">geen</option>';   
                             foreach($teachersArray as $teacher)
                             {
                                 echo '<option value=' . '"' 
