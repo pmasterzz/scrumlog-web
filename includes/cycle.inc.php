@@ -39,29 +39,6 @@
                                     . '</button>'
                                 . '</div>' 
                                 . '</form>';
-//                        echo '<tr>'
-//                        . '<td><form action="php/editCycle.php" method="post">
-//                            <input type="date" name="start_Date" value="' .  $cycle['Start_Date'] . '">'
-//                            . '<input type="hidden" value="' . $cycle['End_Date'] . '" name="end_Date">'
-//                            . '<input type="hidden" value="' . $cycle['Number'] . '" name="number">'
-//                            . '<input type="hidden" value="' . $cycle['Cycle_ID'] . '" name="cycle_ID">'
-//                        . '<button type="submit" name="submit" class="btn btn-default"><i class="glyphicon glyphicon-edit" "></i></button>'
-//                        . '</form>'
-//                        
-//                        . '</td>'
-//                        
-//                        . '<td><form action="php/editCycle.php" method="post">
-//                            <input type="date" name="end_Date" value="' .  $cycle['End_Date'] . '">'
-//                            . '<input type="hidden" value="' . $cycle['Start_Date'] . '" name="start_Date">'
-//                            . '<input type="hidden" value="' . $cycle['Number'] . '" name="number">'
-//                            . '<input type="hidden" value="' . $cycle['Cycle_ID'] . '" name="cycle_ID">'
-//                        . '<button type="submit" name="submit" class="btn btn-default"><i class="glyphicon glyphicon-edit" "></i></button>'
-//                        . '</form>'
-//                        
-//                        . '</td>'
-//                        . '<td><i class="glyphicon glyphicon-remove"></i></td>'
-//                        . '</tr>';
-                        
                     }
                     ?>
                     <!--</table>-->
