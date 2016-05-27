@@ -13,7 +13,7 @@
                     <p>
                     <?php 
                     if ($_SESSION['Userlevel'] == 'Student') {
-                    if (!isset($_POST["submit"])){
+                    if (!isset($_POST["submit"]) || $scrumlogArray == false){
                         echo '<form action="" method="post" class="scrum-invullen">
                             <h3>Scrumlog bekijken</h3>
                             <input type="date" name="Date" value=' . date('Y-m-d') . ' class="form-control"></br></br>
@@ -52,9 +52,22 @@
                     }
                     else
                     {
-                        if (!isset($_POST["submit"])){
-                        echo '<form action="" method="post" class="scrum-invullen">
-                            <h3>Scrumlog Inzien</h3>
+                        if (!isset($_POST["submit"]) || $scrumlogArray == false){
+                            
+                            echo '<form action="" method="post" class="scrum-invullen">';
+                            
+                                if(isset($_POST["submit"]) && $scrumlogArray == false){
+                            echo '<div class="alert alert-danger">
+                                
+                                    Er zijn geen scrumlogs gevonden
+                                
+                            </div>';
+                                }
+                            
+                            
+                            
+                        
+                            echo '<h3>Scrumlog Inzien</h3>
                             Datum:
                             <input type="date" name="Date" value=' . date('Y-m-d') . ' class="form-control"><br/><br/>
                             Jaar:
@@ -70,19 +83,17 @@
                         echo '</select><br/><br/>'
                         . '<button type="submit" name="submit" class="knop">bekijk scrumlog</button>'
                                 . '</form>';
+                                
+                            
+                        }
                         
-                    } 
+                    
+                     
                      else
                     {
                         
-                        if($scrumlogArray == false){
-                            echo '<div class="alert alert-danger">
-                                
-                                    Er zijn geen scrumlogs gevonden
-                                
-                            </div>';
-                        }
-                        else{
+                        
+                        
                         
                          echo '<div class="container">';
                          echo '<table class="table table-hover">'
@@ -108,7 +119,7 @@
                                 . '<td>' . $scrumlog['Radio_Help'] .  '</td>'
                                 . '</tr>';
                             }
-                        }
+                        
                         echo '</tbody>'
                         . '</table>'
                         . '</div>';
