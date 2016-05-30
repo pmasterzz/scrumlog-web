@@ -17,8 +17,6 @@ $tomorrow = new DateTime('tomorrow');
                     <h1>Cyclus toevoegen</h1>
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><i
                             class="glyphicon glyphicon-arrow-left"></i></a>
-
-
                     <div class="row cylcus">
                         <?php
                         if (isset($_GET['msg']))
