@@ -71,7 +71,7 @@
                             Datum:
                             <input type="date" name="Date" value=' . date('Y-m-d') . ' class="form-control"><br/><br/>
                             Jaar:
-                            <select name="Year" class="form-control">';
+                            <select name="Year" class="form-control"><option value="undefined">-</option>';
                             
                         for($year = date('Y'); $year > $min_Year; $year--){echo '<option value="' . $year . '">' . $year . '</option>';}
                         echo '</select> <br/><br/> Tafel' ;
