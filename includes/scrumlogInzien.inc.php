@@ -97,13 +97,27 @@
                         echo '<div class="col-lg-12 centreren">'
                          . '<h3>' . $_POST['Date'] . '</h3>'
                          . '</div>' ;
-                        
+
+
+
+                        function afkorten($naam, $lengte) {
+                            $naam2 = $naam;
+                            if (strlen($naam2) > $lengte) {
+                                $naam2 = substr($naam2, 0, $lengte-2)."..";
+                            }
+                            return $naam2;
+                        }
+
                                  
                          foreach($scrumlogArray as $scrumlog)
                         {
+                            $naam = $scrumlog['Firstname'] . ' ' . $scrumlog['Infix'] . ' ' . $scrumlog['Lastname'];
                             echo 
                             '<form class="col-lg-3 invullen">'
-                            . '<h3>' . $scrumlog['Firstname'] . ' ' . $scrumlog['Infix'] . ' ' . $scrumlog['Lastname'] .  '</h3><br>'
+                            . '<h3 title="' . $naam . '">';
+
+                            echo afkorten($naam,16);
+                            echo '</h3><br>'
                             . 'Wat heb je gister bereikt:<br>
                               <input  class="form-control" value="' . $scrumlog['Input_Yesterday'] . '" disabled><br>'
                             . 'Wat zat je in de weg:<br>

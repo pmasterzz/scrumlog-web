@@ -55,7 +55,7 @@ if (!isset($_SESSION['login'])){
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a>
-                        <?php echo '<div class="knop"><h3>Welkom: ' .  $_SESSION['User']['Firstname']  . '</h3></div>'; ?>
+                        <?php echo '<div class="knop"><h3>Welkom ' .  $_SESSION['User']['Firstname']  . '</h3></div>'; ?>
                     </a>
                 </li>
                 <li>
