@@ -26,13 +26,16 @@ if ($_SESSION['Userlevel'] != 'Teacher') {
                         foreach ($cycles as $cycle) {
                             echo '<form method="POST" action="php/cycle.php" class="col-lg-3 invullen">'
                                 . '<input type="hidden" name="id" value="' . $cycle['Cycle_ID'] . '">'
+                                . '<input type="hidden" name="number" value="' . $cycle['Number'] . '">'
+                                . '<input type="hidden" name="end" value="' . $cycle['End_Date'] . '">'
+                                . '<input type="hidden" name="start" value="' . $cycle['Start_Date'] . '">'
                                 . '<h3>Cyclus: ' . $cycle['Number'] . '</h3><br>'
                                 . 'Start Datum:<br>
-                                  <input  class="form-control" value="' . $cycle['Start_Date'] . '" disabled><br>'
+                                  <input name="start" type="date" class="form-control" value="' . $cycle['Start_Date'] . '" disabled><br>'
                                 . 'Eind Datum:<br>
-                                  <input class="form-control" value="' . $cycle['End_Date'] . '" disabled><br>'
+                                  <input name="end" type="date" class="form-control" value="' . $cycle['End_Date'] . '" disabled><br>'
                                 . '<div class="row">'
-                                . '<button class="col-lg-6 cyclusButton" data-toggle="tooltip" title="Bijwerken">'
+                                . '<button class="col-lg-6 cyclusButton" name="toEdit" data-toggle="tooltip" title="Bijwerken">'
                                 . '<i class="glyphicon glyphicon-pencil"></i>'
                                 . '</button>'
                                 . '<button name="delete" class="col-lg-6 cyclusButton cyclusDeleteBtn" data-toggle="tooltip" title="Verwijderen">'
