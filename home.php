@@ -23,7 +23,8 @@ if (!isset($_SESSION['login'])){
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Scrumlog!</title>
+    <title>Scrumlog - Leuker kunnen we het niet maken, wel makkelijker</title>
+    <link rel="shortcut icon" href="assets/ico/favicon.png">
 
     <!-- Bootstrap Core CSS -->
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
