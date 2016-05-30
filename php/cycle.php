@@ -44,7 +44,7 @@ if (isset($_POST['wijzigen'])) {
     $end = $_POST['end_date'];
     $number = $_POST['number'];
 
-    die(var_dump($_POST));
+    
     //validate input
     if ($start >= $end || $end <= $start) {
         //show error

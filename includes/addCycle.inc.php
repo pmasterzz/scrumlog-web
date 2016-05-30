@@ -21,7 +21,7 @@ $tomorrow = new DateTime('tomorrow');
             echo '<div class="alert alert-danger">' . $_GET["msg"] . '</div>';
         ?>
         <form method="POST" action="php/cycle.php" class="col-lg-3 invullen">
-            <input type="hidden" name="id" value="' . $cycle['Cycle_ID'] . '">
+            <input type="hidden" name="id" value="<?php if (isset($_GET['id'])) echo $_GET['id'];?>">
             Start Datum:<br>
             <input type="date" name="start_date" class="form-control"
                    value="<?php if (!isset($_GET['start'])) echo date("Y-m-d"); else echo $_GET['start']; ?>"
