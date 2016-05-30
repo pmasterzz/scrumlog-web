@@ -14,23 +14,23 @@
                     <?php 
                     if ($_SESSION['Userlevel'] == 'Student') {
                     if (!isset($_POST["submit"]) || $scrumlogArray == false){
-                        echo '<form action="" method="post" class="scrum-invullen">
-                            <h3>Scrumlog bekijken</h3>
+                        echo '<form action="" method="post" class="scrum-invullen">';
+                        
+                         if(isset($_POST["submit"]) && $scrumlogArray == false){
+                            echo '<div class="alert alert-danger">
+                                    Er zijn geen scrumlogs gevonden
+                                  </div>';
+                                }
+                        
+                        
+                        
+                            echo '<h3>Scrumlog bekijken</h3>
                             <input type="date" name="Date" value=' . date('Y-m-d') . ' class="form-control"></br></br>
                             <button type="submit" name="submit" class="knop">bekijk scrumlog</button>
                             </form>';
                      }
                      else
-                    {
-                        if($scrumlogArray == false){
-                            echo '<div class="alert alert-danger">
-                                
-                                    Er zijn geen scrumlogs gevonden
-                                
-                            </div>';
-                        }
-                        else{    
-                        
+                        {
                          foreach($scrumlogArray as $scrumlog)
                         {
                             echo '<form class="scrum-invullen">'
@@ -47,7 +47,7 @@
                                   <input class="form-control" value="' . $scrumlog['Radio_Help'] . '" disabled>'
                                 . '</form>';
                             }
-                        }
+                        
                         }
                     }
                     else

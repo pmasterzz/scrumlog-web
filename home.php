@@ -41,10 +41,7 @@ if (!isset($_SESSION['login'])){
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <!-- Javascript -->
-    <script src="assets/js/jquery-1.11.1.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.backstretch.min.js"></script>
-    <script src="assets/js/scripts.js"></script>
+
 
 </head>
 
@@ -103,13 +100,13 @@ if (!isset($_SESSION['login'])){
         if (isset($_GET['page'])){
             switch($_GET['page']){
                 case 'scrumlogInvullen':
-                    include 'includes/scrumloginvullen.inc.php';
+                    include 'includes/scrumlogInvullen.inc.php';
                     break;
                 case 'scrumlogInzien':
                     include 'includes/scrumlogInzien.inc.php';
                     break;
                 case 'allescrumloginzien':
-                    include 'includes/allescrumlogsinzien.inc.php';
+                    include 'includes/allescrumlogsInzien.inc.php';
                     break;
                 case 'createTable':
                     include 'includes/table.inc.php';
@@ -117,8 +114,11 @@ if (!isset($_SESSION['login'])){
                 case 'createCycle':
                     include 'includes/cycle.inc.php';
                     break;
+                case 'addCycle':
+                    include 'includes/addCycle.inc.php';
+                    break;
                 default:
-                    include 'includes/scrumloginvullen.inc.php';
+                    include 'includes/scrumlogInvullen.inc.php';
                     break;
             }
         }
@@ -133,10 +133,15 @@ if (!isset($_SESSION['login'])){
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="assets/bootstrap/js/jquery.js"></script>
+    <!--<script src="assets/bootstrap/js/jquery.js"></script>-->
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <!--<script src="assets/bootstrap/js/bootstrap.min.js"></script>-->
+    
+        <script src="assets/js/jquery-1.11.1.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.backstretch.min.js"></script>
+        <script src="assets/js/scripts.js"></script>
 
     <!-- Menu Toggle Script -->
     <script>

@@ -1,15 +1,18 @@
 <?php
 session_start();
-include_once'database.php';
+include_once 'database.php';
 $_SESSION["submit"] = "set";
-$students = $_POST["table"];
 $seat = $_SESSION['seat'];
-setTable($students,$seat);
+if (isset($_POST["table"])) {
+    $students = $_POST["table"];
 
-$_SESSION['students'] = getSpecificTable($seat);
-$_SESSION['availableStudents'] = getEmptyTable();
+    setTable($students, $seat);
+}
 
- header("Location: ../home.php?page=createTable");
+    $_SESSION['students'] = getSpecificTable($seat);
+    $_SESSION['availableStudents'] = getEmptyTable();
+
+    header("Location: ../home.php?page=createTable");
 
 //setTable($students);
 /* 
