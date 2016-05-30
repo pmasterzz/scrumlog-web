@@ -17,12 +17,13 @@ $tomorrow = new DateTime('tomorrow');
                     <h1>Cyclus toevoegen</h1>
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><i
                             class="glyphicon glyphicon-arrow-left"></i></a>
-                    <div class="row cylcus">
+<!--                    <div class="row cylcus">-->
+                    <div class="scrumin">
                         <?php
                         if (isset($_GET['msg']))
                             echo '<div class="alert alert-danger">' . $_GET["msg"] . '</div>';
                         ?>
-                        <form method="POST" action="php/cycle.php" class="col-lg-3 invullen">
+                        <form method="POST" action="php/cycle.php" class="scrum-invullen">
                             <input type="hidden" name="id" value="<?php if (isset($_GET['id'])) echo $_GET['id']; ?>">
                             Start Datum:<br>
                             <input type="date" name="start_date" class="form-control"
