@@ -33,7 +33,7 @@
                         <input type="text"  name="Input_Help" class="invullen form-control" value="n.v.t." required><br>
                         welk van deze docenten moet jouw helpen?<br>
                         <select name="Input_Teacher" class="form-control">
-                            <option value="n.v.t.">geen</option>';   
+                            <option value="-">geen</option>';   
                             foreach($teachersArray as $teacher)
                             {
                                 echo '<option value=' . '"' 
