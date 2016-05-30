@@ -177,8 +177,13 @@ function addCycle($start_Date, $end_Date, $number){
         $stmt->bindParam(1, $start_Date);
         $stmt->bindParam(2, $end_Date);
         $stmt->bindParam(3, $number);
+    try {
         $stmt->execute();
         return;
+    }
+    catch (PDOException $e){
+        die($e);
+    }
 };
 
 
@@ -304,7 +309,9 @@ function getEmptyTable(){
 };
 
 function deleteCycle($cycle_ID){
+
      $assignment = checkCycleUses($cycle_ID);
+         
 
         if(!$assignment){
             $sql = "DELETE FROM cycle WHERE Cycle_ID = ?";

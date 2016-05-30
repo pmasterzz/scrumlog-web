@@ -31,6 +31,13 @@ jQuery(document).ready(function() {
             $(this).find('i').toggleClass('glyphicon-arrow-left glyphicon-arrow-right')
     });
     
+                $('.cyclusDeleteBtn').click(function(event){
+                    var c = confirm('Weet je het zeker?');
+                    if(!c){
+                        event.preventDefault();
+                    }
+                });
+    
 });
 
 

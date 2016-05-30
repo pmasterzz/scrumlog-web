@@ -6,7 +6,6 @@ $seat = $_POST['table'];
 $_SESSION['students'] = getSpecificTable($seat);
 $_SESSION['availableStudents'] = getEmptyTable();
 $_SESSION['seat'] = $seat;
-var_dump($_SESSION['students']);
 header("Location: ../home.php?page=createTable");
 
 //setTable($students);
