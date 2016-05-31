@@ -191,6 +191,21 @@ button.knop {
     width: 100%;
 }
 
+button.tafelsVerwijderen {
+    color: #4b08a1;
+    padding: 10px;
+    background: #FFF;
+    border: #4b08a1 solid 1px;
+    font-family: Montserrat,sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-shadow: none;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+}
 
 
 button.knop:hover   {

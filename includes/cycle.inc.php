@@ -21,6 +21,17 @@ if ($_SESSION['Userlevel'] != 'Teacher') {
 
 
                         <?php
+
+
+                        function afkorten($naam, $lengte) {
+                            $naam2 = $naam;
+                            if (strlen($naam2) > $lengte) {
+                                $naam2 = substr($naam2, 0, $lengte-2)."..";
+                            }
+                            return $naam2;
+                        }
+
+
                         if (isset($_GET['msg']) && $_GET['msg']!="")
                             echo '<div class="alert alert-danger">' . $_GET['msg'] . '</div>';
                         foreach ($cycles as $cycle) {
@@ -29,7 +40,7 @@ if ($_SESSION['Userlevel'] != 'Teacher') {
                                 . '<input type="hidden" name="description" value="' . $cycle['Description'] . '">'
                                 . '<input type="hidden" name="end" value="' . $cycle['End_Date'] . '">'
                                 . '<input type="hidden" name="start" value="' . $cycle['Start_Date'] . '">'
-                                . '<h3>Cyclus: ' . $cycle['Description'] . '</h3><br>'
+                                . '<h3>' . afkorten($cycle['Description'],11) . '</h3><br>'
                                 . 'Start Datum:<br>
                                   <input name="start" type="date" class="form-control" value="' . $cycle['Start_Date'] . '" disabled><br>'
                                 . 'Eind Datum:<br>
@@ -43,8 +54,6 @@ if ($_SESSION['Userlevel'] != 'Teacher') {
                                 . '</button>'
                                 . '</div>'
                                 . '</form>';
-
-
                         }
                         ?>
                     </div>
