@@ -12,7 +12,7 @@ if (isset($_POST['delete'])) {
 if (isset($_POST['toevoegen'])) {
     $start = $_POST['start_date'];
     $end = $_POST['end_date'];
-    $number = $_POST['description'];
+    $description = $_POST['description'];
     //validate input
     if ($start >= $end || $end <= $start) {
         //show error

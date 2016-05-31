@@ -9,11 +9,6 @@ if (isset($_POST['clear'])) {
     clearTables();
 }
 
-$file = 'file.txt';
-$current = file_get_contents($file);
-$current .= var_dump($_POST);
-file_put_contents($file, $current);
-
 $_SESSION['students'] = getSpecificTable($seat);
 $_SESSION['availableStudents'] = getEmptyTable();
 
