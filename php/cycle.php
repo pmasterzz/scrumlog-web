@@ -12,14 +12,14 @@ if (isset($_POST['delete'])) {
 if (isset($_POST['toevoegen'])) {
     $start = $_POST['start_date'];
     $end = $_POST['end_date'];
-    $number = $_POST['number'];
+    $number = $_POST['description'];
     //validate input
     if ($start >= $end || $end <= $start) {
         //show error
         $error = "De datums kloppen niet";
         header("Location: ../home.php?page=addCycle&msg=" . $error);
     } else {
-        addCycle($start, $end, $number);
+        addCycle($start, $end, $description);
         header("Location: ../home.php?page=createCycle&msg=" . $error);
 
     }
@@ -31,10 +31,10 @@ if (isset($_POST['annuleren'])) {
 
 if (isset($_POST['toEdit'])) {
     $id = $_POST['id'];
-    $num = $_POST['number'];
+    $desc = $_POST['description'];
     $start = $_POST['start'];
     $end = $_POST['end'];
-    header("Location: ../home.php?page=addCycle&start=" . $start . "&end=" . $end . "&num=" . $num . "&id=" . $id);
+    header("Location: ../home.php?page=addCycle&start=" . $start . "&end=" . $end . "&descr=" . $desc . "&id=" . $id);
 }
 
 if (isset($_POST['wijzigen'])) {
@@ -42,7 +42,7 @@ if (isset($_POST['wijzigen'])) {
     $id = $_POST['id'];
     $start = $_POST['start_date'];
     $end = $_POST['end_date'];
-    $number = $_POST['number'];
+    $description = $_POST['description'];
 
     
     //validate input
@@ -51,7 +51,7 @@ if (isset($_POST['wijzigen'])) {
         $error = "De datums kloppen niet";
         header("Location: ../home.php?page=addCycle&msg=" . $error);
     } else {
-        updateCycle($number, $start, $end, $id);
+        updateCycle($description, $start, $end, $id);
         header("Location: ../home.php?page=createCycle");
     }
 }

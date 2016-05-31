@@ -2,7 +2,7 @@
 session_start();
 include_once 'database.php';
 $_SESSION["submit"] = "set";
-$seat = $_SESSION['seat'];
+$seat = $_GET['seat'];
 if (isset($_POST["table"])) {
     $students = $_POST["table"];
 
@@ -12,7 +12,7 @@ if (isset($_POST["table"])) {
     $_SESSION['students'] = getSpecificTable($seat);
     $_SESSION['availableStudents'] = getEmptyTable();
 
-    header("Location: ../home.php?page=createTable");
+    header("Location: ../home.php?page=createTable&seat=" . $seat);
 
 //setTable($students);
 /* 
