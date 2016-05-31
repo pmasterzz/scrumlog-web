@@ -20,21 +20,21 @@ if ($_SESSION['Userlevel'] != 'Teacher') {
                             <?php
                             echo '<form method="POST" id="tableForm" action="php/getTable.php" class="invullen"><h3>Selecteer een tafel</h3>
                             <select name="table"  class="form-control" onchange="document.getElementById(' . "'tableForm'" . ').submit();">';
-
+                            echo '<option value="" disabled selected="selected">Selecteer een tafel...</option>';
                             foreach ($table as $table) {
                                 echo '<option value="' . $table . '"';
-                                if (isset($_SESSION['seat'])) {
-                                    if ($_SESSION['seat'] == $table) {
+                                if (isset($_GET['seat'])) {
+                                    if ($_GET['seat'] == $table) {
                                         echo 'selected="selected"';
                                     }
                                 }
                                 echo '>' . $table . '</option>';
                             }
-                            echo '</select><br/><form action="php/clearTable.php" id="formLegen" method="POST" onclick="confirmBox()"><button type="submit" class="knop"><i class="glyphicon glyphicon-trash"></i> Leeg alle tafels</button></form></form><br>';
+                            echo '</select><br/><button value="clear" type="submit" id="emptyAllTablesBtn" class="knop"><i class="glyphicon glyphicon-trash"></i> Leeg alle tafels</button></form><br>';
                             if (!isset($_SESSION["submit"])) {
 
                             } else {
-                                echo '<div class="tafelContainer"><div class="col-lg-5"><form method="POST" action="php/setTable.php" id="formBeschikbaar" ><h3>Beschikbare studenten</h3><select multiple="true" class="form-control" name="table[]">';
+                                echo '<div class="tafelContainer"><div class="col-lg-5"><form method="POST" action="php/setTable.php?seat='. $_GET['seat'] .'" id="formBeschikbaar" ><h3>Beschikbare studenten</h3><select multiple="true" class="form-control" name="table[]">';
                                 foreach ($_SESSION['availableStudents'] as $student) {
                                     echo '<option value="' . $student['Student_ID'] . '" >' . $student['Firstname'] . ' ' . $student['Infix'] . ' ' . $student['Lastname'] . ' ' . $student['Student_ID'] . '</option>';
                                 }
@@ -47,13 +47,14 @@ if ($_SESSION['Userlevel'] != 'Teacher') {
 
                                     . '</div>'
                                     . '</div>';
-                                echo '<div class="col-lg-5"><form method="POST" action="php/updateTable.php"  id="formTafel"><h3>Tafel: ' . $_SESSION['seat'] . '</h3><select multiple="true"  class="form-control" name="table[]">';
+                                echo '<div class="col-lg-5"><form method="POST" action="php/updateTable.php?seat='. $_GET['seat'] .'"  id="formTafel"><h3>Tafel: ' . $_GET['seat'] . '</h3><select multiple="true"  class="form-control" name="table[]">';
                                 foreach ($_SESSION['students'] as $student) {
                                     echo '<option value="' . $student['Student_ID'] . '" >' . $student['Firstname'] . ' ' . $student['Infix'] . ' ' . $student['Lastname'] . ' ' . $student['Student_ID'] . '</option>';
                                 }
                                 echo '</select> <br><br></form></div></div>';
                             }
                             ?>
+
 
                     </div>
                 </div>

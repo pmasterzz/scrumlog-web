@@ -32,6 +32,23 @@ jQuery(document).ready(function () {
     $('.cyclusDeleteBtn').click(function (event) {
         showConfirm(event, "Weet je zeker dat je deze cyclus wilt verwijderen?");
     });
+
+    $('#emptyAllTablesBtn').click(function (e) {
+        var c = confirm("Weet je zeker dat je alle tafels wilt legen?");
+        if (!c) {
+            e.preventDefault();
+        }
+        else {
+            e.preventDefault();
+            var data = {'clear': $(this).val()};
+            $.post('php/clearTable.php', data, function (response) {
+                    window.location.replace("http://localhost/scrumlog-web/home.php?page=createTable");
+                })
+                .fail(function (e) {
+                    alert('fail' + JSON.parse(e));
+                })
+        }
+    })
     function showConfirm(event, message) {
         var c = confirm(message);
         if (!c) {

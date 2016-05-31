@@ -26,10 +26,10 @@ if ($_SESSION['Userlevel'] != 'Teacher') {
                         foreach ($cycles as $cycle) {
                             echo '<form method="POST" action="php/cycle.php" class="col-lg-3 invullen">'
                                 . '<input type="hidden" name="id" value="' . $cycle['Cycle_ID'] . '">'
-                                . '<input type="hidden" name="number" value="' . $cycle['Number'] . '">'
+                                . '<input type="hidden" name="description" value="' . $cycle['Description'] . '">'
                                 . '<input type="hidden" name="end" value="' . $cycle['End_Date'] . '">'
                                 . '<input type="hidden" name="start" value="' . $cycle['Start_Date'] . '">'
-                                . '<h3>Cyclus: ' . $cycle['Number'] . '</h3><br>'
+                                . '<h3>Cyclus: ' . $cycle['Description'] . '</h3><br>'
                                 . 'Start Datum:<br>
                                   <input name="start" type="date" class="form-control" value="' . $cycle['Start_Date'] . '" disabled><br>'
                                 . 'Eind Datum:<br>

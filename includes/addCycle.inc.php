@@ -19,11 +19,12 @@ $tomorrow = new DateTime('tomorrow');
                             class="glyphicon glyphicon-arrow-left"></i></a>
 <!--                    <div class="row cylcus">-->
                     <div class="scrumin">
-                        <?php
-                        if (isset($_GET['msg']))
-                            echo '<div class="alert alert-danger">' . $_GET["msg"] . '</div>';
-                        ?>
+
                         <form method="POST" action="php/cycle.php" class="scrum-invullen">
+                            <?php
+                            if (isset($_GET['msg']))
+                                echo '<div class="alert alert-danger"><strong>' . $_GET["msg"] . '</strong></div>';
+                            ?>
                             <input type="hidden" name="id" value="<?php if (isset($_GET['id'])) echo $_GET['id']; ?>">
                             Start Datum:<br>
                             <input type="date" name="start_date" class="form-control"
@@ -33,9 +34,9 @@ $tomorrow = new DateTime('tomorrow');
                             <input type="date" name="end_date" class="form-control"
                                    value="<?php if (!isset($_GET['end'])) echo date("Y-m-d"); else echo $_GET['end']; ?>"
                                    required><br>
-                            Cyclus nummer:<br>
-                            <input type="number" name="number" class="form-control"
-                                   value="<?php if (isset($_GET['num'])) echo $_GET['num']; ?>" required><br>
+                            Beschrijving:<br>
+                            <input type="text" name="description" class="form-control"
+                                   value="<?php if (isset($_GET['descr'])) echo $_GET['descr']; ?>" required><br>
                             <div class="row">
                                 <button class="col-lg-6 cyclusButton"
                                         name="<?php if (isset($_GET['id'])) echo 'wijzigen'; else echo 'toevoegen'; ?>"
