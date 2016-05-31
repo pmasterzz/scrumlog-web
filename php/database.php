@@ -170,13 +170,13 @@ function submitScrumlog($input_Yesterday, $input_Problems, $input_Today, $input_
         return;
 };
 
-function addCycle($start_Date, $end_Date, $number){
-    $sql = 'INSERT INTO cycle (Start_Date, End_Date, Number) VALUES(?, ?, ?)';
+function addCycle($start_Date, $end_Date, $description){
+    $sql = 'INSERT INTO cycle (Start_Date, End_Date, Description) VALUES(?, ?, ?)';
         $db = getDB();
         $stmt = $db->prepare($sql);
         $stmt->bindParam(1, $start_Date);
         $stmt->bindParam(2, $end_Date);
-        $stmt->bindParam(3, $number);
+        $stmt->bindParam(3, $description);
     try {
         $stmt->execute();
         return;
@@ -261,7 +261,7 @@ function getAllStudents(){
 };
 
 function getAllCycles(){
-    $sql = "SELECT Cycle_ID, Start_Date, End_Date, Number FROM cycle ORDER BY Number";
+    $sql = "SELECT Cycle_ID, Start_Date, End_Date, Description FROM cycle ORDER BY Cycle_ID";
     $db = getDB();
     $stmt = $db->prepare($sql);
     $stmt->execute();
@@ -335,11 +335,11 @@ function setTableToZero($table){
     return;
 }
 
-function updateCycle($number, $start, $end, $id){
-    $sql = "UPDATE cycle SET Number=?, Start_Date=?, End_Date=? WHERE cycle_ID=?";
+function updateCycle($description, $start, $end, $id){
+    $sql = "UPDATE cycle SET Description=?, Start_Date=?, End_Date=? WHERE cycle_ID=?";
     $db = getDB();
     $stmt = $db->prepare($sql);
-    $stmt->bindValue(1, $number);
+    $stmt->bindValue(1, $description);
     $stmt->bindValue(2, $start);
     $stmt->bindValue(3, $end);
     $stmt->bindValue(4, $id);

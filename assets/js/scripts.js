@@ -32,6 +32,18 @@ jQuery(document).ready(function () {
     $('.cyclusDeleteBtn').click(function (event) {
         showConfirm(event, "Weet je zeker dat je deze cyclus wilt verwijderen?");
     });
+
+    $('#emptyAllTablesBtn').click(function (e) {
+        showConfirm(event, "Weet je zeker dat je alle tafels wilt legen?");
+        var data = {'clear': $(this).val()};
+        $.post('php/clearTable.php', data, function (response) {
+
+            alert('Done?');
+        })
+            .fail(function(e){
+                alert('fail' + JSON.parse(e));
+            })
+    })
     function showConfirm(event, message) {
         var c = confirm(message);
         if (!c) {

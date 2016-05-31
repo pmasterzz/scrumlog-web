@@ -30,7 +30,7 @@ if ($_SESSION['Userlevel'] != 'Teacher') {
                                 }
                                 echo '>' . $table . '</option>';
                             }
-                            echo '</select><br/><form action="php/clearTable.php" id="formLegen" method="POST" onclick="confirmBox()"><button type="submit" class="knop"><i class="glyphicon glyphicon-trash"></i> Leeg alle tafels</button></form></form><br>';
+                            echo '</select><br/><button value="clear" type="submit" id="emptyAllTablesBtn" class="knop"><i class="glyphicon glyphicon-trash"></i> Leeg alle tafels</button></form><br>';
                             if (!isset($_SESSION["submit"])) {
 
                             } else {
@@ -54,6 +54,7 @@ if ($_SESSION['Userlevel'] != 'Teacher') {
                                 echo '</select> <br><br></form></div></div>';
                             }
                             ?>
+
 
                     </div>
                 </div>
