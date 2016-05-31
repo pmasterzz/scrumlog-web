@@ -42,8 +42,9 @@ if ($_SESSION['Userlevel'] != 'Teacher') {
                                 unset($_SESSION['submit']);
                                 echo '<div class="col-lg-2">'
                                     . '<div class="knopContainer">'
-                                    . '<button type="submit"  form="formTafel" class="knop"><i class="glyphicon glyphicon-arrow-left"></i></button>'
+
                                     . '<button type="submit" form="formBeschikbaar" class="knop"><i class="glyphicon glyphicon-arrow-right"></i></button>'
+                                    . '<button type="submit"  form="formTafel" class="knop"><i class="glyphicon glyphicon-arrow-left"></i></button>'
 
                                     . '</div>'
                                     . '</div>';

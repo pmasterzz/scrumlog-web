@@ -8,8 +8,9 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="doorzichtig">
-                    <h1>Scrumlog</h1>
+
                     <a href="#menu-toggle"  class="btn btn-default" id="menu-toggle"><i class="glyphicon glyphicon-arrow-left"></i></a>
+                    <h1>Scrumlog inzien</h1>
                     <p>
                     <?php 
                     if ($_SESSION['Userlevel'] == 'Student') {
@@ -111,11 +112,9 @@
                                  
                          foreach($scrumlogArray as $scrumlog)
                         {
-                            $naam = $scrumlog['Firstname'] . ' ' . $scrumlog['Infix'] . ' ' . $scrumlog['Lastname'];
-                            echo 
+                            echo
                             '<form class="col-lg-3 invullen">'
-                            . '<h3 title="' . $naam . '">';
-
+                            . '<h3>';
                             echo afkorten($naam,16);
                             echo '</h3><br>'
                             . 'Wat heb je gister bereikt:<br>

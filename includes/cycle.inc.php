@@ -11,12 +11,14 @@ if ($_SESSION['Userlevel'] != 'Teacher') {
         <div class="row">
             <div class="col-lg-12">
                 <div class="doorzichtig">
-                    <h1>Cyclus wijzigen</h1>
+
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><i
                             class="glyphicon glyphicon-arrow-left"></i></a>
+                    <h1>Cyclus wijzigen</h1>
                     <a href="?page=addCycle">
                         <button class="cyclusButton">Cyclus Toevoegen</button>
                     </a>
+
                     <div class="row cylcus">
 
 
