@@ -18,10 +18,13 @@ if ($_SESSION['Userlevel'] != 'Teacher') {
                         <button class="cyclusButton">Cyclus Toevoegen</button>
                     </a>
                     <div class="row cylcus">
-
-
+                        <form class="col-lg-3 invullen">
+                            <div>
+                                <i class="glyphicon glyphicon-plus"></i>
+                            </div>
+                        </form>
                         <?php
-                        if (isset($_GET['msg']) && $_GET['msg']!="")
+                        if (isset($_GET['msg']) && $_GET['msg'] != "")
                             echo '<div class="alert alert-danger">' . $_GET['msg'] . '</div>';
                         foreach ($cycles as $cycle) {
                             echo '<form method="POST" action="php/cycle.php" class="col-lg-3 invullen">'
