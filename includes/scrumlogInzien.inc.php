@@ -14,23 +14,23 @@
                     <?php 
                     if ($_SESSION['Userlevel'] == 'Student') {
                     if (!isset($_POST["submit"]) || $scrumlogArray == false){
-                        echo '<form action="" method="post" class="scrum-invullen">
-                            <h3>Scrumlog bekijken</h3>
+                        echo '<form action="" method="post" class="scrum-invullen">';
+                        
+                         if(isset($_POST["submit"]) && $scrumlogArray == false){
+                            echo '<div class="alert alert-danger">
+                                    Er zijn geen scrumlogs gevonden
+                                  </div>';
+                                }
+                        
+                        
+                        
+                            echo '<h3>Scrumlog bekijken</h3>
                             <input type="date" name="Date" value=' . date('Y-m-d') . ' class="form-control"></br></br>
                             <button type="submit" name="submit" class="knop">bekijk scrumlog</button>
                             </form>';
                      }
                      else
-                    {
-                        if($scrumlogArray == false){
-                            echo '<div class="alert alert-danger">
-                                
-                                    Er zijn geen scrumlogs gevonden
-                                
-                            </div>';
-                        }
-                        else{    
-                        
+                        {
                          foreach($scrumlogArray as $scrumlog)
                         {
                             echo '<form class="scrum-invullen">'
@@ -47,7 +47,7 @@
                                   <input class="form-control" value="' . $scrumlog['Radio_Help'] . '" disabled>'
                                 . '</form>';
                             }
-                        }
+                        
                         }
                     }
                     else
@@ -97,13 +97,27 @@
                         echo '<div class="col-lg-12 centreren">'
                          . '<h3>' . $_POST['Date'] . '</h3>'
                          . '</div>' ;
-                        
+
+
+
+                        function afkorten($naam, $lengte) {
+                            $naam2 = $naam;
+                            if (strlen($naam2) > $lengte) {
+                                $naam2 = substr($naam2, 0, $lengte-2)."..";
+                            }
+                            return $naam2;
+                        }
+
                                  
                          foreach($scrumlogArray as $scrumlog)
                         {
+                            $naam = $scrumlog['Firstname'] . ' ' . $scrumlog['Infix'] . ' ' . $scrumlog['Lastname'];
                             echo 
                             '<form class="col-lg-3 invullen">'
-                            . '<h3>' . $scrumlog['Firstname'] . ' ' . $scrumlog['Infix'] . ' ' . $scrumlog['Lastname'] .  '</h3><br>'
+                            . '<h3 title="' . $naam . '">';
+
+                            echo afkorten($naam,16);
+                            echo '</h3><br>'
                             . 'Wat heb je gister bereikt:<br>
                               <input  class="form-control" value="' . $scrumlog['Input_Yesterday'] . '" disabled><br>'
                             . 'Wat zat je in de weg:<br>

@@ -1,6 +1,6 @@
 <?php
     include 'php/getAllTeachers.php';
-    if ($_SESSION['Userlevel'] != 'Student') 
+    if ($_SESSION['Userlevel'] != 'Student')
         {
             header("Location: home.php?page=scrumlogInzien");
         }
@@ -33,26 +33,26 @@
                         <input type="text"  name="Input_Help" class="invullen form-control" value="n.v.t." required><br>
                         welk van deze docenten moet jouw helpen?<br>
                         <select name="Input_Teacher" class="form-control">
-                            <option value="-">geen</option>';   
+                            <option value="-">geen</option>';
                             foreach($teachersArray as $teacher)
                             {
-                                echo '<option value=' . '"' 
-                                        . $teacher['Teacher_ID'] . 
-                                        '"' . "> " . $teacher['Firstname'] 
-                                        . " " . $teacher['Lastname'] 
+                                echo '<option value=' . '"'
+                                        . $teacher['Teacher_ID'] .
+                                        '"' . "> " . $teacher['Firstname']
+                                        . " " . $teacher['Lastname']
                                         . " </option>";
                             }
                            echo '</select><br><br>
 
                                 <button type="submit" class="knop">VERSTUUR SCRUMLOG</button>
                             </form>
-                        </p></div>';   
+                        </p></div>';
                     }
                     else {
                             echo '<img src="http://thecatapi.com/api/images/get?format=src&type=gif"></img>';
                         }
                     ?>
-                    
+
                 </div>
             </div>
         </div>
