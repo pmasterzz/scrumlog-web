@@ -42,7 +42,7 @@ jQuery(document).ready(function () {
             e.preventDefault();
             var data = {'clear': $(this).val()};
             $.post('php/clearTable.php', data, function (response) {
-                    window.location.replace("http://localhost/scrumlog-web/home.php?page=createTable");
+                    window.location.replace("?page=createTable");
                 })
                 .fail(function (e) {
                     alert('fail' + JSON.parse(e));
