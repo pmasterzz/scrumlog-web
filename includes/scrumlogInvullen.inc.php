@@ -33,7 +33,7 @@ if ($_SESSION['Userlevel'] != 'Student') {
                         <textarea name="Input_Today" cols="30" rows="3" class="invullen form-control" required></textarea>
                         <br>
                         Wat voor hulp heb je nodig/waarbij?:<br>
-                        <textarea name="Input_Help" cols="30" rows="3" class="invullen form-control" required></textarea>
+                        <textarea name="Input_Help" cols="30" rows="3" class="invullen form-control" required>n.v.t.</textarea>
                         <br>
                         welk van deze docenten moet jouw helpen?<br>
                         <select name="Input_Teacher" class="form-control">
