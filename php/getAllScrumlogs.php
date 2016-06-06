@@ -51,15 +51,44 @@ if (isset($_POST["submit"]))
                 {
                  $cycle_ID = 'undefined';
                 }
-        
+            if (isset($_POST['Input_Remark']))
+                {
+                    $input_Remark = $_POST['Input_Remark'];
+                }
+            else 
+                {
+                    $input_Remark = 'undefined';
+                }
+            if (isset($_POST['Input_Teacher']))
+                {
+                    $Input_Teacher = $_POST['Input_Teacher'];
+                }
+             else 
+                {
+                     $Input_Teacher = 'undefined';
+                }
         
     $date = $_POST['Date'];
+    
     $date = date_create($date);
     $date = date_format($date, 'y-m-d'); 
     $scrumlogArray = getScrumlog($date, $year,$student_ID,$table,$cycle_ID);
-
+    $_SESSION['scrumlogArray'] = $scrumlogArray;
+    $_SESSION['Date'] = $date;
     //$scrumlogArray = getAllScrumlogs($date, $year,$table,$student_ID,$seating,$cycle_ID);  
   } 
+  if(isset($_POST['Input_Remark']))
+                {
+                     submitComment($_POST['Input_Remark'],$_POST['Input_Teacher'],$_POST['ID']);
+                       
+                     $scrumlogArray = $_SESSION['scrumlogArray'];
+                     for($i = 0;$i < sizeof($scrumlogArray); $i++) {
+                        if ($scrumlogArray[$i]['Scrumlog_ID'] == $_POST['ID']) 
+                        {
+                            $scrumlogArray[$i]['Remark'] = $_POST['Input_Remark'];
+                        }
+                     }
+                } 
 // function getAllScrumlogs($date, $year,$table,$student_ID,$seating,$cycle_ID)
 // {
     

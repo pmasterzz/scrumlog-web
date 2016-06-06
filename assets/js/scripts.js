@@ -55,7 +55,20 @@ jQuery(document).ready(function () {
             event.preventDefault();
         }
     }
-
+//    $('#todoKnop').click(function (e) {
+//        e.preventDefault();
+//            var data = {'submit': $(this).val(),
+//                'Input_Remark': $('#Input_Remark').val(),
+//                'Input_Teacher': $('#Input_Teacher').val(),
+//                'ID':$('#ID').val()
+//        };
+//            $.post('php/submitTodo.php', data, function (response) {
+//                alert('er staat een koe in brand')
+//        })
+//        .fail(function (e) {
+//            alert('fail' + JSON.parse(e));
+//        })
+//    })
 });
 
 

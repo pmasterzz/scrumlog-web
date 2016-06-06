@@ -79,7 +79,7 @@ function getScrumlog($date, $year, $student_ID, $seating, $cycle_ID)
 {
     $filterArray = array($date);
 
-    $sql = "SELECT sc.Input_Yesterday, sc.Input_Help, sc.Input_Today, sc.Input_Problems, sc.Radio_Help,";
+    $sql = "SELECT sc.Input_Yesterday, sc.Input_Help, sc.Input_Today, sc.Input_Problems, sc.Radio_Help, sc.Remark,";
     $sql .= " sc.Scrumlog_ID, sc.Date, sc.Cycle_ID, sc.Seating, st.Student_ID, p.Firstname, p.Lastname, p.Infix";
     $sql .= " FROM scrumlog sc LEFT JOIN student st ON sc.Student_ID=st.Student_ID";
     $sql .= " LEFT JOIN person p ON st.Person_ID=p.Person_ID";
