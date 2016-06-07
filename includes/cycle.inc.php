@@ -11,29 +11,16 @@ if ($_SESSION['Userlevel'] != 'Teacher') {
         <div class="row">
             <div class="col-lg-12">
                 <div class="doorzichtig">
-
+                    <h1>Cyclus wijzigen</h1>
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><i
                             class="glyphicon glyphicon-arrow-left"></i></a>
-                    <h1>Cyclus wijzigen</h1>
                     <a href="?page=addCycle">
                         <button class="cyclusButton">Cyclus Toevoegen</button>
                     </a>
-
                     <div class="row cylcus">
 
 
                         <?php
-
-
-                        function afkorten($naam, $lengte) {
-                            $naam2 = $naam;
-                            if (strlen($naam2) > $lengte) {
-                                $naam2 = substr($naam2, 0, $lengte-2)."..";
-                            }
-                            return $naam2;
-                        }
-
-
                         if (isset($_GET['msg']) && $_GET['msg']!="")
                             echo '<div class="alert alert-danger">' . $_GET['msg'] . '</div>';
                         foreach ($cycles as $cycle) {
@@ -42,7 +29,7 @@ if ($_SESSION['Userlevel'] != 'Teacher') {
                                 . '<input type="hidden" name="description" value="' . $cycle['Description'] . '">'
                                 . '<input type="hidden" name="end" value="' . $cycle['End_Date'] . '">'
                                 . '<input type="hidden" name="start" value="' . $cycle['Start_Date'] . '">'
-                                . '<h3>' . afkorten($cycle['Description'],11) . '</h3><br>'
+                                . '<h3>Cyclus: ' . $cycle['Description'] . '</h3><br>'
                                 . 'Start Datum:<br>
                                   <input name="start" type="date" class="form-control" value="' . $cycle['Start_Date'] . '" disabled><br>'
                                 . 'Eind Datum:<br>
@@ -56,6 +43,8 @@ if ($_SESSION['Userlevel'] != 'Teacher') {
                                 . '</button>'
                                 . '</div>'
                                 . '</form>';
+
+
                         }
                         ?>
                     </div>

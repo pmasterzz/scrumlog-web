@@ -8,6 +8,7 @@
 
 $path = $_SERVER['DOCUMENT_ROOT'];
 $path .= "/scrumlog-web/api/db_config.php";
+//$path .= "/api/db_config.php";
 include_once($path);
 
 function login($username, $password)
@@ -79,7 +80,7 @@ function getScrumlog($date, $year, $student_ID, $seating, $cycle_ID)
 {
     $filterArray = array($date);
 
-    $sql = "SELECT sc.Input_Yesterday, sc.Input_Help, sc.Input_Today, sc.Input_Problems, sc.Radio_Help,";
+    $sql = "SELECT sc.Input_Yesterday, sc.Input_Help, sc.Input_Today, sc.Input_Problems, sc.Radio_Help, sc.Remark,";
     $sql .= " sc.Scrumlog_ID, sc.Date, sc.Cycle_ID, sc.Seating, st.Student_ID, p.Firstname, p.Lastname, p.Infix";
     $sql .= " FROM scrumlog sc LEFT JOIN student st ON sc.Student_ID=st.Student_ID";
     $sql .= " LEFT JOIN person p ON st.Person_ID=p.Person_ID";
@@ -493,3 +494,30 @@ function getCurrentCycle()
     $response = $cycle[0]['Cycle_ID'];
     return $response;
 }
+
+function getLatestScrumlogs($id)
+{
+    $sql = "SELECT sc.Input_Yesterday, sc.Input_Help, sc.Input_Today, sc.Input_Problems, sc.Radio_Help,";
+    $sql .= " sc.Scrumlog_ID, sc.Date, sc.Cycle_ID, sc.Seating, st.Student_ID, p.Firstname, p.Lastname, p.Infix";
+    $sql .= " FROM scrumlog sc LEFT JOIN student st ON sc.Student_ID=st.Student_ID";
+    $sql .= " LEFT JOIN person p ON st.Person_ID=p.Person_ID";
+    $sql .= " WHERE sc.Student_ID=?";
+    $sql .= " ORDER BY sc.Date DESC LIMIT 5";
+
+    $db = getDB();
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(1, $id);
+    $stmt->execute();
+    $scrumlogs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    for ($i = 0; $i < sizeof($scrumlogs); $i++) {
+        if ($scrumlogs[$i]['Radio_Help'] !== '-')
+            $scrumlogs[$i]['Radio_Help'] = GetTeacherNameById($scrumlogs[$i]['Radio_Help']);
+    }
+
+    return $scrumlogs;
+
+}
+
+
+
