@@ -7,12 +7,15 @@ if (isset($_POST['clear'])) {
     $current .= 'In clearTable.php';
     file_put_contents($file, $current);
     clearTables();
+
 }
+
 
 $_SESSION['students'] = getSpecificTable($seat);
 $_SESSION['availableStudents'] = getEmptyTable();
+return;
 
-header("Location: ../home.php?page=createTable");
+//header("Location: ../home.php?page=createTable");
 
 //setTable($students);
 /* 

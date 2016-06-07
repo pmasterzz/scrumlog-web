@@ -42,13 +42,15 @@ jQuery(document).ready(function () {
             e.preventDefault();
             var data = {'clear': $(this).val()};
             $.post('php/clearTable.php', data, function (response) {
-                    window.location.replace("?page=createTable");
+                    alert('Er is een koe?');
+                    //window.location.replace("?page=createTable");
                 })
                 .fail(function (e) {
                     alert('fail' + JSON.parse(e));
                 })
         }
     })
+
     function showConfirm(event, message) {
         var c = confirm(message);
         if (!c) {
