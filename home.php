@@ -41,8 +41,7 @@ if (!isset($_SESSION['login'])){
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <!-- Javascript -->
-
-
+   
 </head>
 
 <body>
