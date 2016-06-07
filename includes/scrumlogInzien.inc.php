@@ -23,12 +23,10 @@
                                     Er zijn geen scrumlogs gevonden
                                   </div>';
                                 }
-
-
                                 echo '<h3>Scrumlog bekijken</h3>
-                            <input type="date" name="Date" value=' . date('Y-m-d') . ' class="form-control"></br></br>
-                            <button type="submit" name="submit" class="knop">bekijk scrumlog</button>
-                            </form>';
+                                <input type="date" name="Date" value=' . date('Y-m-d') . ' class="form-control"></br></br>
+                                <button type="submit" name="submit" class="knop">bekijk scrumlog</button>
+                                </form>';
                             } else {
                                 foreach ($scrumlogArray as $scrumlog) {
                                     echo '<form class="scrum-invullen">'
@@ -45,11 +43,8 @@
                                   <input class="form-control" value="' . $scrumlog['Radio_Help'] . '" disabled>'
                                         . '</form>';
                                 }
-
                             }
-                        
                         }
-                    }
                     else
                     {
                         if ((!isset($_POST["submit"]) && !isset($_POST['todoKnop'])) || $scrumlogArray == false ){
@@ -58,14 +53,10 @@
                             
                                 if(isset($_POST["submit"]) && $scrumlogArray == false){
                             echo '<div class="alert alert-danger">
-                                
                                     Er zijn geen scrumlogs gevonden
-                                
                                     </div>';
                                 }
-
-
-                                echo '<h3>Scrumlog Inzien</h3>
+                            echo '<h3>Scrumlog Inzien</h3>
                             Datum:
                             <input type="date" name="Date" value=' . date('Y-m-d') . ' class="form-control"><br/><br/>
                             Jaar:
@@ -86,9 +77,6 @@
                                 
                             
                         }
-                        
-                    
-                     
                      else
                     {
                          
@@ -143,12 +131,12 @@
                             . '<input class="form-control" id="Input_Remark" name="Input_Remark" value="'. $scrumlog['Remark'] . '"><br>'
                             . '<button type="submit" id="todoKnop" class="knop" name="todoKnop">VERSTUUR COMMENTAAR</button>'
                             . '</form>';
-                        }
-
+                        };
+                    }
                         ?>
                     <p></p>
                 </div>
             </div>
         </div>
     </div>
-</div>
+ </div>
