@@ -261,7 +261,7 @@ form.scrum-invullen {
     background: rgba(255,255,255,0.8);
     color: #333;
     border: #FF5800 solid 1px;
-    max-width: 300px!important;
+    max-width: 450px!important;
 }
 form#tableForm{
     max-width: 300px!important;
