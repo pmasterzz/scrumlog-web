@@ -64,6 +64,7 @@ if (isset($_POST["submit"])) {
     $_SESSION['Date'] = $date;
     //$scrumlogArray = getAllScrumlogs($date, $year,$table,$student_ID,$seating,$cycle_ID);  
   } 
+}
   if(isset($_POST['Input_Remark']))
                 {
                      submitComment($_POST['Input_Remark'],$_POST['Input_Teacher'],$_POST['ID']);
