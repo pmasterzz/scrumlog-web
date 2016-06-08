@@ -16,7 +16,7 @@ $tomorrow = new DateTime('tomorrow');
                 <div class="doorzichtig">
                     <h1>Cyclus toevoegen</h1>
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><i
-                            class="glyphicon glyphicon-arrow-left"></i></a>
+                            class="glyphicon glyphicon-menu-hamburger"></i></a>
 <!--                    <div class="row cylcus">-->
                     <div class="scrumin">
 
