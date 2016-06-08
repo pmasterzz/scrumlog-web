@@ -156,14 +156,37 @@ div#page-content-wrapper
     transform: rotate(-15deg);
     top: 150px;
     font-family: 'Rock Salt', cursive;
-    z-index: 0!important;
+    z-index: 0;
+    animation-name: klieder;
+    animation-duration: 2s;
+/*    animation-iteration-count: infinite;*/
+    
+    
+}
+
+@keyframes klieder{
+    0% {z-index: 0; }
+    50%   {z-index: 1;}
+    100% {z-index: 2; /*transform: rotate(345deg);*/} 
+}
+
+@-webkit-keyframes klieder{
+    0% {z-index: 0;}
+    50%   {z-index: 1;}
+    100% {z-index: 2;} 
+}
+.fantasie{
+    background-image: url('../../img/backgrounds/spongebob.gif');
 }
 
 
 
-input.invullen {
-    color: #333;
-}
+
+
+
+
+
+
 
 .doorzichtig p
 {
@@ -221,11 +244,6 @@ button.knop:hover   {
 
 
 
-input.invullen {
-    color: #333;
-
-
-}
 
 form.invullen {
     padding: 20px 15px;
@@ -252,6 +270,18 @@ form#tableForm{
     color: #FF5800!important;
     margin: 7%;
 }
+
+.toevoegen{
+
+    text-align: center;
+    background: rgba(255,255,255,0.8);
+    color: #333;
+    border: #FF5800 solid 1px;
+    font-size: 50px;
+    width: 99.6%;
+    margin: 0 0.2%;
+}
+
 
 .col-lg-12{
     z-index:1 !important;
@@ -287,6 +317,30 @@ form#tableForm{
     margin: 2%;
 }
 
+.scrumlog{
+    width: 24.6%;
+    margin: 0 0.2%;
+}
+.scrumlog h4{
+    color: #FF5800;
+}
+
+.scrumlog form{
+    padding: 0;
+    text-align: center;
+    background: rgba(255,255,255,0.8);
+    color: #333;
+    margin: 2%; 
+}
+
+.centreren h3{
+    color: #FFF;
+}
+
+.invullen input {
+    margin: 0 0 6% 0;
+}
+
 form.col-lg-3.invullen {
     margin: 0.2%;
     width: 24.6%;
@@ -297,7 +351,9 @@ form.col-lg-3.invullen {
 table {
     background-color: #FFF;
 }
-
+.cyclus{
+    margin-top: 1%;
+}
 .cyclusButton{
     width: 48%;
     margin: 1%;

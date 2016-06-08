@@ -15,7 +15,7 @@ if ($_SESSION['Userlevel'] != 'Teacher') {
                     <div class="doorzichtig">
                         <h1>Scrumlog</h1>
                         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><i
-                                class="glyphicon glyphicon-arrow-left"></i></a>
+                                class="glyphicon glyphicon-menu-hamburger"></i></a>
                         <p>
                             <?php
                             echo '<form method="POST" id="tableForm" action="php/getTable.php" class="invullen"><h3>Selecteer een tafel</h3>
