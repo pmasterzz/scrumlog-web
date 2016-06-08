@@ -120,7 +120,8 @@
 //                            echo afkorten($naam,16);
                             echo '</h3><br>'
                             . '<input type="hidden" name="Date" value="' . $scrumlog['Date'] . '">'
-                            . '<input type="hidden" name="ID" id="ID" value="' . $scrumlog['Scrumlog_ID'] . '">'
+                            //. '<input type="hidden" name="ID" id="ID" value="' . $scrumlog['Scrumlog_ID'] . '">'
+                                .'<textarea class="form-control" disabled>'.$scrumlog['Input_Yesterday'].'</textarea>'
                             . 'Wat heb je gister bereikt:<br>
                               <input  class="form-control" value="' . $scrumlog['Input_Yesterday'] . '" disabled><br>'
                             . 'Wat zat je in de weg:<br>
