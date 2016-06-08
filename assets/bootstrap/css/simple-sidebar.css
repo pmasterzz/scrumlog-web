@@ -178,15 +178,28 @@ div#page-content-wrapper
 
 textarea.form-control {
     resize:vertical;
+    margin: 0 0 4% 0;
+}
+
+h3.white{
+    color:#FFF;
+}
+
+h4.orange {
+    color: #FF5800;
 }
 
 
 
+.incomplete{
+    
+}
 
 
 
-
-
+.toegewezen{
+    padding: 0;
+}
 
 .doorzichtig p
 {
@@ -309,12 +322,10 @@ form#tableForm{
     color: #333;
 }
 
-.col-lg-3 form{
+.col-lg-3{
+    width: 24.6%;
+    margin: 0.2%;
     padding: 0;
-    text-align: center;
-    background: rgba(255,255,255,0.8);
-    color: #333;
-    margin: 2%;
 }
 
 .scrumlog{
@@ -384,6 +395,44 @@ table {
     text-shadow: none;
     text-align: center;
     display: inline-block;
+}
+
+.todoButton{
+    width: 48%;
+    margin: 1%;
+    color: #4b08a1;
+    padding: 10px;
+    background: #FFF;
+    border: #4b08a1 solid 1px;
+    font-family: Montserrat,sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-shadow: none;
+    text-align: center;
+    display: inline-block;
+}
+
+.todoButton:hover{
+    color: #FFF;
+    padding: 10px;
+    background: #4b08a1;
+/*    border: rgba(255,255,255, 0) solid;*/
+    font-family: Montserrat,sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-shadow: none;
+    text-align: center;
+    display: inline-block;
+}
+
+.complete{
+    background: green!important;
+    color: green!important;
+    
 }
 
 @media(min-width:768px) {

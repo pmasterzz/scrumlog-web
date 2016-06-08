@@ -55,6 +55,10 @@ jQuery(document).ready(function () {
             event.preventDefault();
         }
     }
+    
+    $('#change').click(function () {
+        $(this).toggleClass('incomplete complete')
+    });
 //    $('#todoKnop').click(function (e) {
 //        e.preventDefault();
 //            var data = {'submit': $(this).val(),

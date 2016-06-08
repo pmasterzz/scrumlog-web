@@ -1,6 +1,7 @@
 <?php
-   include 'php/database.php' ;
-   $sql = "SELECT sc.Remark, sc.Teacher_ID, sc.Completed, p.Firstname, p.Lastname, p.Infix, sc.Scrumlog_ID, sc.Input_Help ";
+   include 'php/getAllScrumlogs.php' ;
+   include 'php/getAllTeachers.php';
+   
 ?>
 
 <div id="page-content-wrapper">
@@ -12,46 +13,104 @@
                     
                     <h1>Scrumlog</h1>
                     <a href="#menu-toggle"  class="btn btn-default" id="menu-toggle"><i class="glyphicon glyphicon-menu-hamburger"></i></a>
-                    <?php 
-                    $teacher_ID = $_SESSION['User']['Teacher_ID'];
-                    $comments = getAllTodos($teacher_ID);
-                    $wilComments = getAllTodos(11);
-                    foreach ($comments as $comment)
-                    {
-                        echo '<div class="col-lg-3">'
-                        . '<form class="invullen">'
-                        . $comment['Firstname']
-                        . ' '
-                        . $comment['Infix']
-                        . ' '
-                        . $comment['Lastname']
-                        . '<br>Jouw aantekening:'
-                        . $comment['Remark']
-                        . '<button>'
-                        . 'voltooid?'
-                        . '</button>'
-                        . '</form>'
-                        . '</div>';
-                    }
-                    foreach ($wilComments as $comment)
-                    {
-                        echo '<div class="col-lg-3">'
-                        . '<form class="invullen">'
-                        . $comment['Firstname']
-                        . ' '
-                        . $comment['Infix']
-                        . ' '
-                        . $comment['Lastname']
-                        . '<br>Jouw aantekening:'
-                        . $comment['Remark']
-                        . '<button>'
-                        . 'voltooid?'
-                        . '</button>'
-                        . '</form>'
-                        . '</div>';
-                    }
                     
-                    ?>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h3 class="white">Persoonlijke todo's</h3>
+                            </div> 
+                        </div>
+                        
+                        <?php 
+                        $teacher_ID = $_SESSION['User']['Teacher_ID'];
+                        $comments = getAllTodos($teacher_ID);
+                        $wilComments = getAllTodos(11);
+                        function afkorten($naam, $lengte) {
+                            $naam2 = $naam;
+                            if (strlen($naam2) > $lengte) {
+                                $naam2 = substr($naam2, 0, $lengte-2)."..";
+                            }
+                            return $naam2;
+                        }
+                        foreach ($comments as $comment)
+                        {
+                            $naam = $comment['Firstname'] . ' ' . $comment['Infix'] . ' ' . $comment['Lastname'];
+                            echo  '<form method="POST" action="" class="col-lg-3 invullen'; if ($comment['Completed'] == 1) echo ' complete'; echo '">' .  
+                               '<h3 title="' . $naam . '">';
+                               echo $comment['Completed'];
+                            echo afkorten($naam,16);
+                            echo '</h3>'
+                            . '<h4 class="orange">Tafel: ' .$comment['Seating']  .  '</h4>'
+                            . '<input type="hidden" name="ID" id="ID" value="' . $comment['Scrumlog_ID'] . '">'
+                            . 'Commentaar doorsturen naar'
+                            .'<select id="Input_Teacher" name="Input_Teacher" class="form-control">';
+                            foreach($teachersArray as $teacher)
+                            {
+                                echo '<option value=' . '"'
+                                        . $teacher['Teacher_ID'] .
+                                        '"' . "> " . $teacher['Firstname']
+                                        . " " . $teacher['Lastname']
+                                        . " </option>";
+                            }
+                           echo '</select>'
+                            . 'Jouw aantekening:'
+                            . '<textarea class="form-control" id="Input_Remark" name="Input_Remark">'
+                            . $comment['Remark']
+                            . '</textarea>'
+                            . $comment['Teacher_ID']
+                            . '<div class="row">'
+                            . '<button name="todoKnop" type="submit" id="todoKnop" class="col-lg-6 todoButton">'
+                            . 'doorsturen'
+                            . '</button>'
+                            . '<button  formaction="php/completeTodo.php" name="change" class="col-lg-6 todoButton">'
+                            . 'voltooid?'
+                            . '</button>'
+                            
+                            . '</div>'
+                            . '</form>';
+                        }
+                        echo '<div class="col-lg-12 toegewezen">
+                            <h3 class="white">Nog niet toegewezen todo' ."'" . 's</h3>
+                        </div> ';
+                        foreach ($wilComments as $comment)
+                        {
+                            
+                            $naam = $comment['Firstname'] . ' ' . $comment['Infix'] . ' ' . $comment['Lastname'];
+                            echo '<form method="POST" action="" class="col-lg-3 invullen'; if ($comment['Completed'] == 1) echo ' complete'; echo '">' .  
+                               '<h3 title="' . $naam . '">';
+
+                            echo afkorten($naam,16);
+                            echo '</h3>'
+                            . '<h4 class="orange">Tafel: ' .$comment['Seating']  .  '</h4>'
+                            . '<input type="hidden" name="ID" id="ID" value="' . $comment['Scrumlog_ID'] . '">'
+                            . 'Commentaar doorsturen naar'
+                             .'<select id="Input_Teacher" name="Input_Teacher" class="form-control">';
+                            foreach($teachersArray as $teacher)
+                            {
+                                echo '<option value=' . '"'
+                                        . $teacher['Teacher_ID'] .
+                                        '"' . "> " . $teacher['Firstname']
+                                        . " " . $teacher['Lastname']
+                                        . " </option>";
+                            }
+                           echo '</select>'
+                            . 'Jouw aantekening:'
+                            . '<textarea class="form-control" id="Input_Remark" name="Input_Remark">'
+                            . $comment['Remark']
+                            . '</textarea>'
+                            . '<div class="row">'
+                            . '<button name="todoKnop" type="submit" id="todoKnop" class="col-lg-6 todoButton">'
+                            . 'doorsturen'
+                            . '</button>'
+                            . '<button formaction="php/completeTodo.php" name="change" class="col-lg-6 todoButton">'
+                            . 'voltooid?'
+                            . '</button>'
+                            . '</div>'
+                            . '</form>'
+                            . '</div>';
+                        }
+
+                        ?>
+                      
                     </div>
                 </div>
             </div>
