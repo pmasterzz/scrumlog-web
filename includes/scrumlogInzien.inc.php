@@ -10,7 +10,7 @@
             <div class="col-lg-12">
                 <div class="doorzichtig">
                     <h1>Scrumlog</h1>
-                    <a href="#menu-toggle"  class="btn btn-default" id="menu-toggle"><i class="glyphicon glyphicon-arrow-left"></i></a>
+                    <a href="#menu-toggle"  class="btn btn-default" id="menu-toggle"><i class="glyphicon glyphicon-menu-hamburger"></i></a>
                     <p>
                     <?php 
                     if ($_SESSION['Userlevel'] == 'Student') {
@@ -35,16 +35,16 @@
                          foreach($scrumlogArray as $scrumlog)
                         {
                             echo '<form class="scrum-invullen">'
-                                . '<h3>Scrumglog van: ' . $scrumlog['Date'] .  '</h3><br>'
-                                . 'Wat heb je gister bereikt:<br>
-                                  <input  class="form-control" value="' . $scrumlog['Input_Yesterday'] . '" disabled><br>'
-                                . 'Wat zat je in de weg:<br>
-                                  <input class="form-control" value="' . $scrumlog['Input_Problems'] . '" disabled><br>'
-                                . 'Wat denk je vandaag te bereiken:<br>
-                                  <input class="form-control" value="' . $scrumlog['Input_Today'] . '" disabled><br>'
-                                . 'Wat voor hulp heb je nodig/waarbij?:<br>
-                                  <input class="form-control" value="' . $scrumlog['Input_Help'] . '" disabled><br>'
-                                . 'welk van deze docenten moet jouw helpen?<br>
+                                . '<h3>Scrumglog van: ' . $scrumlog['Date'] .  '</h3>'
+                                . 'Wat heb je gister bereikt:
+                                  <input  class="form-control" value="' . $scrumlog['Input_Yesterday'] . '" disabled>'
+                                . 'Wat zat je in de weg:
+                                  <input class="form-control" value="' . $scrumlog['Input_Problems'] . '" disabled>'
+                                . 'Wat denk je vandaag te bereiken:
+                                  <input class="form-control" value="' . $scrumlog['Input_Today'] . '" disabled>'
+                                . 'Wat voor hulp heb je nodig/waarbij?:
+                                  <input class="form-control" value="' . $scrumlog['Input_Help'] . '" disabled>'
+                                . 'welk van deze docenten moet jouw helpen?
                                   <input class="form-control" value="' . $scrumlog['Radio_Help'] . '" disabled>'
                                 . '</form>';
                             }
@@ -101,35 +101,36 @@
 
 
 
-//                        function afkorten($naam, $lengte) {
-//                            $naam2 = $naam;
-//                            if (strlen($naam2) > $lengte) {
-//                                $naam2 = substr($naam2, 0, $lengte-2)."..";
-//                            }
-//                            return $naam2;
-//                        }
+                        function afkorten($naam, $lengte) {
+                            $naam2 = $naam;
+                            if (strlen($naam2) > $lengte) {
+                                $naam2 = substr($naam2, 0, $lengte-2)."..";
+                            }
+                            return $naam2;
+                        }
 
                                  
                          foreach($scrumlogArray as $scrumlog)
                         {
-                            $naam = $scrumlog['Firstname'] . ' ' . $scrumlog['Infix'] . ' ' . $scrumlog['Lastname'][0];
+                            $naam = $scrumlog['Firstname'] . ' ' . $scrumlog['Infix'] . ' ' . $scrumlog['Lastname'];
                             echo 
-                            '<form method="POST" action="" class="col-lg-3 invullen">'
+                            '<form method="POST" action="" class="col-lg-3 scrumlog invullen">'
                             . '<h3 title="' . $naam . '">';
 
-//                            echo afkorten($naam,16);
-                            echo '</h3><br>'
+                            echo afkorten($naam,16);
+                            echo '</h3>'
+                            . '<h4>Tafel: ' . $scrumlog['Seating']  .  '</h4>'
                             . '<input type="hidden" name="Date" value="' . $scrumlog['Date'] . '">'
                             . '<input type="hidden" name="ID" id="ID" value="' . $scrumlog['Scrumlog_ID'] . '">'
-                            . 'Wat heb je gister bereikt:<br>
-                              <input  class="form-control" value="' . $scrumlog['Input_Yesterday'] . '" disabled><br>'
-                            . 'Wat zat je in de weg:<br>
-                              <input class="form-control" value="' . $scrumlog['Input_Problems'] . '" disabled><br>'
-                            . 'Wat denk je vandaag te bereiken:<br>
-                              <input class="form-control" value="' . $scrumlog['Input_Today'] . '" disabled><br>'
-                            . 'Wat voor hulp heb je nodig/waarbij?:<br>
-                              <input class="form-control" value="' . $scrumlog['Input_Help'] . '" disabled><br>'
-                            . 'welk van deze docenten moet jouw helpen?<br>
+                            . 'Wat heb je gister bereikt:
+                              <input  class="form-control" value="' . $scrumlog['Input_Yesterday'] . '" disabled>'
+                            . 'Wat zat je in de weg:
+                              <input class="form-control" value="' . $scrumlog['Input_Problems'] . '" disabled>'
+                            . 'Wat denk je vandaag te bereiken:
+                              <input class="form-control" value="' . $scrumlog['Input_Today'] . '" disabled>'
+                            . 'Wat voor hulp heb je nodig/waarbij?:
+                              <input class="form-control" value="' . $scrumlog['Input_Help'] . '" disabled>'
+                            . 'welk van deze docenten moet jouw helpen?
                               <input class="form-control" value="' . $scrumlog['Radio_Help'] . '" disabled>'
                             . 'Commentaar doorsturen naar'
                             .'<select id="Input_Teacher" name="Input_Teacher" class="form-control">';
@@ -143,7 +144,7 @@
                             }
                            echo '</select>'
                             . 'commentaar'
-                            . '<input class="form-control" id="Input_Remark" name="Input_Remark" value="'. $scrumlog['Remark'] . '"><br>'
+                            . '<input class="form-control" id="Input_Remark" name="Input_Remark" value="'. $scrumlog['Remark'] . '">'
                             . '<button type="submit" id="todoKnop" class="knop" name="todoKnop">VERSTUUR COMMENTAAR</button>'
                             . '</form>';
                         }

@@ -81,7 +81,15 @@ if (!isset($_SESSION['login'])){
                 <?php 
                     if ($_SESSION['Userlevel'] == 'Teacher')
                         {
-                            echo ' <a href="?page=createCycle">Cyclus Wijzigen</a>';
+                            echo ' <a href="?page=createCycle">Cyclus</a>';
+                        }
+                ?>   
+                </li>
+                <li>
+                <?php 
+                    if ($_SESSION['Userlevel'] == 'Teacher')
+                        {
+                            echo ' <a href="?page=todo">Todo' . "'" . 's bekijken</a>';
                         }
                 ?>   
                 </li>
@@ -116,6 +124,9 @@ if (!isset($_SESSION['login'])){
                 case 'addCycle':
                     include 'includes/addCycle.inc.php';
                     break;
+                case 'todo':
+                    include 'includes/todo.inc.php';
+                    break;
                 default:
                     include 'includes/scrumlogInvullen.inc.php';
                     break;
@@ -125,7 +136,7 @@ if (!isset($_SESSION['login'])){
         ?>
         <!-- /#page-content-wrapper -->
         <div class="wasHier">
-            <?php echo $_SESSION['User']['Firstname'] . ' wazz hier'; ?>
+            <?php echo '<p contenteditable="true">' . $_SESSION['User']['Firstname'] . ' wazz hier</p>'; ?>
         </div>  
     </div>
     
@@ -155,6 +166,7 @@ if (!isset($_SESSION['login'])){
     });
         
     });
+  
     </script>
 
 </body>
