@@ -192,6 +192,7 @@ function addCycle($start_Date, $end_Date, $description)
 // <<<<<<< HEAD
 function setTable($students, $seat)
 {
+    
     $studentArray = implode(",", $students);
 
     $db = getDB();

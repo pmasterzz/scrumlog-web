@@ -226,7 +226,21 @@ $app->post('/api/table', 'middleWare', function () use ($app) {
     $students = $app->request->params('studentArray');
     $seat = $app->request->params('seating');
     setTableToZero($seat);
-    setTable($students, $seat);
+
+    $studentArray = explode(",", $students);
+    $inQuery = implode(',', array_fill(0, count($studentArray), '?'));
+    $db = getDB();
+    $sql = 'UPDATE student SET Seating = ? WHERE Student_ID IN(' . $inQuery . ')';
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(1, $seat);
+
+    foreach ($studentArray as $k => $id) {
+        $stmt->bindValue(($k + 2), $id);
+    };
+
+    $stmt->execute();
+
+    //setTable($students, $seat);
 });
 //clear all tables
 $app->put('/api/cleanTables', 'middleWare', function () {
