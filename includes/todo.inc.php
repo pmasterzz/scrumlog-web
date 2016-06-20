@@ -31,12 +31,13 @@
                             }
                             return $naam2;
                         }
+                        
+                        if ($comments) {
                         foreach ($comments as $comment)
                         {
                             $naam = $comment['Firstname'] . ' ' . $comment['Infix'] . ' ' . $comment['Lastname'];
                             echo  '<form method="POST" action="" class="col-lg-3 invullen'; if ($comment['Completed'] == 1) echo ' complete'; echo '">' .  
                                '<h3 title="' . $naam . '">';
-                               echo $comment['Completed'];
                             echo afkorten($naam,16);
                             echo '</h3>'
                             . '<h4 class="orange">Tafel: ' .$comment['Seating']  .  '</h4>'
@@ -56,7 +57,6 @@
                             . '<textarea class="form-control" id="Input_Remark" name="Input_Remark">'
                             . $comment['Remark']
                             . '</textarea>'
-                            . $comment['Teacher_ID']
                             . '<div class="row">'
                             . '<button name="todoKnop" type="submit" id="todoKnop" class="col-lg-6 todoButton">'
                             . 'doorsturen'
@@ -68,9 +68,17 @@
                             . '</div>'
                             . '</form>';
                         }
+                        
+                        }
+                        else {
+                            echo '<div class="col-lg-12">'
+                            . '<p>U heeft nog geen todo' . "'s vandaag" . '</p>'
+                            . '</div>';
+                        }
                         echo '<div class="col-lg-12 toegewezen">
                             <h3 class="white">Nog niet toegewezen todo' ."'" . 's</h3>
                         </div> ';
+                        if ($wilComments) {
                         foreach ($wilComments as $comment)
                         {
                             
@@ -108,6 +116,13 @@
                             . '</form>'
                             . '</div>';
                         }
+                        }
+                        else {
+                            echo '<div class="col-lg-12">'
+                            . '<p>Er zijn nog geen niet toegewezen todo' . "'s vandaag" . '</p>'
+                            . '</div>';
+                        }
+                        
 
                         ?>
                       

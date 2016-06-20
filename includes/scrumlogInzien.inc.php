@@ -4,6 +4,20 @@
     include 'php/globals.php';
     $min_Year = date('Y') - 5;
 ?>
+<script>
+$(document).ready(function(){
+    $('.datepicker').pickadate({
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 15, // Creates a dropdown of 15 years to control year
+        formatSubmit: 'yyyy/mm/dd',
+        onStart: function() {
+            var date = new Date()
+            this.set('select', [date.getFullYear(), date.getMonth() + 1, date.getDate()]);
+        }
+    }); 
+})
+
+</script>
 <div id="page-content-wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -26,7 +40,7 @@
                         
                         
                             echo '<h3>Scrumlog bekijken</h3>
-                            <input type="date" name="Date" value=' . date('Y-m-d') . ' class="form-control"></br></br>
+                            <input type="date" name="Date" value=' . date('Y-m-d') . ' class="form-control datepicker"></br></br>
                             <button type="submit" name="submit" class="knop">bekijk scrumlog</button>
                             </form>';
                      }
