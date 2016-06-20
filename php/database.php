@@ -396,7 +396,7 @@ function submitComment($text, $teacher_ID, $scrumlog_ID)
 
 function getAllTodos($teacher_ID)
 {
-    $sql = "SELECT sc.Remark, sc.Teacher_ID, sc.Completed, p.Firstname, p.Lastname, p.Infix, sc.Scrumlog_ID, sc.Input_Help ";
+    $sql = "SELECT sc.Remark, sc.Teacher_ID, sc.Completed, sc.Seating, p.Firstname, p.Lastname, p.Infix, sc.Scrumlog_ID, sc.Input_Help ";
     $sql .= "FROM scrumlog sc LEFT JOIN student st ON sc.Student_ID=st.Student_ID ";
     $sql .= "LEFT JOIN person p ON st.Person_ID=p.Person_ID ";
     $sql .= "WHERE (sc.Teacher_ID=:id OR sc.Radio_Help=:id) AND sc.Date=CURDATE()";

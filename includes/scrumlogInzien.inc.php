@@ -4,6 +4,20 @@
     include 'php/globals.php';
     $min_Year = date('Y') - 5;
 ?>
+<script>
+$(document).ready(function(){
+    $('.datepicker').pickadate({
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 15, // Creates a dropdown of 15 years to control year
+        formatSubmit: 'yyyy/mm/dd',
+        onStart: function() {
+            var date = new Date()
+            this.set('select', [date.getFullYear(), date.getMonth() + 1, date.getDate()]);
+        }
+    }); 
+})
+
+</script>
 <div id="page-content-wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -26,7 +40,7 @@
                         
                         
                             echo '<h3>Scrumlog bekijken</h3>
-                            <input type="date" name="Date" value=' . date('Y-m-d') . ' class="form-control"></br></br>
+                            <input type="date" name="Date" value=' . date('Y-m-d') . ' class="form-control datepicker"></br></br>
                             <button type="submit" name="submit" class="knop">bekijk scrumlog</button>
                             </form>';
                      }
@@ -37,15 +51,15 @@
                             echo '<form class="scrum-invullen">'
                                 . '<h3>Scrumglog van: ' . $scrumlog['Date'] .  '</h3>'
                                 . 'Wat heb je gister bereikt:
-                                  <input  class="form-control" value="' . $scrumlog['Input_Yesterday'] . '" disabled>'
+                                  <textarea  class="form-control" value="' . $scrumlog['Input_Yesterday'] . '" disabled>' . $scrumlog['Input_Yesterday'] . '</textarea>'
                                 . 'Wat zat je in de weg:
-                                  <input class="form-control" value="' . $scrumlog['Input_Problems'] . '" disabled>'
+                                  <textarea class="form-control" value="' . $scrumlog['Input_Problems'] . '" disabled>' . $scrumlog['Input_Problems'] . '</textarea>'
                                 . 'Wat denk je vandaag te bereiken:
-                                  <input class="form-control" value="' . $scrumlog['Input_Today'] . '" disabled>'
+                                  <textarea class="form-control" value="' . $scrumlog['Input_Today'] . '" disabled>' . $scrumlog['Input_Today'] . '</textarea>'
                                 . 'Wat voor hulp heb je nodig/waarbij?:
-                                  <input class="form-control" value="' . $scrumlog['Input_Help'] . '" disabled>'
+                                  <textarea class="form-control" value="' . $scrumlog['Input_Help'] . '" disabled>' . $scrumlog['Input_Help'] . '</textarea>'
                                 . 'welk van deze docenten moet jouw helpen?
-                                  <input class="form-control" value="' . $scrumlog['Radio_Help'] . '" disabled>'
+                                  <textarea class="form-control" value="' . $scrumlog['Radio_Help'] . '" disabled>' . $scrumlog['Radio_Help'] . '</textarea>'
                                 . '</form>';
                             }
                         
@@ -123,13 +137,13 @@
                             . '<input type="hidden" name="Date" value="' . $scrumlog['Date'] . '">'
                             . '<input type="hidden" name="ID" id="ID" value="' . $scrumlog['Scrumlog_ID'] . '">'
                             . 'Wat heb je gister bereikt:
-                              <input  class="form-control" value="' . $scrumlog['Input_Yesterday'] . '" disabled>'
+                              <textarea  class="form-control" value="' . $scrumlog['Input_Yesterday'] . '" disabled>' . $scrumlog['Input_Yesterday'] . '</textarea>'
                             . 'Wat zat je in de weg:
-                              <input class="form-control" value="' . $scrumlog['Input_Problems'] . '" disabled>'
+                              <textarea class="form-control" value="' . $scrumlog['Input_Problems'] . '" disabled>' . $scrumlog['Input_Problems'] . '</textarea>'
                             . 'Wat denk je vandaag te bereiken:
-                              <input class="form-control" value="' . $scrumlog['Input_Today'] . '" disabled>'
+                              <textarea class="form-control" value="' . $scrumlog['Input_Today'] . '" disabled>' . $scrumlog['Input_Today'] . '</textarea>'
                             . 'Wat voor hulp heb je nodig/waarbij?:
-                              <input class="form-control" value="' . $scrumlog['Input_Help'] . '" disabled>'
+                              <textarea class="form-control" value="' . $scrumlog['Input_Help'] . '" disabled>' . $scrumlog['Input_Help'] . '</textarea>'
                             . 'welk van deze docenten moet jouw helpen?
                               <input class="form-control" value="' . $scrumlog['Radio_Help'] . '" disabled>'
                             . 'Commentaar doorsturen naar'
