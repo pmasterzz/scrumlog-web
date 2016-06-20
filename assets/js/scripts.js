@@ -57,6 +57,10 @@ jQuery(document).ready(function () {
             event.preventDefault();
         }
     }
+    
+    $('#change').click(function () {
+        $(this).toggleClass('incomplete complete')
+    });
 //    $('#todoKnop').click(function (e) {
 //        e.preventDefault();
 //            var data = {'submit': $(this).val(),
@@ -71,6 +75,15 @@ jQuery(document).ready(function () {
 //            alert('fail' + JSON.parse(e));
 //        })
 //    })
+    $('.datepicker').pickadate({
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 15, // Creates a dropdown of 15 years to control year
+        formatSubmit: 'yyyy/mm/dd',
+        onStart: function() {
+            var date = new Date()
+            this.set('select', [date.getFullYear(), date.getMonth() + 1, date.getDate()]);
+        }
+    });
 });
 
 
