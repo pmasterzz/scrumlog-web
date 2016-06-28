@@ -5,7 +5,7 @@
 	} else {
 		$pagina = 'landing';	// De default pagina is landing
 	}
-	
+	error_reporting(0);
 ?>
 
 <!DOCTYPE html>

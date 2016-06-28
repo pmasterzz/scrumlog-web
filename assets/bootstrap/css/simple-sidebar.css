@@ -430,9 +430,8 @@ table {
 }
 
 .complete{
-    background: green!important;
-    color: green!important;
-    
+    background: #81FF33!important;
+    opacity: 0.9;
 }
 
 @media(min-width:768px) {
